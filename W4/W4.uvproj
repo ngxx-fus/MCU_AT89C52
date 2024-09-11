@@ -387,14 +387,14 @@
               <FilePath>.\main.h</FilePath>
             </File>
             <File>
-              <FileName>LCD_CMDs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\LCD_CMDs.h</FilePath>
-            </File>
-            <File>
               <FileName>LCD16x2.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\LCD16x2.h</FilePath>
+            </File>
+            <File>
+              <FileName>LCD16X2_CMDs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LCD16X2_CMDs.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -3,10 +3,9 @@
 void main(){
 	INITIAL();
 	DISPLAY();
-	DELAY(1900);
 	while(1){
 		DISPLAY();
 		INCREASE_SECOND();
-		DELAY(900);
+		DELAY(1300);
 	}
 }

@@ -211,8 +211,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\LCD_CMDs.h</PathWithFileName>
-      <FilenameWithoutPath>LCD_CMDs.h</FilenameWithoutPath>
+      <PathWithFileName>.\LCD16x2.h</PathWithFileName>
+      <FilenameWithoutPath>LCD16x2.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -223,8 +223,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\LCD16x2.h</PathWithFileName>
-      <FilenameWithoutPath>LCD16x2.h</FilenameWithoutPath>
+      <PathWithFileName>.\LCD16X2_CMDs.h</PathWithFileName>
+      <FilenameWithoutPath>LCD16X2_CMDs.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

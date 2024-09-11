@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              09/10/2024 09:51:57 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/11/2024 19:41:07 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -13,18 +13,17 @@ line level    source
    3          void main(){
    4   1        INITIAL();
    5   1        DISPLAY();
-   6   1        DELAY(1900);
-   7   1        while(1){
-   8   2          DISPLAY();
-   9   2          INCREASE_SECOND();
-  10   2          DELAY(900);
-  11   2        }
-  12   1      }
-*** WARNING C290 IN LINE 74 OF main.c: missing return value
+   6   1        while(1){
+   7   2          DISPLAY();
+   8   2          INCREASE_SECOND();
+   9   2          DELAY(1300);
+  10   2        }
+  11   1      }
+*** WARNING C290 IN LINE 81 OF main.c: missing return value
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    763    ----
+   CODE SIZE        =    756    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
