@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              09/17/2024 09:45:38 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/17/2024 10:37:37 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -14,8 +14,8 @@ line level    source
    4          void main(){
    5   1        
    6   1        INITIAL();
-   7   1        SET_YELLOW_TIMER(3);
-   8   1        SET_RED_GREEN_TIMER(9);
+   7   1        SET_YELLOW_TIMER(5);
+   8   1        SET_RED_GREEN_TIMER(15);
    9   1        SET_DISPLAY_PERIOD(12);
   10   1      
   11   1        while ( 0x1 ){

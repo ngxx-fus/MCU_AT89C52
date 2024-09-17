@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/17/2024  09:45:38  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/17/2024  10:37:37  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -59,7 +59,7 @@ SEGMENT                                 DATA_GROUP
 ?C_C51STARTUP                         -----    -----
   +--> ?PR?MAIN?MAIN
   +--> ?C_INITSEG
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  09:45:38  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  10:37:37  PAGE 2
 
 
 
@@ -119,7 +119,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\W2 (MAIN)
   C:0469H         PUBLIC        _SET_TIMER
   C:04C5H         PUBLIC        AUTO_MANUAL
   C:0487H         PUBLIC        _SET_RED_GREEN_TIMER
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  09:45:38  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  10:37:37  PAGE 3
 
 
   B:00B0H.2       PUBLIC        M_A
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\W2 (MAIN)
   C:0487H         LINE#         102
   C:0487H         LINE#         105
   C:048FH         LINE#         106
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  09:45:38  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  10:37:37  PAGE 4
 
 
   C:04A1H         LINE#         107
@@ -239,7 +239,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\W2 (MAIN)
   -------         ENDPROC       L?0083
   C:0389H         SYMBOL        L?0084
   -------         PROC          _SET_TRAFFIC_LIGHT
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  09:45:38  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  10:37:37  PAGE 5
 
 
   D:0006H         SYMBOL        POS
@@ -299,7 +299,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\W2 (MAIN)
   C:014CH         LINE#         228
   C:0156H         LINE#         229
   C:015BH         LINE#         230
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  09:45:38  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/17/2024  10:37:37  PAGE 6
 
 
   C:0161H         LINE#         231
