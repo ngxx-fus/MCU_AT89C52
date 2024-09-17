@@ -233,7 +233,7 @@
               <RCB>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0xffff</Size>
               </RCB>
               <RXB>
                 <Type>0</Type>
@@ -382,11 +382,6 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>main.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\main.h</FilePath>
-            </File>
-            <File>
               <FileName>LCD16x2.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\LCD16x2.h</FilePath>
@@ -395,6 +390,16 @@
               <FileName>LCD16X2_CMDs.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\LCD16X2_CMDs.h</FilePath>
+            </File>
+            <File>
+              <FileName>LCD16x2_DATE_TIME.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LCD16x2_DATE_TIME.h</FilePath>
+            </File>
+            <File>
+              <FileName>STACK_BUFFER.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\STACK_BUFFER.h</FilePath>
             </File>
           </Files>
         </Group>

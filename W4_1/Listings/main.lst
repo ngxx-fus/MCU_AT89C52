@@ -1,0 +1,48 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/17/2024 07:42:17 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "DS1307.h"
+*** WARNING C173 IN LINE 155 OF DS1307.h: missing return-expression
+   2          #include "LCD16x2_DATE_TIME.h"
+*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
+*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
+*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
+*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
+*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
+*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
+   3          
+   4          void main(){
+   5   1        LCD_INITIAL();
+   6   1        //SET_HH_MM_SS(23, 59, 55);
+   7   1        //SET_DD_MM_YYYY(3, 2, 2004);
+   8   1        DS1307_INIT();
+   9   1        DISPLAY();
+  10   1        while(1){
+  11   2          GET_TIME_DATE();
+  12   2          DISPLAY();
+  13   2          MS_DELAY(100);
+  14   2        }
+  15   1      }
+  16          
+*** WARNING C290 IN LINE 155 OF main.c: missing return value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1452    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     76      37
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  8 WARNING(S),  0 ERROR(S)

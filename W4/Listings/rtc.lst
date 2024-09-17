@@ -1,0 +1,242 @@
+C51 COMPILER V9.60.7.0   RTC                                                               09/17/2024 07:46:18 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE RTC
+OBJECT MODULE PLACED IN .\Objects\rtc.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE rtc.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\rtc.l
+                    -st) TABS(2) OBJECT(.\Objects\rtc.obj)
+
+line level    source
+
+   1          /***************************************************************************************************
+   2                                              ExploreEmbedded Copyright Notice    
+   3          ****************************************************************************************************
+   4           * File:   rtc.c
+   5           * Version: 15.0
+   6           * Author: ExploreEmbedded
+   7           * Website: http://www.exploreembedded.com/wiki
+   8           * Description: Contains the library functions for RTC-Ds1307 date and time read write
+   9          
+  10          This code has been developed and tested on ExploreEmbedded boards.  
+  11          We strongly believe that the library works on any of development boards for respective controllers. 
+  12          Check this link http://www.exploreembedded.com/wiki for awesome tutorials on 8051,PIC,AVR,ARM,Robotics,RTO
+             -S,IOT.
+  13          ExploreEmbedded invests substantial time and effort developing open source HW and SW tools, to support con
+             -sider buying the ExploreEmbedded boards.
+  14           
+  15          The ExploreEmbedded libraries and examples are licensed under the terms of the new-bsd license(two-clause 
+             -bsd license).
+  16          See also: http://www.opensource.org/licenses/bsd-license.php
+  17          
+  18          EXPLOREEMBEDDED DISCLAIMS ANY KIND OF HARDWARE FAILURE RESULTING OUT OF USAGE OF LIBRARIES, DIRECTLY OR
+  19          INDIRECTLY. FILES MAY BE SUBJECT TO CHANGE WITHOUT PRIOR NOTICE. THE REVISION HISTORY CONTAINS THE INFORMA
+             -TION 
+  20          RELATED TO UPDATES.
+  21           
+  22          
+  23          Permission to use, copy, modify, and distribute this software and its documentation for any purpose
+  24          and without fee is hereby granted, provided that this copyright notices appear in all copies 
+  25          and that both those copyright notices and this permission notice appear in supporting documentation.
+  26          ***************************************************************************************************/
+  27          
+  28          
+  29          
+  30          /***************************************************************************************************
+  31                                       Revision History
+  32          ****************************************************************************************************
+  33          15.0: Initial version 
+  34          ***************************************************************************************************/
+  35          
+  36          #include "rtc.h"
+*** ERROR C231 IN LINE 107 OF stdutils.h: 'T2CON': redefinition
+*** ERROR C231 IN LINE 108 OF stdutils.h: 'RCAP2L': redefinition
+*** ERROR C231 IN LINE 109 OF stdutils.h: 'RCAP2H': redefinition
+*** ERROR C231 IN LINE 110 OF stdutils.h: 'TL2': redefinition
+*** ERROR C231 IN LINE 111 OF stdutils.h: 'TH2': redefinition
+*** ERROR C231 IN LINE 113 OF stdutils.h: 'ET2': redefinition
+*** ERROR C231 IN LINE 114 OF stdutils.h: 'TF2': redefinition
+*** ERROR C231 IN LINE 115 OF stdutils.h: 'TR2': redefinition
+  37          #include "i2c.h"
+*** ERROR C231 IN LINE 13 OF C:\Keil_v5\C51\Inc\reg51.h: 'P0': redefinition
+*** ERROR C231 IN LINE 14 OF C:\Keil_v5\C51\Inc\reg51.h: 'P1': redefinition
+*** ERROR C231 IN LINE 15 OF C:\Keil_v5\C51\Inc\reg51.h: 'P2': redefinition
+*** ERROR C231 IN LINE 16 OF C:\Keil_v5\C51\Inc\reg51.h: 'P3': redefinition
+*** ERROR C231 IN LINE 17 OF C:\Keil_v5\C51\Inc\reg51.h: 'PSW': redefinition
+C51 COMPILER V9.60.7.0   RTC                                                               09/17/2024 07:46:18 PAGE 2   
+
+*** ERROR C231 IN LINE 18 OF C:\Keil_v5\C51\Inc\reg51.h: 'ACC': redefinition
+*** ERROR C231 IN LINE 19 OF C:\Keil_v5\C51\Inc\reg51.h: 'B': redefinition
+*** ERROR C231 IN LINE 20 OF C:\Keil_v5\C51\Inc\reg51.h: 'SP': redefinition
+*** ERROR C231 IN LINE 21 OF C:\Keil_v5\C51\Inc\reg51.h: 'DPL': redefinition
+*** ERROR C231 IN LINE 22 OF C:\Keil_v5\C51\Inc\reg51.h: 'DPH': redefinition
+*** ERROR C231 IN LINE 23 OF C:\Keil_v5\C51\Inc\reg51.h: 'PCON': redefinition
+*** ERROR C231 IN LINE 24 OF C:\Keil_v5\C51\Inc\reg51.h: 'TCON': redefinition
+*** ERROR C231 IN LINE 25 OF C:\Keil_v5\C51\Inc\reg51.h: 'TMOD': redefinition
+*** ERROR C231 IN LINE 26 OF C:\Keil_v5\C51\Inc\reg51.h: 'TL0': redefinition
+*** ERROR C231 IN LINE 27 OF C:\Keil_v5\C51\Inc\reg51.h: 'TL1': redefinition
+*** ERROR C231 IN LINE 28 OF C:\Keil_v5\C51\Inc\reg51.h: 'TH0': redefinition
+*** ERROR C231 IN LINE 29 OF C:\Keil_v5\C51\Inc\reg51.h: 'TH1': redefinition
+*** ERROR C231 IN LINE 30 OF C:\Keil_v5\C51\Inc\reg51.h: 'IE': redefinition
+*** ERROR C231 IN LINE 31 OF C:\Keil_v5\C51\Inc\reg51.h: 'IP': redefinition
+*** ERROR C231 IN LINE 32 OF C:\Keil_v5\C51\Inc\reg51.h: 'SCON': redefinition
+*** ERROR C231 IN LINE 33 OF C:\Keil_v5\C51\Inc\reg51.h: 'SBUF': redefinition
+*** ERROR C231 IN LINE 38 OF C:\Keil_v5\C51\Inc\reg51.h: 'CY': redefinition
+*** ERROR C231 IN LINE 39 OF C:\Keil_v5\C51\Inc\reg51.h: 'AC': redefinition
+*** ERROR C231 IN LINE 40 OF C:\Keil_v5\C51\Inc\reg51.h: 'F0': redefinition
+*** ERROR C231 IN LINE 41 OF C:\Keil_v5\C51\Inc\reg51.h: 'RS1': redefinition
+*** ERROR C231 IN LINE 42 OF C:\Keil_v5\C51\Inc\reg51.h: 'RS0': redefinition
+*** ERROR C231 IN LINE 43 OF C:\Keil_v5\C51\Inc\reg51.h: 'OV': redefinition
+*** ERROR C231 IN LINE 44 OF C:\Keil_v5\C51\Inc\reg51.h: 'P': redefinition
+*** ERROR C231 IN LINE 47 OF C:\Keil_v5\C51\Inc\reg51.h: 'TF1': redefinition
+*** ERROR C231 IN LINE 48 OF C:\Keil_v5\C51\Inc\reg51.h: 'TR1': redefinition
+*** ERROR C231 IN LINE 49 OF C:\Keil_v5\C51\Inc\reg51.h: 'TF0': redefinition
+*** ERROR C231 IN LINE 50 OF C:\Keil_v5\C51\Inc\reg51.h: 'TR0': redefinition
+*** ERROR C231 IN LINE 51 OF C:\Keil_v5\C51\Inc\reg51.h: 'IE1': redefinition
+*** ERROR C231 IN LINE 52 OF C:\Keil_v5\C51\Inc\reg51.h: 'IT1': redefinition
+*** ERROR C231 IN LINE 53 OF C:\Keil_v5\C51\Inc\reg51.h: 'IE0': redefinition
+*** ERROR C231 IN LINE 54 OF C:\Keil_v5\C51\Inc\reg51.h: 'IT0': redefinition
+*** ERROR C231 IN LINE 57 OF C:\Keil_v5\C51\Inc\reg51.h: 'EA': redefinition
+*** ERROR C231 IN LINE 58 OF C:\Keil_v5\C51\Inc\reg51.h: 'ES': redefinition
+*** ERROR C231 IN LINE 59 OF C:\Keil_v5\C51\Inc\reg51.h: 'ET1': redefinition
+*** ERROR C231 IN LINE 60 OF C:\Keil_v5\C51\Inc\reg51.h: 'EX1': redefinition
+*** ERROR C231 IN LINE 61 OF C:\Keil_v5\C51\Inc\reg51.h: 'ET0': redefinition
+*** ERROR C231 IN LINE 62 OF C:\Keil_v5\C51\Inc\reg51.h: 'EX0': redefinition
+*** ERROR C231 IN LINE 65 OF C:\Keil_v5\C51\Inc\reg51.h: 'PS': redefinition
+*** ERROR C231 IN LINE 66 OF C:\Keil_v5\C51\Inc\reg51.h: 'PT1': redefinition
+*** ERROR C231 IN LINE 67 OF C:\Keil_v5\C51\Inc\reg51.h: 'PX1': redefinition
+*** ERROR C231 IN LINE 68 OF C:\Keil_v5\C51\Inc\reg51.h: 'PT0': redefinition
+*** ERROR C231 IN LINE 69 OF C:\Keil_v5\C51\Inc\reg51.h: 'PX0': redefinition
+*** ERROR C231 IN LINE 72 OF C:\Keil_v5\C51\Inc\reg51.h: 'RD': redefinition
+*** ERROR C231 IN LINE 73 OF C:\Keil_v5\C51\Inc\reg51.h: 'WR': redefinition
+*** ERROR C231 IN LINE 74 OF C:\Keil_v5\C51\Inc\reg51.h: 'T1': redefinition
+*** ERROR C231 IN LINE 75 OF C:\Keil_v5\C51\Inc\reg51.h: 'T0': redefinition
+*** ERROR C231 IN LINE 76 OF C:\Keil_v5\C51\Inc\reg51.h: 'INT1': redefinition
+*** ERROR C231 IN LINE 77 OF C:\Keil_v5\C51\Inc\reg51.h: 'INT0': redefinition
+*** ERROR C231 IN LINE 78 OF C:\Keil_v5\C51\Inc\reg51.h: 'TXD': redefinition
+*** ERROR C231 IN LINE 79 OF C:\Keil_v5\C51\Inc\reg51.h: 'RXD': redefinition
+*** ERROR C231 IN LINE 82 OF C:\Keil_v5\C51\Inc\reg51.h: 'SM0': redefinition
+*** ERROR C231 IN LINE 83 OF C:\Keil_v5\C51\Inc\reg51.h: 'SM1': redefinition
+*** ERROR C231 IN LINE 84 OF C:\Keil_v5\C51\Inc\reg51.h: 'SM2': redefinition
+*** ERROR C231 IN LINE 85 OF C:\Keil_v5\C51\Inc\reg51.h: 'REN': redefinition
+*** ERROR C231 IN LINE 86 OF C:\Keil_v5\C51\Inc\reg51.h: 'TB8': redefinition
+*** ERROR C231 IN LINE 87 OF C:\Keil_v5\C51\Inc\reg51.h: 'RB8': redefinition
+*** ERROR C231 IN LINE 88 OF C:\Keil_v5\C51\Inc\reg51.h: 'TI': redefinition
+*** ERROR C231 IN LINE 89 OF C:\Keil_v5\C51\Inc\reg51.h: 'RI': redefinition
+*** ERROR C141 IN LINE 90 OF C:\Keil_v5\C51\Inc\reg51.h: syntax error near '/', expected 'hdata'
+  38          
+  39          
+  40          
+C51 COMPILER V9.60.7.0   RTC                                                               09/17/2024 07:46:18 PAGE 3   
+
+  41          
+  42          
+  43          /***************************************************************************************************
+  44                                   void RTC_Init(void)
+  45          ****************************************************************************************************
+  46           * I/P Arguments: none.
+  47           * Return value    : none
+  48          
+  49           * description :This function is used to Initialize the Ds1307 RTC.
+  50          ***************************************************************************************************/
+  51          void RTC_Init(void)
+  52          {
+  53   1          I2C_Init();                             // Initialize the I2c module.
+  54   1          I2C_Start();                            // Start I2C communication
+  55   1      
+  56   1          I2C_Write(C_Ds1307WriteMode_U8);        // Connect to DS1307 by sending its ID on I2c Bus
+  57   1          I2C_Write(C_Ds1307ControlRegAddress_U8);// Select the Ds1307 ControlRegister to configure Ds1307
+  58   1      
+  59   1          I2C_Write(0x00);                        // Write 0x00 to Control register to disable SQW-Out
+  60   1      
+  61   1          I2C_Stop();                             // Stop I2C communication after initializing DS1307
+  62   1      }
+  63          
+  64          
+  65          
+  66          
+  67          
+  68          
+  69          
+  70          
+  71          
+  72          
+  73          
+  74          
+  75          
+  76          
+  77          /***************************************************************************************************
+  78                              void RTC_SetDateTime(rtc_t *rtc)
+  79          ****************************************************************************************************
+  80           * I/P Arguments: rtc_t *: Pointer to structure of type rtc_t. Structure contains hour,min,sec,day,date,mo
+             -nth and year 
+  81           * Return value    : none
+  82          
+  83           * description  :This function is used to update the Date and time of Ds1307 RTC.
+  84                           The new Date and time will be updated into the non volatile memory of Ds1307.
+  85                  Note: The date and time should be of BCD format, 
+  86                       like 0x12,0x39,0x26 for 12hr,39min and 26sec.    
+  87                            0x15,0x08,0x47 for 15th day,8th month and 47th year.                 
+  88          ***************************************************************************************************/
+  89          void RTC_SetDateTime(rtc_t *rtc)
+  90          {
+  91   1          I2C_Start();                          // Start I2C communication
+  92   1      
+  93   1          I2C_Write(C_Ds1307WriteMode_U8);      // connect to DS1307 by sending its ID on I2c Bus
+  94   1          I2C_Write(C_Ds1307SecondRegAddress_U8); // Request sec RAM address at 00H
+  95   1      
+  96   1          I2C_Write(rtc->sec);                    // Write sec from RAM address 00H
+  97   1          I2C_Write(rtc->min);                    // Write min from RAM address 01H
+  98   1          I2C_Write(rtc->hour);                    // Write hour from RAM address 02H
+  99   1          I2C_Write(rtc->weekDay);                // Write weekDay on RAM address 03H
+ 100   1          I2C_Write(rtc->date);                    // Write date on RAM address 04H
+ 101   1          I2C_Write(rtc->month);                    // Write month on RAM address 05H
+C51 COMPILER V9.60.7.0   RTC                                                               09/17/2024 07:46:18 PAGE 4   
+
+ 102   1          I2C_Write(rtc->year);                    // Write year on RAM address 06h
+ 103   1      
+ 104   1          I2C_Stop();                              // Stop I2C communication after Setting the Date
+ 105   1      }
+ 106          
+ 107          
+ 108          
+ 109          
+ 110          
+ 111          
+ 112          
+ 113          /***************************************************************************************************
+ 114                               void RTC_GetDateTime(rtc_t *rtc)
+ 115          ****************************************************************************************************
+ 116           * I/P Arguments: rtc_t *: Pointer to structure of type rtc_t. Structure contains hour,min,sec,day,date,mo
+             -nth and year 
+ 117           * Return value    : none
+ 118          
+ 119           * description  :This function is used to get the Date(d,m,y) from Ds1307 RTC.
+ 120          
+ 121              Note: The date and time read from Ds1307 will be of BCD format, 
+ 122                    like 0x12,0x39,0x26 for 12hr,39min and 26sec.    
+ 123                         0x15,0x08,0x47 for 15th day,8th month and 47th year.              
+ 124          ***************************************************************************************************/
+ 125          void RTC_GetDateTime(rtc_t *rtc)
+ 126          {
+ 127   1          I2C_Start();                            // Start I2C communication
+ 128   1      
+ 129   1          I2C_Write(C_Ds1307WriteMode_U8);        // connect to DS1307 by sending its ID on I2c Bus
+ 130   1          I2C_Write(C_Ds1307SecondRegAddress_U8); // Request Sec RAM address at 00H
+ 131   1      
+ 132   1          I2C_Stop();                                // Stop I2C communication after selecting Sec Register
+ 133   1      
+ 134   1          I2C_Start();                            // Start I2C communication
+ 135   1          I2C_Write(C_Ds1307ReadMode_U8);            // connect to DS1307(Read mode) by sending its ID
+ 136   1      
+ 137   1          rtc->sec = I2C_Read(1);                // read second and return Positive ACK
+ 138   1          rtc->min = I2C_Read(1);                 // read minute and return Positive ACK
+ 139   1          rtc->hour= I2C_Read(1);               // read hour and return Negative/No ACK
+ 140   1          rtc->weekDay = I2C_Read(1);           // read weekDay and return Positive ACK
+ 141   1          rtc->date= I2C_Read(1);              // read Date and return Positive ACK
+ 142   1          rtc->month=I2C_Read(1);            // read Month and return Positive ACK
+ 143   1          rtc->year =I2C_Read(0);             // read Year and return Negative/No ACK
+ 144   1      
+ 145   1          I2C_Stop();                              // Stop I2C communication after reading the Date
+ 146   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  72 ERROR(S)
