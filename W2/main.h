@@ -174,7 +174,7 @@ void SET_TRAFFIC_LIGHT(UINT32 POS, UINT32 CODE){
 	//POS = 0 --> Traffic light 0 --> 3 bits control locates at 3 last bit.
 	//>	MSB [x][x][x][x] [x][G][Y][R] LSB
 	//POS = 1 --> Traffic light 1 --> 3 bits control loacates from 5th bit down to 3rd bit.
-	//>   MSB [x][x][G][Y] [R][x][x][x] LSB
+	//> MSB [x][x][G][Y] [R][x][x][x] LSB
 
 	UINT32 TL = TRAFFIC_LIGHT;
 	UINT32 CURRENT_STATE = GET_STATE(POS) & 0x7;
