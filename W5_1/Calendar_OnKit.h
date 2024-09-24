@@ -87,7 +87,7 @@ void calendar_initial(){
     datetime.YEAR = 2024;
     datetime.MONTH = 9;
     datetime.DAY = 24;
-    datetime.HOUR = 23;
-    datetime.MINUTE= 55;
+    datetime.HOUR = 10;
+    datetime.MINUTE= 26;
     datetime.SECOND = 55;
 }
