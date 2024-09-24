@@ -391,6 +391,16 @@
               <FileType>5</FileType>
               <FilePath>.\main.h</FilePath>
             </File>
+            <File>
+              <FileName>Calendar_OnKit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Calendar_OnKit.h</FilePath>
+            </File>
+            <File>
+              <FileName>DateTimeLimit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\DateTimeLimit.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
