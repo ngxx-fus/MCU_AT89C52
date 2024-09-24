@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              09/24/2024 02:39:08 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/24/2024 07:28:16 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -14,21 +14,21 @@ line level    source
    4          void main(){
    5   1        
    6   1        INITIAL();
-   7   1        SET_YELLOW_TIMER(3);
-   8   1        SET_RED_GREEN_TIMER(7);
+   7   1        SET_YELLOW_TIMER(5);
+   8   1        SET_RED_GREEN_TIMER(17);
    9   1        SET_DISPLAY_PERIOD(12);
   10   1      
   11   1        while ( 0x1 ){
-  12   2          if(AUTO_MANUAL() ){
+  12   2          if(!AUTO_MANUAL() ){
   13   3            SET_STATE(RED);
   14   3            SET_TIMER(0);
   15   3            SET_STATE(GREEN);
   16   3            SET_TIMER(1);
   17   3          }else{
   18   3            STOP_COUNT();
-  19   3                  while( AUTO_MANUAL() == 0x0 ){
+  19   3                  while( !AUTO_MANUAL() == 0x0 ){
   20   4                      SET_STATE(RED_GREEN());
-  21   4                      GND0 = 1; GND1 = 0; GND2 = 0; SET_LED(DIGIT(0));
+  21   4                      GND0 = 1; GND1 = 1; GND2 = 0; SET_LED(DIGIT(0));
   22   4                      DELAY(SINGLE_LED_DISPLAY_T);
   23   4                      GND0 = 1; GND1 = 1; GND2 = 1; SET_LED(DIGIT(1));
   24   4                DELAY(SINGLE_LED_DISPLAY_T);
@@ -41,7 +41,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1325    ----
+   CODE SIZE        =   1377    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

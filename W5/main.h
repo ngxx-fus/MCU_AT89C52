@@ -30,6 +30,11 @@
 typedef unsigned int UINT;
 
 //---------- Delay ------------
+static void DELAY_DISP(UINT mili_sec) {
+  UINT i;
+  for (i = 0; i < 3 * mili_sec; i++)
+    ;
+}
 static void DELAY(UINT mili_sec) {
   UINT i;
   for (i = 0; i < 12 * mili_sec; i++)
@@ -70,7 +75,7 @@ UINT COUNT_0;
 // Count for the main traffic light
 UINT COUNT_1;
 // Count for the order traffic light
-UINT SINGLE_LED_DISPLAY_T = 25;
+UINT SINGLE_LED_DISPLAY_T = 1;
 // The time use show a single 7-seg LED
 UINT RED_T = 0;
 UINT GREEN_T = 0;
@@ -80,8 +85,8 @@ UINT YELLOW_T = 0;
 
 //---------- CA LED CODE
 const UINT DIGIT_CODE[] = {0X3F, 0X06, 0X5B, 0X4F, 0X66, 0X6D,
-                             0X7D, 0X07, 0X7F, 0XEF, 0X0, 0X33,
-							 0x6E, 0x3D};
+                             0X7D, 0X07, 0X7F, 0XEF, 0X0, 0X1,
+							 0x40, 0x8};
 // 7-seg LED CODE (Common Anode)
 
 UINT AUTO_MANUAL() {
@@ -157,33 +162,33 @@ UINT DIGIT(UINT POS){
 void DISPLAY_LED(){
 	/*This function only runs ONE SECOND*/
 	UINT i = 0;
-	for(i = 0; i < 1400/(6*SINGLE_LED_DISPLAY_T); i++){
+	for(i = 0; i < 2800/(6*SINGLE_LED_DISPLAY_T); i++){
 			GND0 = 1; GND1 = 0; GND2 = 0;
 			if(COUNT_0 != 0) SET_LED((COUNT_0/10)%10);
 			else SET_LED(LED_OFF);
-			DELAY(SINGLE_LED_DISPLAY_T);
+			DELAY_DISP(SINGLE_LED_DISPLAY_T);
 
 			GND0 = 1; GND1 = 0; GND2 = 1; 
 			if(COUNT_1 != 0)SET_LED((COUNT_1/10)%10);
 			else SET_LED(LED_OFF);
-			DELAY(SINGLE_LED_DISPLAY_T);
+			DELAY_DISP(SINGLE_LED_DISPLAY_T);
 			
 
-            GND0 = 1; GND1 = 1; GND2 = 0; SET_LED(DIGIT(0));
-			DELAY(SINGLE_LED_DISPLAY_T);
+      GND0 = 1; GND1 = 1; GND2 = 0; SET_LED(DIGIT(0));
+			DELAY_DISP(SINGLE_LED_DISPLAY_T);
 		
 			GND0 = 0; GND1 = 0; GND2 = 0;
 			if(COUNT_0 != 0) SET_LED(COUNT_0%10);
 			else SET_LED(LED_OFF);
-			DELAY(SINGLE_LED_DISPLAY_T);
+			DELAY_DISP(SINGLE_LED_DISPLAY_T);
 		
 			GND0 = 0; GND1 = 0; GND2 = 1;
 			if(COUNT_1 != 0) SET_LED(COUNT_1%10);
 			else SET_LED(LED_OFF);
-			DELAY(SINGLE_LED_DISPLAY_T);
+			DELAY_DISP(SINGLE_LED_DISPLAY_T);
 
 			GND0 = 1; GND1 = 1; GND2 = 1; SET_LED(DIGIT(1));
-			DELAY(SINGLE_LED_DISPLAY_T);
+			DELAY_DISP(SINGLE_LED_DISPLAY_T);
 	}
 }
 
