@@ -162,7 +162,7 @@ UINT DIGIT(UINT POS){
 void DISPLAY_LED(){
 	/*This function only runs ONE SECOND*/
 	UINT i = 0;
-	for(i = 0; i < 2800/(6*SINGLE_LED_DISPLAY_T); i++){
+	for(i = 0; i < 7200/(6*SINGLE_LED_DISPLAY_T); i++){
 			GND0 = 1; GND1 = 0; GND2 = 0;
 			if(COUNT_0 != 0) SET_LED((COUNT_0/10)%10);
 			else SET_LED(LED_OFF);
