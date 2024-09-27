@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/24/2024  10:25:24  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/27/2024  15:40:18  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -29,38 +29,40 @@ LINK MAP OF MODULE:  .\Objects\W5_1 (MAIN)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     002EH     UNIT         ?DT?MAIN
-            DATA    0036H     0015H     UNIT         _DATA_GROUP_
-            DATA    004BH     0002H     UNIT         ?DT?_DIGIT_SELECT_DISP?MAIN
-            IDATA   004DH     0001H     UNIT         ?STACK
+            DATA    0008H     0030H     UNIT         ?DT?MAIN
+            DATA    0038H     0015H     UNIT         _DATA_GROUP_
+            DATA    004DH     0002H     UNIT         ?DT?_DIGIT_SELECT_DISP?MAIN
+            IDATA   004FH     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     01CBH     UNIT         ?PR?_DIGIT_SELECT_DISP?MAIN
-            CODE    01CEH     01AEH     UNIT         ?PR?CALENDAR_DISP?MAIN
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     01CBH     UNIT         ?PR?_DIGIT_SELECT_DISP?MAIN
+            CODE    01D1H     01ABH     UNIT         ?PR?CALENDAR_DISP?MAIN
             CODE    037CH     0167H     UNIT         ?C?LIB_CODE
             CODE    04E3H     008CH     UNIT         ?C_C51STARTUP
             CODE    056FH     0071H     UNIT         ?PR?_LED7SEG_DISP?MAIN
-            CODE    05E0H     0038H     UNIT         ?PR?_DELAY?MAIN
-            CODE    0618H     0036H     UNIT         ?PR?_INCREASE_MONTH?MAIN
-            CODE    064EH     0036H     UNIT         ?PR?_INCREASE_DAY?MAIN
-            CODE    0684H     0035H     UNIT         ?PR?_INCREASE_HOUR?MAIN
-            CODE    06B9H     0035H     UNIT         ?PR?_INCREASE_MINUTE?MAIN
-            CODE    06EEH     0035H     UNIT         ?PR?_INCREASE_SECCOND?MAIN
-            CODE    0723H     002BH     UNIT         ?C_INITSEG
-            CODE    074EH     0025H     UNIT         ?PR?CALENDAR_INITIAL?MAIN
-            CODE    0773H     0013H     UNIT         ?PR?TRIGGER_CHECK?MAIN
-            CODE    0786H     000EH     UNIT         ?PR?_DIGIT_DISP?MAIN
-            CODE    0794H     0008H     UNIT         ?PR?MAIN?MAIN
-            CODE    079CH     0007H     UNIT         ?PR?_INCREASE_YEAR?MAIN
-            CODE    07A3H     0003H     UNIT         ?PR?MAIN_INITIAL?MAIN
+            CODE    05E0H     003EH     UNIT         ?PR?_DELAY?MAIN
+            CODE    061EH     0036H     UNIT         ?PR?_INCREASE_MONTH?MAIN
+            CODE    0654H     0036H     UNIT         ?PR?_INCREASE_DAY?MAIN
+            CODE    068AH     0035H     UNIT         ?PR?_INCREASE_HOUR?MAIN
+            CODE    06BFH     0035H     UNIT         ?PR?_INCREASE_MINUTE?MAIN
+            CODE    06F4H     0035H     UNIT         ?PR?_INCREASE_SECCOND?MAIN
+            CODE    0729H     002FH     UNIT         ?C_INITSEG
+            CODE    0758H     002BH     UNIT         ?PR?CALENDAR_INITIAL?MAIN
+            CODE    0783H     0027H     UNIT         ?PR?INTERRUPT_ACTION?MAIN
+            CODE    07AAH     0013H     UNIT         ?PR?TRIGGER_CHECK?MAIN
+            CODE    07BDH     000EH     UNIT         ?PR?_DIGIT_DISP?MAIN
+            CODE    07CBH     0008H     UNIT         ?PR?MAIN?MAIN
+            CODE    07D3H     0007H     UNIT         ?PR?_INCREASE_YEAR?MAIN
+            CODE    07DAH     0003H     UNIT         ?PR?MAIN_INITIAL?MAIN
 
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/27/2024  15:40:18  PAGE 2
 
 
 OVERLAY MAP OF MODULE:   .\Objects\W5_1 (MAIN)
-
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/24/2024  10:25:24  PAGE 2
-
 
 
 SEGMENT                               DATA_GROUP 
@@ -77,25 +79,24 @@ SEGMENT                               DATA_GROUP
 ?PR?MAIN_INITIAL?MAIN               -----    -----
   +--> ?PR?CALENDAR_INITIAL?MAIN
 
-?PR?CALENDAR_DISP?MAIN              0036H    0006H
-  +--> ?PR?TRIGGER_CHECK?MAIN
+?PR?CALENDAR_DISP?MAIN              0038H    0006H
   +--> ?PR?_INCREASE_SECCOND?MAIN
   +--> ?PR?_DELAY?MAIN
   +--> ?PR?_LED7SEG_DISP?MAIN
 
-?PR?_INCREASE_SECCOND?MAIN          003CH    0003H
+?PR?_INCREASE_SECCOND?MAIN          003EH    0003H
   +--> ?PR?_INCREASE_MINUTE?MAIN
 
-?PR?_INCREASE_MINUTE?MAIN           003FH    0003H
+?PR?_INCREASE_MINUTE?MAIN           0041H    0003H
   +--> ?PR?_INCREASE_HOUR?MAIN
 
-?PR?_INCREASE_HOUR?MAIN             0042H    0003H
+?PR?_INCREASE_HOUR?MAIN             0044H    0003H
   +--> ?PR?_INCREASE_DAY?MAIN
 
-?PR?_INCREASE_DAY?MAIN              0045H    0003H
+?PR?_INCREASE_DAY?MAIN              0047H    0003H
   +--> ?PR?_INCREASE_MONTH?MAIN
 
-?PR?_INCREASE_MONTH?MAIN            0048H    0003H
+?PR?_INCREASE_MONTH?MAIN            004AH    0003H
   +--> ?PR?_INCREASE_YEAR?MAIN
 
 ?PR?_DELAY?MAIN                     -----    -----
@@ -116,33 +117,38 @@ SYMBOL TABLE OF MODULE:  .\Objects\W5_1 (MAIN)
   D:0080H         PUBLIC        P0
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
   B:00A0H.2       PUBLIC        GND0
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/27/2024  15:40:18  PAGE 3
+
+
   B:00A0H.3       PUBLIC        GND1
-  C:0003H         PUBLIC        _digit_select_disp
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/24/2024  10:25:24  PAGE 3
-
-
+  C:0006H         PUBLIC        _digit_select_disp
   B:00A0H.4       PUBLIC        GND2
-  C:074EH         PUBLIC        calendar_initial
+  C:0758H         PUBLIC        calendar_initial
   C:05F9H         SYMBOL        _delay
-  C:06EEH         PUBLIC        _increase_seccond
+  C:06F4H         PUBLIC        _increase_seccond
+  C:0783H         SYMBOL        Interrupt_Action
   D:0008H         PUBLIC        MODE
-  C:0794H         PUBLIC        main
-  C:0786H         PUBLIC        _digit_disp
+  C:07CBH         PUBLIC        main
+  C:07BDH         PUBLIC        _digit_disp
   C:056FH         PUBLIC        _led7seg_disp
   D:000AH         PUBLIC        DISP_TIME
-  C:06B9H         PUBLIC        _increase_minute
+  C:06BFH         PUBLIC        _increase_minute
   B:00B0H.2       PUBLIC        TRIGGER0
-  C:01CEH         PUBLIC        calendar_disp
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  C:01D1H         PUBLIC        calendar_disp
   D:000CH         PUBLIC        datetime
-  C:0618H         PUBLIC        _increase_month
-  C:0773H         PUBLIC        trigger_check
-  C:079CH         PUBLIC        _increase_year
-  C:064EH         PUBLIC        _increase_day
-  D:0018H         PUBLIC        DIGIT_CODE
-  C:0684H         PUBLIC        _increase_hour
-  C:07A3H         PUBLIC        main_initial
-  D:0034H         PUBLIC        EDIT_POS
+  C:061EH         PUBLIC        _increase_month
+  C:07AAH         PUBLIC        trigger_check
+  D:0018H         PUBLIC        F_EXIT
+  C:07D3H         PUBLIC        _increase_year
+  C:0654H         PUBLIC        _increase_day
+  D:001AH         PUBLIC        DIGIT_CODE
+  C:068AH         PUBLIC        _increase_hour
+  C:07DAH         PUBLIC        main_initial
+  D:0036H         PUBLIC        EDIT_POS
   -------         PROC          _LED7SEG_DISP
   D:0006H         SYMBOL        POS
   D:0004H         SYMBOL        CODE
@@ -160,196 +166,209 @@ SYMBOL TABLE OF MODULE:  .\Objects\W5_1 (MAIN)
   -------         PROC          _DIGIT_DISP
   D:0006H         SYMBOL        POS
   D:0004H         SYMBOL        DIGIT
-  C:0786H         LINE#         36
-  C:0786H         LINE#         37
+  C:07BDH         LINE#         36
+  C:07BDH         LINE#         37
   -------         ENDPROC       _DIGIT_DISP
   -------         PROC          _DIGIT_SELECT_DISP
   D:0006H         SYMBOL        LED_POS
-  D:004BH         SYMBOL        SEL_POS
+  D:004DH         SYMBOL        SEL_POS
   D:0002H         SYMBOL        DIGIT
-  C:0003H         LINE#         40
-  C:0007H         LINE#         41
-  C:0040H         LINE#         42
-  C:0079H         LINE#         43
-  C:00B2H         LINE#         44
-  C:00EBH         LINE#         45
-  C:0124H         LINE#         46
-  C:015DH         LINE#         47
-  C:0196H         LINE#         48
-  C:01CDH         LINE#         49
+  C:0006H         LINE#         40
+  C:000AH         LINE#         41
+  C:0043H         LINE#         42
+  C:007CH         LINE#         43
+  C:00B5H         LINE#         44
+  C:00EEH         LINE#         45
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/27/2024  15:40:18  PAGE 4
+
+
+  C:0127H         LINE#         46
+  C:0160H         LINE#         47
+  C:0199H         LINE#         48
+  C:01D0H         LINE#         49
   -------         ENDPROC       _DIGIT_SELECT_DISP
   -------         PROC          _INCREASE_YEAR
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/24/2024  10:25:24  PAGE 4
-
-
   D:0001H         SYMBOL        datetime
-  C:079CH         LINE#         14
-  C:079CH         LINE#         15
+  C:07D3H         LINE#         14
+  C:07D3H         LINE#         15
   -------         ENDPROC       _INCREASE_YEAR
   -------         PROC          _INCREASE_MONTH
-  D:0048H         SYMBOL        datetime
-  C:0618H         LINE#         17
-  C:061EH         LINE#         18
-  C:062AH         LINE#         19
-  C:062DH         LINE#         20
-  C:063DH         LINE#         21
-  C:063DH         LINE#         22
-  C:064DH         LINE#         23
-  C:064DH         LINE#         24
+  D:004AH         SYMBOL        datetime
+  C:061EH         LINE#         17
+  C:0624H         LINE#         18
+  C:0630H         LINE#         19
+  C:0633H         LINE#         20
+  C:0643H         LINE#         21
+  C:0643H         LINE#         22
+  C:0653H         LINE#         23
+  C:0653H         LINE#         24
   -------         ENDPROC       _INCREASE_MONTH
   -------         PROC          _INCREASE_DAY
-  D:0045H         SYMBOL        datetime
-  C:064EH         LINE#         25
-  C:0654H         LINE#         26
-  C:0660H         LINE#         27
-  C:0663H         LINE#         28
-  C:0673H         LINE#         29
-  C:0673H         LINE#         30
-  C:0683H         LINE#         31
-  C:0683H         LINE#         32
+  D:0047H         SYMBOL        datetime
+  C:0654H         LINE#         25
+  C:065AH         LINE#         26
+  C:0666H         LINE#         27
+  C:0669H         LINE#         28
+  C:0679H         LINE#         29
+  C:0679H         LINE#         30
+  C:0689H         LINE#         31
+  C:0689H         LINE#         32
   -------         ENDPROC       _INCREASE_DAY
   -------         PROC          _INCREASE_HOUR
-  D:0042H         SYMBOL        datetime
-  C:0684H         LINE#         33
-  C:068AH         LINE#         34
-  C:0696H         LINE#         35
-  C:0699H         LINE#         36
-  C:06A8H         LINE#         37
-  C:06A8H         LINE#         38
-  C:06B8H         LINE#         39
-  C:06B8H         LINE#         40
+  D:0044H         SYMBOL        datetime
+  C:068AH         LINE#         33
+  C:0690H         LINE#         34
+  C:069CH         LINE#         35
+  C:069FH         LINE#         36
+  C:06AEH         LINE#         37
+  C:06AEH         LINE#         38
+  C:06BEH         LINE#         39
+  C:06BEH         LINE#         40
   -------         ENDPROC       _INCREASE_HOUR
   -------         PROC          _INCREASE_MINUTE
-  D:003FH         SYMBOL        datetime
-  C:06B9H         LINE#         41
-  C:06BFH         LINE#         42
-  C:06CBH         LINE#         43
-  C:06CEH         LINE#         44
-  C:06DDH         LINE#         45
-  C:06DDH         LINE#         46
-  C:06EDH         LINE#         47
-  C:06EDH         LINE#         48
+  D:0041H         SYMBOL        datetime
+  C:06BFH         LINE#         41
+  C:06C5H         LINE#         42
+  C:06D1H         LINE#         43
+  C:06D4H         LINE#         44
+  C:06E3H         LINE#         45
+  C:06E3H         LINE#         46
+  C:06F3H         LINE#         47
+  C:06F3H         LINE#         48
   -------         ENDPROC       _INCREASE_MINUTE
   -------         PROC          _INCREASE_SECCOND
-  D:003CH         SYMBOL        datetime
-  C:06EEH         LINE#         49
-  C:06F4H         LINE#         50
-  C:0700H         LINE#         51
-  C:0703H         LINE#         52
-  C:0712H         LINE#         53
-  C:0712H         LINE#         54
-  C:0722H         LINE#         55
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/24/2024  10:25:24  PAGE 5
+  D:003EH         SYMBOL        datetime
+  C:06F4H         LINE#         49
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/27/2024  15:40:18  PAGE 5
 
 
-  C:0722H         LINE#         56
+  C:06FAH         LINE#         50
+  C:0706H         LINE#         51
+  C:0709H         LINE#         52
+  C:0718H         LINE#         53
+  C:0718H         LINE#         54
+  C:0728H         LINE#         55
+  C:0728H         LINE#         56
   -------         ENDPROC       _INCREASE_SECCOND
-  C:05F0H         SYMBOL        L?0102
-  C:05F5H         SYMBOL        L?0103
-  -------         PROC          L?0101
-  -------         ENDPROC       L?0101
-  C:05F0H         SYMBOL        L?0102
-  C:05F5H         SYMBOL        L?0103
+  C:05F0H         SYMBOL        L?0107
+  C:05F5H         SYMBOL        L?0108
+  -------         PROC          L?0106
+  -------         ENDPROC       L?0106
+  C:05F0H         SYMBOL        L?0107
+  C:05F5H         SYMBOL        L?0108
   -------         PROC          _DELAY
   D:0002H         SYMBOL        mili_sec
   -------         DO            
   D:0082H         SYMBOL        i
   -------         ENDDO         
-  C:05F9H         LINE#         20
-  C:05FDH         LINE#         22
-  C:0617H         LINE#         23
+  C:05F9H         LINE#         21
+  C:05FDH         LINE#         23
+  C:0614H         LINE#         24
+  C:061DH         LINE#         25
   -------         ENDPROC       _DELAY
   -------         PROC          TRIGGER_CHECK
-  C:0773H         LINE#         25
-  C:0773H         LINE#         26
-  C:0776H         LINE#         27
-  C:0785H         LINE#         28
-  C:0785H         LINE#         29
+  C:07AAH         LINE#         27
+  C:07AAH         LINE#         28
+  C:07ADH         LINE#         29
+  C:07BCH         LINE#         30
+  C:07BCH         LINE#         31
   -------         ENDPROC       TRIGGER_CHECK
   -------         PROC          CALENDAR_DISP
   -------         DO            
-  D:0036H         SYMBOL        DATE_TIME_DISP
-  D:0038H         SYMBOL        MAX_LOOP_DISP
+  D:0038H         SYMBOL        DATE_TIME_DISP
+  D:003AH         SYMBOL        MAX_LOOP_DISP
+  C:0226H         SYMBOL        EXIT
   -------         DO            
-  D:003AH         SYMBOL        i
-  D:003AH         SYMBOL        i
+  D:003CH         SYMBOL        i
+  D:003CH         SYMBOL        i
   -------         ENDDO         
   -------         DO            
-  D:003AH         SYMBOL        i
+  D:003CH         SYMBOL        i
   -------         ENDDO         
   -------         ENDDO         
-  C:01CEH         LINE#         31
-  C:01CEH         LINE#         32
-  C:01D4H         LINE#         33
-  C:01DAH         LINE#         34
-  C:01DDH         LINE#         35
-  C:01E6H         LINE#         38
-  C:01EFH         LINE#         39
-  C:01F3H         LINE#         40
-  C:0206H         LINE#         41
-  C:021AH         LINE#         42
-  C:021DH         LINE#         43
-  C:022AH         LINE#         44
-  C:022DH         LINE#         46
-  C:0231H         LINE#         47
-  C:0234H         LINE#         48
-  C:0241H         LINE#         49
-  C:0244H         LINE#         51
-  C:0258H         LINE#         52
-  C:025BH         LINE#         53
-  C:026FH         LINE#         54
-  C:0272H         LINE#         55
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/24/2024  10:25:24  PAGE 6
+  C:01D1H         LINE#         33
+  C:01D1H         LINE#         34
+  C:01D7H         LINE#         35
+  C:01DDH         LINE#         37
+  C:01E6H         LINE#         40
+  C:01EFH         LINE#         41
+  C:01F3H         LINE#         42
+  C:0206H         LINE#         43
+  C:021AH         LINE#         44
+  C:021DH         LINE#         45
+  C:022AH         LINE#         46
+  C:022DH         LINE#         48
+  C:0231H         LINE#         49
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/27/2024  15:40:18  PAGE 6
 
 
-  C:0286H         LINE#         56
-  C:0289H         LINE#         57
-  C:0296H         LINE#         58
-  C:0299H         LINE#         59
-  C:02A4H         LINE#         60
-  C:02A4H         LINE#         61
-  C:02AFH         LINE#         62
-  C:02B3H         LINE#         63
-  C:02C6H         LINE#         64
-  C:02E7H         LINE#         65
-  C:02EAH         LINE#         66
-  C:0304H         LINE#         67
-  C:0307H         LINE#         68
-  C:030BH         LINE#         69
-  C:030EH         LINE#         70
-  C:031BH         LINE#         71
-  C:031EH         LINE#         73
-  C:0332H         LINE#         74
-  C:0335H         LINE#         75
-  C:0342H         LINE#         76
-  C:0345H         LINE#         77
-  C:0350H         LINE#         78
-  C:0353H         LINE#         79
-  C:036DH         LINE#         80
-  C:0370H         LINE#         81
-  C:037BH         LINE#         82
-  C:037BH         LINE#         83
+  C:0234H         LINE#         50
+  C:0241H         LINE#         51
+  C:0244H         LINE#         53
+  C:0258H         LINE#         54
+  C:025BH         LINE#         55
+  C:026FH         LINE#         56
+  C:0272H         LINE#         57
+  C:0286H         LINE#         58
+  C:0289H         LINE#         59
+  C:0296H         LINE#         60
+  C:0299H         LINE#         61
+  C:02A4H         LINE#         62
+  C:02A4H         LINE#         63
+  C:02AFH         LINE#         64
+  C:02B3H         LINE#         65
+  C:02C6H         LINE#         66
+  C:02E7H         LINE#         67
+  C:02EAH         LINE#         68
+  C:0304H         LINE#         69
+  C:0307H         LINE#         70
+  C:030BH         LINE#         71
+  C:030EH         LINE#         72
+  C:031BH         LINE#         73
+  C:031EH         LINE#         75
+  C:0332H         LINE#         76
+  C:0335H         LINE#         77
+  C:0342H         LINE#         78
+  C:0345H         LINE#         79
+  C:0350H         LINE#         80
+  C:0353H         LINE#         81
+  C:036DH         LINE#         82
+  C:0370H         LINE#         83
+  C:037BH         LINE#         84
+  C:037BH         LINE#         85
+  C:037BH         LINE#         87
   -------         ENDPROC       CALENDAR_DISP
+  -------         PROC          INTERRUPT_ACTION
+  C:0783H         LINE#         90
+  C:078EH         LINE#         91
+  C:07A1H         LINE#         92
+  -------         ENDPROC       INTERRUPT_ACTION
   -------         PROC          CALENDAR_INITIAL
-  C:074EH         LINE#         86
-  C:074EH         LINE#         87
-  C:0754H         LINE#         88
-  C:075AH         LINE#         89
-  C:0760H         LINE#         90
-  C:0766H         LINE#         91
-  C:076CH         LINE#         92
-  C:0772H         LINE#         93
+  C:0758H         LINE#         94
+  C:0758H         LINE#         95
+  C:075AH         LINE#         96
+  C:075CH         LINE#         97
+  C:075EH         LINE#         98
+  C:0764H         LINE#         99
+  C:076AH         LINE#         100
+  C:0770H         LINE#         101
+  C:0776H         LINE#         102
+  C:077CH         LINE#         103
+  C:0782H         LINE#         104
   -------         ENDPROC       CALENDAR_INITIAL
   -------         PROC          MAIN_INITIAL
-  C:07A3H         LINE#         4
-  C:07A3H         LINE#         5
+  C:07DAH         LINE#         4
+  C:07DAH         LINE#         5
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/27/2024  15:40:18  PAGE 7
+
+
   -------         ENDPROC       MAIN_INITIAL
   -------         PROC          MAIN
-  C:0794H         LINE#         4
-  C:0794H         LINE#         5
-  C:0797H         LINE#         6
-  C:0797H         LINE#         7
-  C:079AH         LINE#         8
+  C:07CBH         LINE#         4
+  C:07CBH         LINE#         5
+  C:07CEH         LINE#         6
+  C:07CEH         LINE#         7
+  C:07D1H         LINE#         8
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
@@ -359,9 +378,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\W5_1 (MAIN)
 
   -------         MODULE        ?C?UIDIV
   C:038EH         PUBLIC        ?C?UIDIV
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/24/2024  10:25:24  PAGE 7
-
-
   -------         ENDMOD        ?C?UIDIV
 
   -------         MODULE        ?C?ILDOPTR
@@ -387,5 +403,8 @@ SYMBOL TABLE OF MODULE:  .\Objects\W5_1 (MAIN)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_DIGIT_SELECT_DISP?MAIN
 
-Program Size: data=78.0 xdata=0 code=1958
-LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?TRIGGER_CHECK?MAIN
+
+Program Size: data=80.0 xdata=0 code=2013
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

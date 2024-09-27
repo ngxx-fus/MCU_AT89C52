@@ -14,12 +14,14 @@ sbit TRIGGER1 = P3^3;
 
 UINT MODE = VIEW_TIME;
 UINT EDIT_POS = 1;
+UINT F_EXIT = 0;
 
 DATETIME datetime;
 
 static void delay(unsigned int mili_sec) {
   UINT i;
-  for (i = 0; i < 12 * mili_sec; i++);
+  for (i = 0; i < 12 * mili_sec; i++)
+    if(F_EXIT) return;
 }
 
 void trigger_check(){
@@ -31,7 +33,7 @@ void trigger_check(){
 void calendar_disp(){
 	UINT DATE_TIME_DISP = 5;
     UINT MAX_LOOP_DISP = 45;
-    trigger_check();
+    //trigger_check();
     increase_seccond(&datetime);
 		//run in a seccond
     
@@ -80,10 +82,19 @@ void calendar_disp(){
             delay(DATE_TIME_DISP);
         }
     }
+    EXIT:
+        return;
 }
 
 
+static void Interrupt_Action(void) interrupt 0 {
+    MODE = (MODE == VIEW_DATE)?(VIEW_TIME): (VIEW_DATE);
+}
+
 void calendar_initial(){
+    EA = 1;
+    EX0 = 1;
+    IT0 = 1;
     datetime.YEAR = 2024;
     datetime.MONTH = 9;
     datetime.DAY = 24;
