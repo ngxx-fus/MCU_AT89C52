@@ -1,3 +1,5 @@
+#ifndef _MAIN_H_
+#define _MAIN_H_
 #include <REGX52.h>
 
 // type define: "usigned int" -> "uint"
@@ -41,3 +43,5 @@ void display(int V){
         delay_milisec(delta_t);
     }
 }
+
+#endif
