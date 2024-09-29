@@ -1,7 +1,8 @@
-#include "main.h"
+#include "Calendar_OnKit.h"
 
 void main(void){
-    initial();
-    delay_ms(5000);
-    ds1302_read_datetime();
+	calendar_initial();
+	while(0x1){
+		calendar_disp();
+	}
 }

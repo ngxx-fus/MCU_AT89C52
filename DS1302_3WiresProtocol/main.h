@@ -1,5 +1,5 @@
-#include "DS1302.h"
+#include "Calendar_OnKit.h"
 
 void initial(){
-    ds1302_initial();
+    calendar_initial();
 }

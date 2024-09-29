@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff7c0000001e000000dc040000ee020000</PLACEMENT>
+  <PLACEMENT>2c00000002000000030000000083ffffe282ffffffffffffffffffff85fefffff3fbffffe5020000c3feffff</PLACEMENT>
   <WINDOW type="default" module="ISIS">
-   <editor metric="0" gridmajor="25400000" mode="00000000" zoom="0" scale="15" flipped="0" gridminor="5080000" gridmode="0" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="846666">
+   <editor metric="0" gridmajor="25400000" mode="00000016" zoom="-1" scale="78" flipped="0" gridminor="508000" gridmode="0" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="162820">
     <world y1="-40640000" x1="-55880000" y2="40640000" x2="55880000"/>
-    <centre x="-10668000" y="25400000"/>
+    <centre x="-11788205" y="28148411"/>
     <origin x="0" y="0"/>
    </editor>
   </WINDOW>
@@ -18,15 +18,15 @@
   </editor>
  </MODULE>
  <MODULE name="ISIS">
-  <editor metric="0" gridmajor="25400000" mode="00000000" zoom="0" scale="15" flipped="0" gridminor="5080000" gridmode="0" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="846666">
+  <editor metric="0" gridmajor="25400000" mode="00000016" zoom="-1" scale="78" flipped="0" gridminor="508000" gridmode="0" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="162820">
    <world y1="-40640000" x1="-55880000" y2="40640000" x2="55880000"/>
-   <centre x="-10668000" y="25400000"/>
+   <centre x="-11788205" y="28148411"/>
    <origin x="0" y="0"/>
   </editor>
  </MODULE>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="68" flags="00000002" y="159" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="-515" flags="00000002" y="-921" h="200" pid="0" iid="-1">
     <PROPERTIES>
      <ITEM name="Message Column Width">-22</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
@@ -34,7 +34,7 @@
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="350" x="88" flags="00000032" y="179" h="200" pid="1" iid="-1">
+   <POPUP w="350" x="-495" flags="00000032" y="-901" h="200" pid="1" iid="-1">
     <PROPERTIES>
      <ITEM name="Address Column Width">100</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -53,10 +53,13 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="24" x="108" flags="00000008" y="199" h="17" pid="1" iid="1">
+   <POPUP w="1384" x="-208" flags="00000000" y="-1028" h="877" pid="0" iid="83">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="8" x="128" flags="0000000a" y="219" h="16" pid="3" iid="1">
+   <POPUP w="24" x="-455" flags="00000008" y="-861" h="17" pid="1" iid="1">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP w="8" x="-435" flags="0000000a" y="-841" h="16" pid="3" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -66,7 +69,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="8" x="148" flags="0000000a" y="239" h="16" pid="2" iid="1">
+   <POPUP w="8" x="-415" flags="0000000a" y="-821" h="16" pid="2" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -74,6 +77,19 @@
      <ITEM name="ShowChanges">Yes</ITEM>
      <ITEM name="ShowToolTips">Yes</ITEM>
      <ITEM name="TopLineAddress">00000080</ITEM>
+    </PROPERTIES>
+   </POPUP>
+   <POPUP w="20" x="-395" flags="00000001" y="-801" h="3" pid="1" iid="81">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP w="8" x="-375" flags="00000008" y="-781" h="4" pid="2" iid="81">
+    <PROPERTIES>
+     <ITEM name="DataType">2</ITEM>
+     <ITEM name="DispChars">Yes</ITEM>
+     <ITEM name="DispFormat">2</ITEM>
+     <ITEM name="ShowChanges">Yes</ITEM>
+     <ITEM name="ShowToolTips">Yes</ITEM>
+     <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
   </PWI>

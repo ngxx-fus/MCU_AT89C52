@@ -387,14 +387,19 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>main.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\main.h</FilePath>
-            </File>
-            <File>
               <FileName>ThreeWiresProtocol.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\ThreeWiresProtocol.h</FilePath>
+            </File>
+            <File>
+              <FileName>LED7Seg_OnKit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LED7Seg_OnKit.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calendar_OnKit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Calendar_OnKit.h</FilePath>
             </File>
           </Files>
         </Group>

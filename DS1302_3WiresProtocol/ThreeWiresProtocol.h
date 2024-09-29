@@ -31,12 +31,12 @@ sbit CE = P3^5;
 sbit SCLK = P3^6;
 sbit IO = P3^4;
 uint T_PEAK = 5; //Unit: mili-sec
-
+uint IDLE_T = 5;
 
 void single_byte_write(uint cmd, uint byte_data){
     uint nCLK = 0;
 	//wait for sth un-finished to be finished :v
-    delay_ms(T_PEAK);
+    delay_ms(IDLE_T);
     //Reset to Start comunication
     CE = LOW; 
     IO = LOW;
@@ -53,7 +53,7 @@ void single_byte_write(uint cmd, uint byte_data){
         SCLK = LOW; delay_ms(T_PEAK);
         cmd = (cmd>>1);
     }
-    // send byte_date in 8 rasing edges 
+    // send byte_data in 8 rasing edges 
     for(nCLK = 1; nCLK <= 8; nCLK++){
         IO = (byte_data&0x1);
         SCLK = HIGH; delay_ms(T_PEAK);
@@ -63,18 +63,21 @@ void single_byte_write(uint cmd, uint byte_data){
 }
 
 uint single_byte_read(uint cmd){
-		uint nCLK;
-    uint byte_date = 0;
+	uint nCLK;
+    uint byte_data = 0;
+    uint bit_data = 0;
     //wait for sth un-finished to be done :v
-    delay_ms(T_PEAK);
+    delay_ms(IDLE_T);
     //Reset to Start comunication
     CE = LOW; 
     IO = LOW;
     SCLK = LOW;
     delay_ms(T_PEAK);
     //starting comunication
+    
     //Send command at 8 rasing edge
     CE = HIGH;
+    delay_ms(T_PEAK);
     // 7 rasing edges 
     for(nCLK = 1; nCLK <= 7; nCLK++){
         IO = (cmd&0x1);
@@ -87,19 +90,22 @@ uint single_byte_read(uint cmd){
     // 8th rasing edge
     IO = (cmd&0x1);
     SCLK = HIGH;
-    //Receiving byte_date at 8 falling edge following
+    //Receiving byte_data at 7 falling edge following
     for(nCLK = 1; nCLK <= 7; nCLK++){
         delay_ms(T_PEAK);
         SCLK = LOW;
-        byte_date = ((byte_date<<1)|IO);
+        bit_data = IO;
+        byte_data = ((byte_data<<1)|bit_data);
         delay_ms(T_PEAK);
         SCLK = HIGH;
     }
     delay_ms(T_PEAK);
     SCLK = LOW;
-    CE = LOW;
+    bit_data = IO;
+    byte_data = ((byte_data<<1)|bit_data);
     delay_ms(T_PEAK);
-    return byte_date;
+    CE = LOW;
+    return byte_data;
 }
 
 void ThreeWiresProtocol_Initial(){
