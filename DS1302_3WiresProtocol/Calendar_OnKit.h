@@ -49,9 +49,9 @@ void calendar_disp(){
         digit_disp(5, ((time.MINUTE)%10));
         delay(DATE_TIME_DISP);
 
-        digit_disp(4, (((time.MONTH)/1000)%10)); 
+        digit_disp(4, (((time.MONTH)/10)%10)); 
         delay(DATE_TIME_DISP);
-        digit_disp(3, (((time.MONTH)/100)%10)); 
+        digit_disp(3, (((time.MONTH)/1)%10)); 
         delay(DATE_TIME_DISP);
 
         digit_disp(2, (((time.YEAR)/10)%10)); 

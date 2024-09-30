@@ -30,8 +30,22 @@ enum enum_STATE{
 sbit CE = P3^5;
 sbit SCLK = P3^6;
 sbit IO = P3^4;
-uint T_PEAK = 5; //Unit: mili-sec
-uint IDLE_T = 5;
+uint T_PEAK = 1; //Unit: mili-sec
+uint IDLE_T = 1;
+uint READ_T = 0;
+
+static uint inverse_bit_ordered(uint byte_data){
+	uint res = 0;
+	res +=(byte_data & 0x1)<<7; byte_data = (byte_data >> 1);
+	res +=(byte_data & 0x1)<<6; byte_data = (byte_data >> 1);
+	res +=(byte_data & 0x1)<<5; byte_data = (byte_data >> 1);
+	res +=(byte_data & 0x1)<<4; byte_data = (byte_data >> 1);
+	res +=(byte_data & 0x1)<<3; byte_data = (byte_data >> 1);
+	res +=(byte_data & 0x1)<<2; byte_data = (byte_data >> 1);
+	res +=(byte_data & 0x1)<<1; byte_data = (byte_data >> 1);
+	res +=(byte_data & 0x1)   ; byte_data = (byte_data >> 1);
+	return res;
+}
 
 void single_byte_write(uint cmd, uint byte_data){
     uint nCLK = 0;
@@ -39,7 +53,6 @@ void single_byte_write(uint cmd, uint byte_data){
     delay_ms(IDLE_T);
     //Reset to Start comunication
     CE = LOW; 
-    IO = LOW;
     SCLK = LOW;
     delay_ms(T_PEAK);
     //starting comunication
@@ -60,21 +73,21 @@ void single_byte_write(uint cmd, uint byte_data){
         SCLK = LOW; delay_ms(T_PEAK);
         byte_data = (byte_data>>1);
     }
+
+    CE = LOW; 
 }
 
 uint single_byte_read(uint cmd){
 	uint nCLK;
-    uint byte_data = 0;
+    uint byte_data = 0xFF;
     uint bit_data = 0;
     //wait for sth un-finished to be done :v
     delay_ms(IDLE_T);
     //Reset to Start comunication
     CE = LOW; 
-    IO = LOW;
     SCLK = LOW;
     delay_ms(T_PEAK);
     //starting comunication
-    
     //Send command at 8 rasing edge
     CE = HIGH;
     delay_ms(T_PEAK);
@@ -94,18 +107,21 @@ uint single_byte_read(uint cmd){
     for(nCLK = 1; nCLK <= 7; nCLK++){
         delay_ms(T_PEAK);
         SCLK = LOW;
+        delay_ms(READ_T);
         bit_data = IO;
-        byte_data = ((byte_data<<1)|bit_data);
-        delay_ms(T_PEAK);
+        byte_data = (((byte_data<<1)&0XFE)|(bit_data&0x1));
+        delay_ms(T_PEAK-READ_T);
         SCLK = HIGH;
     }
     delay_ms(T_PEAK);
     SCLK = LOW;
+    delay_ms(READ_T);
     bit_data = IO;
-    byte_data = ((byte_data<<1)|bit_data);
-    delay_ms(T_PEAK);
-    CE = LOW;
-    return byte_data;
+    byte_data = (((byte_data<<1)&0XFE)|(bit_data&0x1));
+    delay_ms(T_PEAK-READ_T);
+    
+    CE = LOW; 
+    return inverse_bit_ordered(byte_data);
 }
 
 void ThreeWiresProtocol_Initial(){

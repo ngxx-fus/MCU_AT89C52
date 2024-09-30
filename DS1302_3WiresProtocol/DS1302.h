@@ -74,10 +74,10 @@ void ds1302_read_time(TIME* time){
 }
 
 void ds1302_write_time(TIME* const time){
-    uint x10, x1, byte_data;
+    uint x10 = 0, x1 = 0, byte_data = 0;
     //second
-    x10 = ((time->SECOND)/10)%10;
-    x1  = (time->SECOND)%10;
+    x10 = (((*time).SECOND)/10)%10;
+    x1  = ((*time).SECOND)%10;
     byte_data = (x10<<4) + x1;
     single_byte_write(0x80, byte_data);
     //minute
@@ -94,5 +94,6 @@ void ds1302_write_time(TIME* const time){
 
 void ds1302_initial(){
     ThreeWiresProtocol_Initial();
+    single_byte_write(0x90, 0x5A);
 }
 #endif
