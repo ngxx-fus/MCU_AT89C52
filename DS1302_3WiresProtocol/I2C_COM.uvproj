@@ -401,6 +401,11 @@
               <FileType>5</FileType>
               <FilePath>.\Calendar_OnKit.h</FilePath>
             </File>
+            <File>
+              <FileName>base_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\base_lib.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

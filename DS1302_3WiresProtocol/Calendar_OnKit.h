@@ -2,8 +2,10 @@
 #ifndef _CALENDAR_ONKIT_H_
 #define  _CALENDAR_ONKIT_H_
 
-#include "LED7Seg_OnKit.h"
+#include "base_lib.h"
 #include "DS1302.h"
+#include "LED7Seg_OnKit.h"
+#include "ThreeWiresProtocol.h"
 
 #define A_DIGIT 0x77
 #define P_DIGIT 0x73
@@ -16,62 +18,68 @@
 sbit TRIGGER0 = P3^2;
 sbit TRIGGER1 = P3^3;
 
-uint MODE = VIEW_TIME;
-uint EDIT_POS = 1;
-uint F_EXIT = 0;
+ubyte MODE = VIEW_TIME;
+ubyte EDIT_POS = 1;
+ubyte F_EXIT = 0;
 
 TIME time;
 
-static void delay(unsigned int mili_sec) {
-  uint i;
-  for (i = 0; i < 12 * mili_sec; i++)
-    if(F_EXIT) return;
+void HHMMSS_disp(){
+  ds1302_read_time(&time, 0x7);
+  LED[7] = DIGIT_CODE[(time.HOUR/10)%10];
+  LED[6] = DIGIT_CODE[time.HOUR%10];
+  LED[5] = 0x40;
+  LED[4] = DIGIT_CODE[(time.MINUTE/10)%10];
+  LED[3] = DIGIT_CODE[time.MINUTE%10];
+  LED[2] = 0x40;
+  LED[1] = DIGIT_CODE[(time.SECOND/10)%10];
+  LED[0] = DIGIT_CODE[(time.SECOND)%10];
+  DISP = 1;
+  Disp8leds7seg();
+}
+
+void YYMMDD_disp(){
+  ds1302_read_time(&time, 0x38);
+  LED[7] = DIGIT_CODE[(time.YEAR/10)%10];
+  LED[6] = DIGIT_CODE[time.YEAR%10];
+  LED[5] = 0x40;
+  LED[4] = DIGIT_CODE[(time.MONTH/10)%10];
+  LED[3] = DIGIT_CODE[time.MONTH%10];
+  LED[2] = 0x40;
+  LED[1] = DIGIT_CODE[(time.DATE/10)%10];
+  LED[0] = DIGIT_CODE[(time.DATE)%10];
+  DISP = 1;
+  Disp8leds7seg();
 }
 
 void calendar_disp(){
-    uint DATE_TIME_DISP = 3;
-    uint MAX_LOOP_DISP = 60;
-    uint i = 0;
-    //Update time
-    led7seg_disp(1, 0x0);
-    delay(300);
-    ds1302_read_time(&time);
-	//run in a seccond
-    
-    FOR(i, 1, MAX_LOOP_DISP){
-        digit_disp(8, (((time.HOUR)/10)%10)); 
-        delay(DATE_TIME_DISP);
-        digit_disp(7, ((time.HOUR)%10));
-        delay(DATE_TIME_DISP);
-
-        digit_disp(6, (((time.MINUTE)/10)%10)); 
-        delay(DATE_TIME_DISP);
-        digit_disp(5, ((time.MINUTE)%10));
-        delay(DATE_TIME_DISP);
-
-        digit_disp(4, (((time.MONTH)/10)%10)); 
-        delay(DATE_TIME_DISP);
-        digit_disp(3, (((time.MONTH)/1)%10)); 
-        delay(DATE_TIME_DISP);
-
-        digit_disp(2, (((time.YEAR)/10)%10)); 
-        delay(DATE_TIME_DISP);
-        digit_disp(1, ((time.YEAR)%10));
-        delay(DATE_TIME_DISP);
-    }
+  switch (MODE) {
+    case VIEW_TIME:
+      HHMMSS_disp();
+      break;
+    case VIEW_DATE:
+      YYMMDD_disp();
+      break;
+  }
 }
 
 void calendar_initial(){
-    EA = 1; EX0 = 1; IT0 = 1;
-    ds1302_initial();
-    time.SECOND = 3;
-    time.MINUTE = 2;
-    time.HOUR = 17;
-    ds1302_write_time(&time);
+  EA = 1; EX0 = 1; IT0 = 1;
+  ds1302_initial();
+  time.SECOND = 0;
+  time.MINUTE = 30;
+  time.HOUR = 9;
+  time.DAY = TUE;
+  time.DATE = 1;
+  time.MONTH = 9;
+  time.YEAR  = 24;
+  ds1302_write_time(&time,0x7F);
+  set_disp_freq(48);
 }
 
 static void Interrupt_Action(void) interrupt 0 {
-    MODE = (MODE == VIEW_DATE)?(VIEW_TIME): (VIEW_DATE);
+  MODE=(MODE+1)%2;
+  DISP = 0;
 }
 
 #endif
