@@ -3,7 +3,7 @@
         {
             "name": "Target 1",
             "includePath": [
-                "d:\\DOC\\NH_2024_2025_HK_01\\COOL325364\\ThreeWiresProtocol"
+                "d:\\DOC\\NH_2024_2025_HK_01\\COOL325364\\DS1302_3WiresProtocol"
             ],
             "defines": [
                 "__C51__",

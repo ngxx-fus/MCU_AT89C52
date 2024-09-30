@@ -13,7 +13,7 @@
 #include <REGX52.h>
 
 // type define: "usigned int" -> "uint"
-typedef unsigned int uint;
+// typedef unsigned int uint;
 
 static void delay_ms(uint t_mili_sec){
     uint i = 0; 

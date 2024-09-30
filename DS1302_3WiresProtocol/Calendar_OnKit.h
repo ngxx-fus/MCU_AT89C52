@@ -16,22 +16,22 @@
 sbit TRIGGER0 = P3^2;
 sbit TRIGGER1 = P3^3;
 
-UINT MODE = VIEW_TIME;
-UINT EDIT_POS = 1;
-UINT F_EXIT = 0;
+uint MODE = VIEW_TIME;
+uint EDIT_POS = 1;
+uint F_EXIT = 0;
 
 TIME time;
 
 static void delay(unsigned int mili_sec) {
-  UINT i;
+  uint i;
   for (i = 0; i < 12 * mili_sec; i++)
     if(F_EXIT) return;
 }
 
 void calendar_disp(){
-    UINT DATE_TIME_DISP = 3;
-    UINT MAX_LOOP_DISP = 60;
-    UINT i = 0;
+    uint DATE_TIME_DISP = 3;
+    uint MAX_LOOP_DISP = 60;
+    uint i = 0;
     //Update time
     led7seg_disp(1, 0x0);
     delay(300);
@@ -67,7 +67,9 @@ void calendar_initial(){
     time.SECOND = 3;
     time.MINUTE = 2;
     time.HOUR = 17;
+		single_byte_write(0x8E,0X00);
     ds1302_write_time(&time);
+		single_byte_write(0x8E,0X00);
 }
 
 static void Interrupt_Action(void) interrupt 0 {
