@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              09/30/2024 19:47:06 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              09/30/2024 20:46:09 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -11,21 +11,23 @@ line level    source
    1          #include "Calendar_OnKit.h"
    2          
    3          #include "Calendar_OnKit.h"
-   4          
-   5          void main(void){
-   6   1        calendar_initial();
-   7   1        while(0x1){
-   8   2          calendar_disp();
-   9   2        }
-  10   1      }
+   4          #include "LED7Seg_OnKit.h"
+   5          #include "ThreeWiresProtocol.h"
+   6          
+   7          void main(void){
+   8   1        calendar_initial();
+   9   1        while(0x1){
+  10   2          calendar_disp();
+  11   2        }
+  12   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1884    ----
+   CODE SIZE        =   1489    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     58      38
+   DATA SIZE        =     71      35
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

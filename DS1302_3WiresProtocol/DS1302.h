@@ -10,15 +10,11 @@
 
 #include "ThreeWiresProtocol.h"
 
-enum enum_DAY{
-    MON = 0,
-    TUE,
-    WED,
-    THU,
-    FRI,
-    SAT,
-    SUN
-};
+//typedef unsigned int uint;
+
+enum enum_DAY{MON = 0, TUE, WED, THU, FRI, SAT, SUN};
+
+#define ds1302_unlock_reg() single_byte_write(0x8E, 0x0)
 
 typedef struct TIME{
     uint DAY; // mon, tue, wed, thu, ...
@@ -33,16 +29,19 @@ typedef struct TIME{
 void ds1302_read_time(TIME* time){
     uint x10, x1, byte_data, AM_PM;
     //second
+    ds1302_unlock_reg();
     byte_data = single_byte_read(0x81);
     x10 = ((byte_data & 0x70) >> 4)*10;
     x1  = (byte_data & 0x0F);
     time->SECOND = x1 + x10;
     //minute
+    ds1302_unlock_reg();
     byte_data = single_byte_read(0x83);
     x10 = ((byte_data & 0x70) >> 4)*10;
     x1  = (byte_data & 0x0F);
     time->MINUTE = x10 + x1;
     //hour
+    ds1302_unlock_reg();
 	byte_data = single_byte_read(0x85);
     if( (byte_data & 0x80) == HIGH){
         //12-hour mode
@@ -57,16 +56,19 @@ void ds1302_read_time(TIME* time){
         time->HOUR = x10 + x1;
     }
     //date
+    ds1302_unlock_reg();
     byte_data = single_byte_read(0x87);
     x10 = ((byte_data&0x30)>>4)*10;
     x1  = (byte_data&0x0F);
     time->DATE = x10 + x1;
     //month
+    ds1302_unlock_reg();
     byte_data = single_byte_read(0x89);
     x10 = ((byte_data&0x10)>>4)*10;
     x1  = (byte_data&0x0F);
     time->MONTH = x10 + x1;
     //year
+    ds1302_unlock_reg();
     byte_data = single_byte_read(0x87);
     x10 = ((byte_data&0xF0)>>4)*10;
     x1  = (byte_data&0x0F);
@@ -79,21 +81,23 @@ void ds1302_write_time(TIME* const time){
     x10 = (((*time).SECOND)/10)%10;
     x1  = ((*time).SECOND)%10;
     byte_data = (x10<<4) + x1;
+    ds1302_unlock_reg();
     single_byte_write(0x80, byte_data);
     //minute
     x10 = ((time->MINUTE)/10)%10;
     x1  = (time->MINUTE)%10;
     byte_data = (x10<<4) + x1;
+    ds1302_unlock_reg();
     single_byte_write(0x82, byte_data);
     //hour
     x10 = ((time->HOUR)/10)%10;
     x1  = (time->HOUR)%10;
     byte_data = (x10<<4) + x1;
+    ds1302_unlock_reg();
     single_byte_write(0x84, byte_data);
 }
 
 void ds1302_initial(){
     ThreeWiresProtocol_Initial();
-    single_byte_write(0x90, 0x5A);
 }
 #endif

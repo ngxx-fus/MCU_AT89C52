@@ -67,9 +67,7 @@ void calendar_initial(){
     time.SECOND = 3;
     time.MINUTE = 2;
     time.HOUR = 17;
-		single_byte_write(0x8E,0X00);
     ds1302_write_time(&time);
-		single_byte_write(0x8E,0X00);
 }
 
 static void Interrupt_Action(void) interrupt 0 {

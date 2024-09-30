@@ -19,7 +19,7 @@
 #endif
 
 //Định nghĩa lại kiểu dữ liệu
-typedef unsigned int  uint;
+//typedef unsigned int  uint;
 
 //Các chân chọn vị trí LED.
 sbit GND0 = P2^2;
@@ -94,7 +94,7 @@ void Disp8leds7seg(){
     uint j = 0;
     set_disp_freq(DISP_Freq);
     for(j = 1; j <= DISP_Freq; ++j){
-        for( int i =0; i < 7; ++i){
+        for(i =0; i < 7; ++i){
             led7seg_disp(i, LED[i]);
             delay_ms(DISP_Time);
         }
