@@ -95,7 +95,7 @@ void Disp8leds7seg(){
     set_disp_freq(DISP_Freq);
     for(j = 1; j <= DISP_Freq; ++j){
         for( int i =0; i < 7; ++i){
-            digit_disp(i, LED[i]);
+            led7seg_disp(i, LED[i]);
             delay_ms(DISP_Time);
         }
     }
