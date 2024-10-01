@@ -3,6 +3,6 @@
 
 void main_initial(){
     calendar_initial();
-    
+    //without realtime
 }
 
