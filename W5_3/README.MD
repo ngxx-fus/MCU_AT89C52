@@ -3,7 +3,7 @@
         base_lib.h
         |
         |
-        ThreeWireProtocol.h
+        ThreeWiresProtocol.h
         |
         |
         DS1302.h
