@@ -35,6 +35,7 @@ void CHON_VITRI_LED7SEG(ubyte i){
 
 void HIENTHI_8LED(){
     ubyte i = 0;
+    ubyte j = 0;
     FOR(i, 0, 7){
         CHON_VITRI_LED7SEG(i);
         LED = LED_CODE[i];

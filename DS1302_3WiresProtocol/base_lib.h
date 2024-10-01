@@ -26,7 +26,7 @@ static void delay_us(uint t){
 
 static void delay_ms(uint t){
     uint i = 0; 
-    for(i = 0; i < t*1200; i = i + 1){
+    for(i = 0; i < t*12; i = i + 1){
         // do nothin'
     }
 }

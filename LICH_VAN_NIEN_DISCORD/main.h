@@ -20,13 +20,13 @@ void THIETLAP_NGAYGIO(){
 
 void HT_LICHVANNIEN(){
     ds1302_read_time(&time, 0x3F);
-    LED_CODE[7] = DIGIT_CODE[ ((time.MONTH)/10)%10];
-    LED_CODE[6] = DIGIT_CODE[ ((time.MONTH)/1)%10];
-    LED_CODE[5] = DIGIT_CODE[ ((time.DATE)/10)%10];
-    LED_CODE[4] = DIGIT_CODE[ ((time.DATE)/1)%10];
-    LED_CODE[3] = DIGIT_CODE[ ((time.HOUR)/10)%10];
-    LED_CODE[2] = DIGIT_CODE[ ((time.HOUR)/1)%10];
-    LED_CODE[1] = DIGIT_CODE[ ((time.MINUTE)/10)%10];
-    LED_CODE[0] = DIGIT_CODE[ ((time.MINUTE)/1)%10];
+    LED_CODE[7] = DIGIT_CODE[ ((time.HOUR)/1)%10];
+    LED_CODE[6] = DIGIT_CODE[ ((time.MINUTE)/10)%10];
+    LED_CODE[5] = DIGIT_CODE[ ((time.MINUTE)/1)%10];
+    LED_CODE[4] = DIGIT_CODE[ ((time.SECOND)/10)%10];
+    LED_CODE[3] = DIGIT_CODE[ ((time.SECOND)/1)%10];
+    LED_CODE[2] = DIGIT_CODE[ ((time.DATE)/1)%10];
+    LED_CODE[1] = DIGIT_CODE[ ((time.MONTH)/1)%10];
+    LED_CODE[0] = DIGIT_CODE[ ((time.YEAR)/1)%10];
     HIENTHI_8LED();
 }

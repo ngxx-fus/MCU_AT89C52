@@ -76,7 +76,7 @@ void Disp8leds7seg(){
     uint j = 0;
     for(i =0; i < 8; ++i){
         led7seg_disp(i+1, LED[i]);
-        for(j = 0; j < 150; ++j);
+        for(j = 0; j < 180; ++j);
     }
     LED_7SEG = 0x0;
 }

@@ -77,7 +77,7 @@ void calendar_initial(){
   set_disp_freq(48);
 }
 
-static void Interrupt_Action(void) interrupt 0 {
+void Interrupt0_Action(void) interrupt 0 {
   MODE=(MODE+1)%2;
   DISP = 0;
 }

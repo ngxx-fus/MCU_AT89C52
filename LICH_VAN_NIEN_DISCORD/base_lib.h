@@ -14,6 +14,9 @@
 #define FOR_reverse(i, a, b) for(i = (a); i >= (b); --i)
 #endif
 
+#define LH_MONO_PULSE(x) x = LOW; delay_us(T_PEAK); x = HIGH; delay_us(T_PEAK);
+#define HL_MONO_PULSE(x) x = HIGH; delay_us(T_PEAK); x = LOW; delay_us(T_PEAK);
+
 typedef unsigned char ubyte;
 typedef unsigned int uint ;
 
