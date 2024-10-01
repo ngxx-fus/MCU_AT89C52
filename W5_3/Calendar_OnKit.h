@@ -68,7 +68,7 @@ void calendar_initial(){
   ds1302_initial();
   time.SECOND = 0;
   time.MINUTE = 30;
-  time.HOUR = 9;
+  time.HOUR = 10;
   time.DAY = TUE;
   time.DATE = 1;
   time.MONTH = 9;

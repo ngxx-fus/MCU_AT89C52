@@ -20,8 +20,8 @@ sbit CE = P3^5;
 sbit SCLK = P3^6;
 sbit IO = P3^4;
 
-ubyte T_PEAK = 1; //Unit: mili-sec
-ubyte IDLE_T = 1;
+ubyte T_PEAK = 0;
+ubyte IDLE_T = 0;
 ubyte READ_T = 0;
 
 #define LH_MONO_PULSE(x) x = LOW; delay_us(T_PEAK); x = HIGH; delay_us(T_PEAK);
@@ -31,11 +31,8 @@ void single_byte_write(ubyte cmd, ubyte byte_data){
     ubyte nCLK = 0;
 	//wait for sth un-finished to be finished :v
     delay_us(IDLE_T);
-    //Reset to Start comunication
-    CE = LOW; SCLK = LOW;
-    delay_us(T_PEAK);
     //start comunication
-    CE = HIGH;
+    CE = HIGH; SCLK = LOW;
     //wait for sth un-finished to be finished :v
     delay_us(T_PEAK);
     // send cmd in 8 rasing edges 
@@ -60,12 +57,8 @@ ubyte single_byte_read(ubyte cmd){
     ubyte byte_data = 0, bit_data = 0;
     //wait for sth un-finished to be done :v
     delay_us(IDLE_T);
-    //Reset to Start comunication
-    CE = LOW; 
-    SCLK = LOW;
-    delay_us(T_PEAK);
     //starting comunication
-    CE = HIGH;
+    CE = HIGH;SCLK = LOW;
     delay_us(T_PEAK);
     //Send command at 8 rasing edge
     for(nCLK = 1; nCLK <= 7; nCLK++){
@@ -85,10 +78,8 @@ ubyte single_byte_read(ubyte cmd){
         SCLK = HIGH; delay_us(T_PEAK);
     }
 
-
     //End write process
     CE = LOW; 
-
     return byte_data;
 }
 

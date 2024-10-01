@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/01/2024  07:39:29  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/01/2024  09:52:35  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -49,7 +49,7 @@ LINK MAP OF MODULE:  .\Objects\I2C_COM (MAIN)
             CODE    07A7H     0023H     UNIT         ?PR?_DELAY_US?MAIN
             CODE    07CAH     0021H     UNIT         ?PR?_DELAY_MS?MAIN
             CODE    07EBH     001AH     UNIT         ?PR?_SET_DISP_FREQ?MAIN
-            CODE    0805H     000FH     UNIT         ?PR?INTERRUPT_ACTION?MAIN
+            CODE    0805H     000FH     UNIT         ?PR?INTERRUPT0_ACTION?MAIN
             CODE    0814H     000EH     UNIT         ?PR?CALENDAR_DISP?MAIN
             CODE    0822H     0008H     UNIT         ?PR?MAIN?MAIN
             CODE    082AH     0007H     UNIT         ?PR?THREEWIRESPROTOCOL_INITIAL?MAIN
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  .\Objects\I2C_COM (MAIN)
 
 OVERLAY MAP OF MODULE:   .\Objects\I2C_COM (MAIN)
 
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 2
 
 
 
@@ -119,7 +119,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 3
 
 
   D:0080H         PUBLIC        P0
@@ -132,7 +132,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   B:00A0H.4       PUBLIC        GND2
   C:0701H         PUBLIC        calendar_initial
   C:082AH         PUBLIC        ThreeWiresProtocol_Initial
-  C:0805H         PUBLIC        Interrupt_Action
   B:00B0H.4       PUBLIC        IO
   C:062BH         PUBLIC        _single_byte_read
   D:0008H         PUBLIC        DISP_Freq
@@ -146,6 +145,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   D:0019H         PUBLIC        DISP
   C:033EH         PUBLIC        _ds1302_write_time
   C:069BH         PUBLIC        _led7seg_disp
+  C:0805H         PUBLIC        Interrupt0_Action
   B:00A8H.0       PUBLIC        EX0
   B:0088H.0       PUBLIC        IT0
   D:001AH         PUBLIC        READ_T
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   C:07BBH         LINE#         22
   C:07C2H         LINE#         24
   C:07C9H         LINE#         25
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 4
 
 
   -------         ENDPROC       _DELAY_US
@@ -239,7 +239,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   C:0637H         LINE#         64
   C:0639H         LINE#         65
   C:0639H         LINE#         66
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 5
 
 
   C:063CH         LINE#         68
@@ -299,7 +299,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   C:0096H         LINE#         54
   C:009FH         LINE#         55
   C:00B4H         LINE#         56
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 6
 
 
   C:00B4H         LINE#         58
@@ -359,7 +359,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   C:0367H         LINE#         111
   C:036CH         LINE#         112
   C:036FH         LINE#         113
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 7
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 7
 
 
   C:036FH         LINE#         114
@@ -419,7 +419,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   C:069BH         LINE#         46
   C:06CBH         LINE#         47
   C:06CBH         LINE#         48
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 8
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 8
 
 
   C:06CFH         LINE#         49
@@ -479,7 +479,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   C:04BDH         LINE#         46
   C:04D6H         LINE#         47
   C:04E8H         LINE#         48
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 9
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 9
 
 
   C:04EBH         LINE#         49
@@ -513,12 +513,12 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   C:072DH         LINE#         76
   C:0738H         LINE#         77
   -------         ENDPROC       CALENDAR_INITIAL
-  -------         PROC          INTERRUPT_ACTION
+  -------         PROC          INTERRUPT0_ACTION
   C:0805H         LINE#         80
   C:0807H         LINE#         81
   C:080EH         LINE#         82
   C:0811H         LINE#         83
-  -------         ENDPROC       INTERRUPT_ACTION
+  -------         ENDPROC       INTERRUPT0_ACTION
   -------         PROC          MAIN
   C:0822H         LINE#         3
   C:0822H         LINE#         4
@@ -539,7 +539,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C_COM (MAIN)
   -------         MODULE        ?C?ILDPTR
   C:02AEH         PUBLIC        ?C?ILDPTR
   -------         ENDMOD        ?C?ILDPTR
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  07:39:29  PAGE 10
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/01/2024  09:52:35  PAGE 10
 
 
 
