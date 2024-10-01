@@ -16,8 +16,8 @@
         |
         main.c
 ### Information
-        |     |       |
-        |:---:|:-----:|
-        |Author| Nguyen Thanh Phu|
-        |Kit| 8051 Pro |
-        |Title| Hien thi ngay/gio, chuyen che do thong qua nut P3^3 |
+|     |       |
+|:---:|:-----:|
+|Author| Nguyen Thanh Phu|
+|Kit| 8051 Pro |
+|Title| Hien thi ngay/gio, chuyen che do thong qua nut P3^3 |
