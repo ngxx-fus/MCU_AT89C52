@@ -185,9 +185,9 @@ void External0_Interrupt() interrupt 0 {
 			}
         }else if(negedge_count >= 32){
             EXTRACT_FRAME();
-            FrameExtracted=~FrameExtracted;
+            FrameExtracted=0;
 						LED_Show(data_frame);
-            FrameExtracted=~FrameExtracted;
+            FrameExtracted=1;
         }
     }
     
