@@ -46,7 +46,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>W6</OutputName>
+          <OutputName>I2C_COM</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -377,14 +377,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>Base_Lib.h</FileName>
+              <FileName>DS1302.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Base_Lib.h</FilePath>
-            </File>
-            <File>
-              <FileName>IR_Reading.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\IR_Reading.h</FilePath>
+              <FilePath>.\DS1302.h</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
@@ -392,9 +387,24 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>Matrix_Button.h</FileName>
+              <FileName>ThreeWiresProtocol.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Matrix_Button.h</FilePath>
+              <FilePath>.\ThreeWiresProtocol.h</FilePath>
+            </File>
+            <File>
+              <FileName>LED7Seg_OnKit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LED7Seg_OnKit.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calendar_OnKit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Calendar_OnKit.h</FilePath>
+            </File>
+            <File>
+              <FileName>base_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\base_lib.h</FilePath>
             </File>
           </Files>
         </Group>

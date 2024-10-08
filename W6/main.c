@@ -3,6 +3,7 @@
 void main(void){
 		Initial();
     while(0x1){
-			delay_us(1);
+      Manual_Control();
+      delay_ms(300);
     }
 }

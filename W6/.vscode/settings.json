@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "matrix_button.h": "c",
+        "base_lib.h": "c"
+    }
+}

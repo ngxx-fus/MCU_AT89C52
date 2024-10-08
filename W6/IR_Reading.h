@@ -1,8 +1,9 @@
 #ifndef _IF_READING_
 #define _IF_READING_
 
-#include "Base_Lib.h"
 #include "REGX52.h"
+#include "Base_Lib.h"
+#include "Matrix_Button.h"
 
 /*
     Refs:
@@ -95,6 +96,7 @@ sbit IR_RCV_PIN = P3^2;
 sbit IndicatorLED = P2^7;
 sbit DataRcv = P2^6;
 sbit FrameExtracted = P2^5;
+sbit MR = P2^4;
 sbit L0 = P2^0;
 sbit L1 = P2^1;
 sbit L2 = P2^2;
@@ -106,11 +108,18 @@ uint32 buffer = 0;
 uint8 ms_count = 0;
 // bit-count
 int8 negedge_count = 0;
+//Manual_Remote
+enum enum_MR{ MANUAL=0, REMOTE=1 };
+uint8 manual_remote = REMOTE;
 
 
 void IR_Reading_Initial(){
     // Enable the Global Interrupt bit
     EA  = 1;
+    // Configure INT1 falling edge interrupt
+    IT1 = 1;   
+    // Enable the INT1 External Interrupt    
+    EX1 = 1;
     // Configure INT0 falling edge interrupt
     IT0 = 1;   
     // Enable the INT0 External Interrupt    
@@ -163,8 +172,30 @@ void Timer0_OverFlow_Interrupt() interrupt 1 {
 }
 
 
+void External1_Interrupt() interrupt 2 {
+    //Toggle mode
+    manual_remote = (manual_remote==MANUAL)?(REMOTE):(MANUAL);
+    MR = manual_remote;
+    delay_ms(500);
+}
+
+void Manual_Control(){
+    if(manual_remote==MANUAL){
+        Get_BTN_MATRIX();
+        if(BTN_MATRIX & 0x1000)
+            L0 = ~L0;
+        if(BTN_MATRIX & 0x2000)
+            L1 = ~L1;
+        if(BTN_MATRIX & 0x4000)
+            L2 = ~L2;
+    }
+}
+
 void External0_Interrupt() interrupt 0 {
-    uint32 current_mscount = 0; 
+    uint32 current_mscount = 0;
+
+    if(manual_remote == MANUAL) return;
+
     current_mscount = ms_count;
     RESET_TIMER_0();
     ms_count=0;
