@@ -19,4 +19,4 @@
     └──── main.c
 
 ### Img
-<img src="https://github.com/ngxx-fus/MCU_AT89C52/blob/main/W6/IMG_20241014_092233.jpg?raw=true" width="300" />
+<img src="https://github.com/ngxx-fus/MCU_AT89C52/blob/main/W6/IMG_20241014_092233.jpg?raw=true" width="500" />
