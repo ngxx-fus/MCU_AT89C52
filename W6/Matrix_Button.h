@@ -24,16 +24,16 @@ uint32 BTN_MATRIX = 0;
 void Row_Write(uint8 I){
     switch (I){
         case 0:
-            ROW0 = 0;
+            ROW0 = 0; ROW1 = 1; ROW2 = 1; ROW3 = 1;
             break;
         case 1:
-            ROW1 = 0;
+            ROW0 = 1; ROW1 = 0; ROW2 = 1; ROW3 = 1;
             break;
         case 2:
-            ROW2 = 0;
+            ROW0 = 1;  ROW1 = 1; ROW2 = 0; ROW3 = 1;
             break;
         case 3:
-            ROW3 = 0;
+            ROW0 = 1;  ROW1 = 1; ROW2 = 1; ROW3 = 0;
             break;
     }
 }
@@ -52,7 +52,7 @@ uint32 Get_BTN_MATRIX(){
     BTN_MATRIX = 0;
     for(i = 0; i < 4; ++i){
         Row_Write(i);
-        delay_us(10);
+        // delay_us(30);
         BTN_MATRIX |= (Col_Read()<<(4*i));
     }
     return BTN_MATRIX;

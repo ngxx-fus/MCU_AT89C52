@@ -83,9 +83,6 @@ NEC IR Remote Codes (Size: 3bytes data)
 **************************/
 
 // Reset timer at 0xFC67
-#define RESET_TIMER_0() TH0=0xFC; TL0=0x67;
-#define START_TIMER_0() TR0 = 1; 
-#define STOP_TIMER() TR0 = 0; 
 #define PUSH_BIT_1() buffer |=(uint32)1<<(31-negedge_count);
 #define PUSH_BIT_0() /*do nothing*/;
 #define RESET_BUFFER() buffer=0;
@@ -114,30 +111,20 @@ uint8 manual_remote = REMOTE;
 
 
 void IR_Reading_Initial(){
-    // Enable the Global Interrupt bit
-    EA  = 1;
-    // Configure INT1 falling edge interrupt
-    IT1 = 1;   
-    // Enable the INT1 External Interrupt    
-    EX1 = 1;
-    // Configure INT0 falling edge interrupt
-    IT0 = 1;   
-    // Enable the INT0 External Interrupt    
-    EX0 = 1;
-    // Enable Timer 1
-    ET0 = 1;
-    // Set mode Timer 1: 16 bits
-    TMOD = TMOD|0x01;
-    // Start timer1
     IndicatorLED = 1;
     DataRcv = 1;
     buffer = 0;
     data_frame = 0;
     negedge_count = 0;
-    START_TIMER_0();
-
+    GLOBAL_INT(ENABLE);
+    eINT0_CTL(ENABLE);
+    eINT1_CTL(ENABLE);
+    TIMER0_CTL(START);
 }
 
+//Yeah, this function need to declare in main.h
+//but, merge into IR_Reading.h for reducing
+//working tree
 void Initial(){
     // Run initial 
     IR_Reading_Initial();
@@ -160,13 +147,13 @@ void LED_Show(uint32 CODE){
             L2 = ~L2;
             break;
         default:
-                P2 = 0xFF;
+            P2 = 0xFF;
     }
 }
 
 void Timer0_OverFlow_Interrupt() interrupt 1 {
 	IndicatorLED = ~IndicatorLED;
-    RESET_TIMER_0();
+    TIMER0_CTL(RESET);
     //A data-frame isn't longer than 67.5mili-sec.
     if(ms_count<50) ms_count = ms_count + 1;
 }
@@ -176,18 +163,21 @@ void External1_Interrupt() interrupt 2 {
     //Toggle mode
     manual_remote = (manual_remote==MANUAL)?(REMOTE):(MANUAL);
     MR = manual_remote;
-    delay_ms(500);
 }
 
 void Manual_Control(){
-    if(manual_remote==MANUAL){
-        Get_BTN_MATRIX();
-        if(BTN_MATRIX & 0x1000)
+    uint32 btn_matrix = 0;
+    if(manual_remote == MANUAL){
+        btn_matrix =  Get_BTN_MATRIX();
+        if(btn_matrix & 0x2)
             L0 = ~L0;
-        if(BTN_MATRIX & 0x2000)
+        if(btn_matrix & 0x40)
             L1 = ~L1;
-        if(BTN_MATRIX & 0x4000)
+        if(btn_matrix & 0x800)
             L2 = ~L2;
+        //Prevent continuos toggle stata :v
+        while( btn_matrix == Get_BTN_MATRIX() )
+            delay_us(1000);
     }
 }
 
@@ -197,7 +187,7 @@ void External0_Interrupt() interrupt 0 {
     if(manual_remote == MANUAL) return;
 
     current_mscount = ms_count;
-    RESET_TIMER_0();
+    TIMER0_CTL(RESET);
     ms_count=0;
     negedge_count +=1;
     DataRcv = ~DataRcv;
@@ -217,12 +207,12 @@ void External0_Interrupt() interrupt 0 {
         }else if(negedge_count >= 32){
             EXTRACT_FRAME();
             FrameExtracted=0;
+            delay_ms(1000);
 			LED_Show(data_frame);
             FrameExtracted=1;
         }
     }
     
 }
-
 
 #endif

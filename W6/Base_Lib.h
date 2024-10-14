@@ -29,6 +29,11 @@ typedef unsigned int uint32;
 typedef char int8;
 typedef int int32;
 
+enum enum_STATE{ LOW  = 0, HIGH = 1 };
+enum enum_ENABLE{ DISABLE=0, ENABLE, START, 
+    STOP, MODE_16BIT, RESET
+};
+
 static void delay_us(uint32 us){
     uint32 i = 0; 
     for(i = 0; i < us; i = i + 1){
@@ -43,8 +48,56 @@ void delay_ms(uint32 ms){
     }
 }
 
-enum enum_STATE{ LOW  = 0, HIGH = 1 };
+void eINT0_CTL(uint8 CONFIG){
+    if( CONFIG == ENABLE){
+        // Enable the INT0 External Interrupt    
+        EX0 = 1;
+        // Enable Timer 1
+        ET0 = 1;
+    }
+    if( CONFIG == DISABLE){
+        // Enable the INT0 External Interrupt    
+        EX0 = 0;
+        // Enable Timer 1
+        ET0 = 0;
+    }
+}
 
+void eINT1_CTL(uint8 CONFIG){
+    if( CONFIG == ENABLE){
+        // Configure INT1 falling edge interrupt
+        IT1 = 1;   
+        // Enable the INT1 External Interrupt    
+        EX1 = 1;
+    }
+    if( CONFIG == DISABLE){
+        // Configure INT1 falling edge interrupt
+        IT1 = 0;   
+        // Enable the INT1 External Interrupt    
+        EX1 = 0;
+    }
+}
 
+#define RESET_TH 0xFC 
+#define RESET_TL 0x67
+void TIMER0_CTL(uint8 CONFIG){
+    switch (CONFIG) {
+        case ENABLE:
+            ET0 = 1;            return;
+        case DISABLE:
+            ET0 = 0;            return;
+        case RESET:
+            TL0 = RESET_TL;
+            TH0 = RESET_TH;     return;
+        case START:
+            TR0 = 1;            return;
+        case STOP:
+            TR0 = 0;            return;
+        case MODE_16BIT:
+            TMOD = TMOD|0x01;   return;
+    }
+}
+
+#define GLOBAL_INT(CONFIG) EA=(CONFIG==ENABLE)?(1):(0)
 
 #endif
