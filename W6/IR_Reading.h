@@ -119,7 +119,10 @@ void IR_Reading_Initial(){
     GLOBAL_INT(ENABLE);
     eINT0_CTL(ENABLE);
     eINT1_CTL(ENABLE);
+    TIMER0_CTL(ENABLE);
+    TIMER0_CTL(MODE_16BIT);
     TIMER0_CTL(START);
+    TIMER0_CTL(RESET);
 }
 
 //Yeah, this function need to declare in main.h
@@ -155,9 +158,8 @@ void Timer0_OverFlow_Interrupt() interrupt 1 {
 	IndicatorLED = ~IndicatorLED;
     TIMER0_CTL(RESET);
     //A data-frame isn't longer than 67.5mili-sec.
-    if(ms_count<50) ms_count = ms_count + 1;
+    if(ms_count<67) ms_count = ms_count + 1;
 }
-
 
 void External1_Interrupt() interrupt 2 {
     //Toggle mode
@@ -176,7 +178,7 @@ void Manual_Control(){
         if(btn_matrix & 0x800)
             L2 = ~L2;
         //Prevent continuos toggle stata :v
-        while( btn_matrix == Get_BTN_MATRIX() )
+        while( btn_matrix == Get_BTN_MATRIX())
             delay_us(1000);
     }
 }
@@ -192,7 +194,7 @@ void External0_Interrupt() interrupt 0 {
     negedge_count +=1;
     DataRcv = ~DataRcv;
     // this neg-edge by SOF (start of frame)?
-    if(current_mscount >= 50){
+    if(current_mscount >= 67){
         negedge_count = -2;
         RESET_BUFFER();
     }else{

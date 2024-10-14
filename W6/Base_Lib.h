@@ -31,7 +31,7 @@ typedef int int32;
 
 enum enum_STATE{ LOW  = 0, HIGH = 1 };
 enum enum_ENABLE{ DISABLE=0, ENABLE, START, 
-    STOP, MODE_16BIT, RESET
+    STOP, MODE_16BIT, RESET 
 };
 
 static void delay_us(uint32 us){
@@ -50,16 +50,12 @@ void delay_ms(uint32 ms){
 
 void eINT0_CTL(uint8 CONFIG){
     if( CONFIG == ENABLE){
-        // Enable the INT0 External Interrupt    
         EX0 = 1;
-        // Enable Timer 1
-        ET0 = 1;
+        IT0 = 1;
     }
     if( CONFIG == DISABLE){
-        // Enable the INT0 External Interrupt    
         EX0 = 0;
-        // Enable Timer 1
-        ET0 = 0;
+        IT0 = 1;
     }
 }
 
