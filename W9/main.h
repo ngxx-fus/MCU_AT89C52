@@ -1,6 +1,6 @@
-#include <stdio.h>
 #include "Base_Lib.h"
 #include "DS1302.h"
+#include "XPT2046.h"
 #include "IR_Reading.h"
 #include "LED7Seg_OnKit.h"
 
@@ -14,7 +14,7 @@ enum enum_modes{
     TIME_SETUP_MODE = 3, 
     DEV_CONTROL_MODE = 4,
     SYS_TIME_SETUP_MODE = 9,
-    SYS_TIME_SETUP = 18,
+    SYS_TIME_SETUP = 27,
     ON_TIME_SETUP_MODE = 10,
     ON_TIME_SETUP = 30,
     OFF_TIME_SETUP_MODE = 11,
@@ -215,7 +215,6 @@ void update_dev_state(){
     else
         dev2 = (dev2_user_ctl)?0:1;    
 }
-
 /*
 Time comparision
 Choose what will be compared by using bit in MASK
@@ -234,7 +233,10 @@ uint8 time_equal_cmp(TIME a, TIME b, uint8 mask){
     return true;
 }
 
-uint8 have_daylight(){
+uint32 have_daylight(){
+    Read_AD_Data(0xA4);
+    if( (Read_AD_Data(0xA4)%1000) > 30)
+        return true;
     return false;
 }
 
@@ -277,6 +279,7 @@ uint32 get_right_index(uint32 indx){
 }
 
 void code_proc(uint32 CODE){
+    uint32 tmp;
     switch (CODE) {
         case ON_OFF:
             dev0_syst_ctl = (dev0_syst_ctl)?(0):(1);
@@ -439,9 +442,6 @@ void code_proc(uint32 CODE){
 
     }
 }
-
-
-
 
 void main_intial(){
     IR_Reading_Initial();

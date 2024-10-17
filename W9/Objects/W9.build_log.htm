@@ -23,12 +23,18 @@ Project File Date:  10/15/2024
 
 <h2>Output:</h2>
 Build target 'Target 1'
+compiling main.c...
+main.h(282): warning C280: 'tmp': unreferenced local variable
+main.c(109): warning C294: unreachable code
+main.c(21): warning C294: unreachable code
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_EINT1_CTL?MAIN
-Program Size: data=98.0 xdata=0 code=3861
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SPI_START?MAIN
+Program Size: data=100.0 xdata=0 code=3990
 creating hex file from ".\Objects\W9"...
-".\Objects\W9" - 0 Error(s), 1 Warning(s).
+".\Objects\W9" - 0 Error(s), 5 Warning(s).
 Build Time Elapsed:  00:00:00
 </pre>
 </body>
