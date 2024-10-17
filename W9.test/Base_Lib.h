@@ -5,9 +5,26 @@
     Autor:
         Nguyen Thanh Phu
     Version:
-        0.1.3
+        0.2.x
 */
-#include <REGX52.h>
+/*
+    Notification:
+        1.  This version of this file is modified to be compiled
+            by SDCC in (Ubuntu). It unable to be compiled in Keil C51.
+        2.  To use this file, you must change something e.g:
+            |     SDCC                       |       Keil C51           |
+                #include <at89x52.h>           --->    #include <at89x52.h>
+                __sbit __at (0xA0 + 7) LED  --->    __sbit __at() LED = P2^7;
+                ...
+        3.  Port addreses
+            PORT                Address
+            P0                  0x80            
+            P1                  0x90
+            P2                  0xA0
+            P3                  0xB0
+*/
+#include <at89x52.h>
+
 
 #ifndef _BASE_LIB_H_
 #define _BASE_LIB_H_
@@ -24,22 +41,18 @@
 #ifndef REV
 #define REV(i, a, b) for(i = (a); i >= (b); --i)
 #endif
-#ifndef true
-#define true 1
-#endif
-#ifndef false
-#define false 0
-#endif
-#ifndef bool
-#define bool uint8
-#endif
+
+#define p0_addr 0x80
+#define p1_addr 0x90
+#define p2_addr 0xA0
+#define p3_addr 0xB0
 
 typedef unsigned char uint8;
 typedef unsigned int uint32;
 typedef char int8;
 typedef int int32;
 
-enum enum_STATE{ LOW  = 0, HIGH = 1, Z = 255 };
+enum enum_STATE{ LOW  = 0, HIGH = 1 };
 enum enum_ENABLE{ DISABLE=0, ENABLE, START, 
     STOP, MODE_16BIT, RESET 
 };

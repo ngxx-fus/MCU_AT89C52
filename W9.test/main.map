@@ -1,0 +1,531 @@
+ASxxxx Linker V03.00/V05.40 + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CABS                                00000000    00000000 =           0. bytes (ABS,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000000  l_CABS                          
+C:   00000000  l_GSINIT1                       
+C:   00000000  l_GSINIT5                       
+C:   00000000  l_IABS                          
+C:   00000000  l_ISEG                          
+C:   00000000  l_PSEG                          
+C:   00000000  l_REG_BANK_1                    
+C:   00000000  l_REG_BANK_2                    
+C:   00000000  l_REG_BANK_3                    
+C:   00000000  l_RSEG                          
+C:   00000000  l_RSEG0                         
+C:   00000000  l_RSEG1                         
+C:   00000000  l_XABS                          
+C:   00000000  l_XINIT                         
+C:   00000000  l_XISEG                         
+C:   00000000  l_XSEG                          
+C:   00000000  l__CODE                         
+C:   00000000  s_BSEG                          
+C:   00000000  s_CABS                          
+C:   00000000  s_DSEG                          
+C:   00000000  s_HOME                          
+C:   00000000  s_IABS                          
+C:   00000000  s_ISEG                          
+C:   00000000  s_REG_BANK_0                    
+C:   00000000  s_RSEG                          
+C:   00000000  s_RSEG0                         
+C:   00000000  s_RSEG1                         
+C:   00000000  s_XABS                          
+C:   00000001  l_BIT_BANK                      
+C:   00000001  l_BSEG                          
+C:   00000001  l_BSEG_BYTES                    
+C:   00000001  s_PSEG                          
+C:   00000001  s_XISEG                         
+C:   00000001  s_XSEG                          
+C:   00000003  l_GSFINAL                       
+C:   00000003  l_GSINIT0                       
+C:   00000008  l_REG_BANK_0                    
+C:   00000008  s_OSEG                          
+C:   00000008  s_REG_BANK_1                    
+C:   0000000A  l_GSINIT2                       
+C:   0000000B  l_OSEG                          
+C:   00000010  l_CONST                         
+C:   00000010  s_REG_BANK_2                    
+C:   00000018  s_REG_BANK_3                    
+C:   00000020  s_BSEG_BYTES                    
+C:   00000020  s__CODE                         
+C:   00000021  s_BIT_BANK                      
+C:   00000022  l_GSINIT3                       
+C:   0000002A  l_GSINIT4                       
+C:   00000063  l_GSINIT                        
+ASxxxx Linker V03.00/V05.40 + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CABS                                00000000    00000000 =           0. bytes (ABS,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000073  l_DSEG                          
+C:   00000073  s_SSEG                          
+C:   0000007E  l_HOME                          
+C:   0000007E  s_GSINIT0                       
+C:   00000081  s_GSINIT1                       
+C:   00000081  s_GSINIT2                       
+C:   0000008B  s_GSINIT3                       
+C:   0000008D  l_SSEG                          
+C:   000000AD  s_GSINIT4                       
+C:   000000D7  s_GSINIT                        
+C:   000000D7  s_GSINIT5                       
+C:   00000100  l_IRAM                          
+C:   0000013A  s_GSFINAL                       
+C:   0000013D  s_CSEG                          
+C:   00001090  l_CSEG                          
+C:   000011CD  s_CONST                         
+C:   000011DD  s_XINIT                         
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           _startup
+     00000005  _DEV0                              main
+     00000006  _DEV1                              main
+     00000007  _DEV2                              main
+     00000080  _P0                                main
+     00000080  _P0_0                              main
+     00000081  _P0_1                              main
+     00000081  _SP                                main
+     00000082  _DPL                               main
+     00000082  _P0_2                              main
+     00000083  _DPH                               main
+     00000083  _P0_3                              main
+     00000084  _P0_4                              main
+     00000085  _P0_5                              main
+     00000086  _P0_6                              main
+     00000087  _P0_7                              main
+     00000087  _PCON                              main
+     00000088  _IT0                               main
+     00000088  _TCON                              main
+     00000089  _IE0                               main
+     00000089  _TMOD                              main
+     0000008A  _IT1                               main
+     0000008A  _TL0                               main
+     0000008B  _IE1                               main
+     0000008B  _TL1                               main
+     0000008C  _TH0                               main
+     0000008C  _TR0                               main
+     0000008D  _TF0                               main
+     0000008D  _TH1                               main
+     0000008E  _TR1                               main
+     0000008F  _TF1                               main
+     00000090  _COL3                              main
+     00000090  _P1                                main
+     00000090  _P1_0                              main
+     00000090  _T2                                main
+     00000091  _COL2                              main
+     00000091  _P1_1                              main
+     00000091  _T2EX                              main
+     00000092  _COL1                              main
+     00000092  _P1_2                              main
+     00000093  _COL0                              main
+     00000093  _P1_3                              main
+     00000094  _P1_4                              main
+     00000094  _ROW3                              main
+     00000095  _P1_5                              main
+     00000095  _ROW2                              main
+     00000096  _P1_6                              main
+     00000096  _ROW1                              main
+     00000097  _P1_7                              main
+     00000097  _ROW0                              main
+ASxxxx Linker V03.00/V05.40 + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000098  _RI                                main
+     00000098  _SCON                              main
+     00000099  _SBUF                              main
+     00000099  _TI                                main
+     0000009A  _RB8                               main
+     0000009B  _TB8                               main
+     0000009C  _REN                               main
+     0000009D  _SM2                               main
+     0000009E  _SM1                               main
+     0000009F  _SM0                               main
+     000000A0  _FrameExtracted_LED                main
+     000000A0  _P2                                main
+     000000A0  _P2_0                              main
+     000000A0  __XPAGE                            
+     000000A1  _P2_1                              main
+     000000A2  _GND0                              main
+     000000A2  _P2_2                              main
+     000000A3  _GND1                              main
+     000000A3  _P2_3                              main
+     000000A4  _GND2                              main
+     000000A4  _P2_4                              main
+     000000A5  _P2_5                              main
+     000000A6  _P2_6                              main
+     000000A7  _P2_7                              main
+     000000A8  _EX0                               main
+     000000A8  _IE                                main
+     000000A9  _ET0                               main
+     000000AA  _EX1                               main
+     000000AB  _ET1                               main
+     000000AC  _ES                                main
+     000000AD  _ET2                               main
+     000000AF  _EA                                main
+     000000B0  _P3                                main
+     000000B0  _P3_0                              main
+     000000B0  _RXD                               main
+     000000B1  _P3_1                              main
+     000000B1  _TXD                               main
+     000000B2  _INT0                              main
+     000000B2  _P3_2                              main
+     000000B3  _INT1                              main
+     000000B3  _P3_3                              main
+     000000B4  _IO                                main
+     000000B4  _P3_4                              main
+     000000B4  _T0                                main
+     000000B5  _CE                                main
+     000000B5  _P3_5                              main
+     000000B5  _T1                                main
+     000000B6  _P3_6                              main
+     000000B6  _SCLK                              main
+     000000B6  _WR                                main
+     000000B7  _P3_7                              main
+ASxxxx Linker V03.00/V05.40 + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000000B7  _RD                                main
+     000000B8  _IP                                main
+     000000B8  _PX0                               main
+     000000B9  _PT0                               main
+     000000BA  _PX1                               main
+     000000BB  _PT1                               main
+     000000BC  _PS                                main
+     000000BD  _PT2                               main
+     000000C8  _CP_RL2                            main
+     000000C8  _T2CON                             main
+     000000C8  _T2CON_0                           main
+     000000C9  _C_T2                              main
+     000000C9  _T2CON_1                           main
+     000000C9  _T2MOD                             main
+     000000CA  _RCAP2L                            main
+     000000CA  _T2CON_2                           main
+     000000CA  _TR2                               main
+     000000CB  _EXEN2                             main
+     000000CB  _RCAP2H                            main
+     000000CB  _T2CON_3                           main
+     000000CC  _T2CON_4                           main
+     000000CC  _TCLK                              main
+     000000CC  _TL2                               main
+     000000CD  _RCLK                              main
+     000000CD  _T2CON_5                           main
+     000000CD  _TH2                               main
+     000000CE  _EXF2                              main
+     000000CE  _T2CON_6                           main
+     000000CF  _T2CON_7                           main
+     000000CF  _TF2                               main
+     000000D0  _P                                 main
+     000000D0  _PSW                               main
+     000000D1  _FL                                main
+     000000D2  _OV                                main
+     000000D3  _RS0                               main
+     000000D4  _RS1                               main
+     000000D5  _F0                                main
+     000000D6  _AC                                main
+     000000D7  _CY                                main
+     000000E0  _A                                 main
+     000000E0  _ACC                               main
+     000000F0  _B                                 main
+     000000F5  _B_5                               _gptrget
+     000000F6  _B_6                               _gptrget
+     000000F7  _B_7                               _gptrget
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+BSEG_BYTES                          00000020    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+REG_BANK_0                          00000000    00000008 =           8. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+BIT_BANK                            00000021    00000001 =           1. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+DSEG                                00000000    00000073 =         115. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000022  _T_PEAK                            main
+     00000023  _IDLE_T                            main
+     00000024  _READ_T                            main
+     00000025  _single_byte_write_PARM_2          main
+     00000026  _time_equal_PARM_1                 main
+     0000002D  _time_equal_PARM_2                 main
+     00000034  _ds1302_read_time_PARM_2           main
+     00000039  _ds1302_write_time_PARM_2          main
+     0000003A  _LED                               main
+     00000042  _BTN_MATRIX                        main
+     00000044  _data_frame                        main
+     00000046  _buffer                            main
+     00000048  _ms_count                          main
+     00000049  _negedge_count                     main
+     0000004A  _CURRENT_MODE                      main
+     0000004B  _MANUAL_MODE                       main
+     0000004C  _DEV_ENABLE                        main
+     0000004D  _sys_time                          main
+     00000054  _time_on                           main
+     0000005B  _time_off                          main
+     0000006C  _SET_ON_OFF_PARM_2                 main
+ASxxxx Linker V03.00/V05.40 + sdld,  page 10.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+OSEG                                00000008    0000000B =          11. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000008  _DEV_CTL_PARM_2                    main
+     00000008  ___memcpy_PARM_2                   __memcpy
+     00000008  __gptrput_PARM_2                   _gptrput
+     00000008  __modsint_PARM_2                   _moduint
+     00000008  __moduint_PARM_2                   _moduint
+     00000008  __mulint_PARM_2                    _mulint
+     00000008  _led7seg_disp_PARM_2               main
+     0000000B  ___memcpy_PARM_3                   __memcpy
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 11.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+SSEG                                00000073    0000008D =         141. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000073  __start__stack                     main
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 12.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+HOME                                00000000    0000007E =         126. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000010  sdcc_atomic_exchange_rollback_st   main
+C:   00000037  sdcc_atomic_exchange_gptr_impl     main
+C:   00000037  sdcc_atomic_exchange_rollback_en   main
+C:   00000047  sdcc_atomic_compare_exchange_gpt   main
+C:   00000051  __sdcc_program_startup             main
+C:   00000054  sdcc_atomic_maybe_rollback         
+ASxxxx Linker V03.00/V05.40 + sdld,  page 13.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT0                             0000007E    00000003 =           3. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   0000007E  __sdcc_gsinit_startup              
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 14.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT2                             00000081    0000000A =          10. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 15.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT3                             0000008B    00000022 =          34. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   0000008B  __mcs51_genXINIT                   
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 16.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT4                             000000AD    0000002A =          42. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   000000AD  __mcs51_genRAMCLEAR                
+C:   000000B3  __mcs51_genXRAMCLEAR               
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 17.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT                              000000D7    00000063 =          99. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 18.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSFINAL                             0000013A    00000003 =           3. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 19.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000013D    00001090 =        4240. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000154  _delay_ms                          main
+C:   00000177  _eINT0_CTL                         main
+C:   00000188  _eINT1_CTL                         main
+C:   00000199  _TIMER0_CTL                        main
+C:   000001C9  _GLOBAL_INT                        main
+C:   000001D7  _single_byte_write                 main
+C:   00000263  _single_byte_read                  main
+C:   0000033A  _ThreeWiresProtocol_Initial        main
+C:   00000341  _time_equal                        main
+C:   0000035A  _ds1302_read_time                  main
+C:   000005A1  _ds1302_write_time                 main
+C:   000007C4  _ds1302_initial                    main
+C:   000007C7  _led7seg_disp                      main
+C:   00000845  _Disp8leds7seg                     main
+C:   00000890  _Row_Write                         main
+C:   000008C9  _Col_Read                          main
+C:   000008FA  _Get_BTN_MATRIX                    main
+C:   0000093C  _Get_BTN_MATRIX_2                  main
+C:   0000096A  _new_dataframe                     main
+C:   00000979  _read_extracted_frame              main
+C:   00000985  _IR_Reading_Initial                main
+C:   000009B4  _Timer0_OverFlow_Interrupt         main
+C:   00000A01  _External0_Interrupt               main
+C:   00000AAB  _CODE2NUM                          main
+C:   00000AAF  _YES_NO                            main
+C:   00000B00  _SET_TIMER                         main
+C:   00000C50  _SET_ON_OFF                        main
+C:   00000D48  _DEV_CTL                           main
+C:   00000D6E  _SHOW_MODE                         main
+C:   00000D83  _change_mode                       main
+C:   00000F80  _sys_time_disp                     main
+C:   00000FDA  _main_intial                       main
+C:   00001004  _main                              main
+C:   0000109D  ___memcpy                          __memcpy
+C:   000010F2  __gptrput                          _gptrput
+C:   0000110D  __mulint                           _mulint
+C:   0000110D  __mulint_dummy                     _mulint
+C:   0000112A  __moduint                          _moduint
+C:   00001177  __gptrget                          _gptrget
+C:   00001193  __modsint                          _modsint
+C:   000011C9  ___sdcc_external_startup           _startup
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 20.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CONST                               000011CD    00000010 =          16. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   000011CD  _DIGIT_CODE                        main
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 21.
+
+Files Linked                              [ module(s) ]
+
+main.rel                                  [  ]
+
+
+Libraries Linked                          [ object file ]
+
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/mcs51.lib
+                                          [ crtclear.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/libsdcc.lib
+                                          [ __memcpy.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/mcs51.lib
+                                          [ crtxinit.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/mcs51.lib
+                                          [ __sdcc_atomic_maybe_rollback.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/libsdcc.lib
+                                          [ _gptrput.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/libint.lib
+                                          [ _mulint.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/libint.lib
+                                          [ _moduint.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/mcs51.lib
+                                          [ crtxclear.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/mcs51.lib
+                                          [ crtpagesfr.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/mcs51.lib
+                                          [ crtstart.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/libsdcc.lib
+                                          [ _gptrget.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/libint.lib
+                                          [ _modsint.rel ]
+/mnt/sda2/Linux_Applications/stcflash/sdcc/bin/../share/sdcc/lib/small/libsdcc.lib
+                                          [ _startup.rel ]
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 22.
+
+User Base Address Definitions
+
+HOME = 0x0000
+XSEG = 0x0001
+PSEG = 0x0001
+ISEG = 0x0000
+BSEG = 0x0000
+
+

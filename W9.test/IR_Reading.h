@@ -1,17 +1,17 @@
 #ifndef _IF_READING_
 #define _IF_READING_
 
-#include "REGX52.h"
+#include <at89x52.h>
 #include "Base_Lib.h"
 #include "DS1302.h"
 #include "LED7Seg_OnKit.h"
-//#include "Matrix_Button.h"
+#include "Matrix_Button.h"
 
-/*
+/*`
     Refs:
-        https://embeddedflakes.com/interrupt-handling-in-8051/
+        https://embeddedflakes.com/interrupt-handling-in-at89x52/
         https://exploreembedded.com/wiki/NEC_IR_Remote_Control_Interface_with_8051
-        https://embeddedflakes.com/8051-timers-vs-counters/
+        https://embeddedflakes.com/at89x52-timers-vs-counters/
         https://exploreembedded.com/wiki/6.8051_Interrupts
 
 */
@@ -45,12 +45,12 @@
 #define RESET_BUFFER() buffer=0;
 #define EXTRACT_FRAME() data_frame=buffer; buffer = 0; negedge_count = 0;
 
-// Based on the diagram of "8051 Pro" Kit
-// sbit IR_RCV_PIN = P3^2;
-// sbit IndicatorLED = P2^7;
-// sbit DataRcv = P2^6;
-sbit FrameExtracted = P2^0;
-// sbit MR = P2^4;
+// Based on the diagram of "at89x52 Pro" Kit
+// __sbit __at() IR_RCV_PIN = P3^2;
+// __sbit __at() IndicatorLED = P2^7;
+// __sbit __at() DataRcv = P2^6;
+__sbit __at(p2_addr + 0) FrameExtracted_LED;
+// __sbit __at() MR = P2^4;
 // Final data_frame
 uint32 data_frame = 0;
 // Temporary storing unfinished  data-frame while receiving.
@@ -60,10 +60,10 @@ uint8 ms_count = 0;
 // bit-count
 int8 negedge_count = 0;
 
-// //check if we have a new data_frame or not?
-// uint8 new_dataframe(){
-//     return (data_frame!=0)?1:0;
-// }
+//check if we have a new data_frame or not?
+uint8 new_dataframe(){
+    return (data_frame!=0)?1:0;
+}
 
 //clear frame after read!
 uint32 read_extracted_frame(){
@@ -86,14 +86,14 @@ void IR_Reading_Initial(){
     TIMER0_CTL(RESET);
 }
 
-void Timer0_OverFlow_Interrupt() interrupt 1 {
+void Timer0_OverFlow_Interrupt() __interrupt(1) {
 	// IndicatorLED = ~IndicatorLED;
     TIMER0_CTL(RESET);
     //A data-frame isn't longer than 67.5mili-sec.
     if(ms_count<67) ms_count = ms_count + 1;
 }
 
-void External0_Interrupt() interrupt 0 {
+void External0_Interrupt() __interrupt(0) {
     uint32 current_mscount = 0;
 
     current_mscount = ms_count;
@@ -116,9 +116,9 @@ void External0_Interrupt() interrupt 0 {
 			}
         }else if(negedge_count >= 32){
             EXTRACT_FRAME();
-            FrameExtracted=0;
+            FrameExtracted_LED=0;
             delay_ms(1);
-            FrameExtracted=1;
+            FrameExtracted_LED=1;
         }
     }
 }

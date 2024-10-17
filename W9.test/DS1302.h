@@ -28,6 +28,29 @@ typedef struct TIME{
 } TIME;
 
 /*
+Time comparision
+Choose what will be compared by using bit in MASK
+MASK: 
+             7    6    5     4    3     2     1   0
+    MSB  ... x    x    x     x    x     x     x   x    LSB 
+description       day  year  mon  date  hour  min sec
+*/
+uint8 time_equal(TIME A, TIME B, uint32 MASK){
+    return (A.MINUTE == B.MINUTE) && (A.HOUR == B.HOUR);
+    // if( (MASK&0x01) && (A.SECOND != B.SECOND) ) return 0;
+    // if( (MASK&0x02) && (A.MINUTE != B.MINUTE) ) return 0;
+    // if( (MASK&0x04) && (A.HOUR != B.HOUR) ) return 0;
+    // if( (MASK&0x08) && (A.DATE != B.DATE) ) return 0;
+    // if( (MASK&0x10) && (A.MONTH != B.MONTH) ) return 0;
+    // if( (MASK&0x20) && (A.YEAR != B.YEAR) ) return 0;
+    // if( (MASK&0x40) && (A.DAY != B.DAY) ) return 0;
+    // if( (MASK&0x80) && (A.DATE != B.DATE) ) return 0;
+
+    // // if( MASK != 0 ) return 1;
+    // return 0;
+}
+
+/*
 Read time from DS1302
 SEL: 
 MSB  ... x    x    x    x    x    x   x   LSB 

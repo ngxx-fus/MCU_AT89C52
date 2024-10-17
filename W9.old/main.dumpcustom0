@@ -1,0 +1,164 @@
+
+----------------------------------------------------------------
+Basic Block _entry (df:1 bb:0 lvl:0:1): loopDepth=0
+
+successors: preHeaderLbl10 
+predecessors: 
+dominators: _entry 
+
+defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (27) }
+
+local defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (27) }
+
+pointers Set bitvector :
+inExprs:
+outExprs: iTemp1(27)
+killedExprs:
+----------------------------------------------------------------
+main.c(l11:s0:k0:d0:s0:b3)	 _entry($8) :
+main.c(l11:s0:k1:d0:s0:b3)		proc _main [k1 lr0:0 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{void function ( void ) fixed}
+main.c(l13:s0:k27:d0:s0:b3)		iTemp1 [k4 lr3:8 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{int fixed}{ sir@ _main_t_10000_3} := 0x0 {const-int literal}
+
+----------------------------------------------------------------
+Basic Block preHeaderLbl10 (df:2 bb:1 lvl:0:1): loopDepth=0
+
+successors: _forcontinue_0 
+predecessors: _entry 
+dominators: _entry preHeaderLbl10 
+
+defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { }
+
+local defines bitVector :
+pointers Set bitvector :
+inExprs: iTemp1(27)
+outExprs: iTemp1(27)
+killedExprs:
+----------------------------------------------------------------
+main.c(l13:s0:k39:d0:s0:b3)	 preHeaderLbl10($27) :
+
+----------------------------------------------------------------
+Basic Block _forcontinue_0 (df:3 bb:2 lvl:2:0): loopDepth=1 partOfLoop
+
+successors: _forcontinue_0 _eBBlock8 
+predecessors: preHeaderLbl10 
+dominators: _entry preHeaderLbl10 _forcontinue_0 
+
+defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (6) (8) }
+
+local defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (6) (8) }
+
+pointers Set bitvector :
+inExprs:
+outExprs: iTemp2(8)
+killedExprs: iTemp1(27)
+----------------------------------------------------------------
+main.c(l13:s0:k5:d1:s0:b4)	 _forcontinue_0($4) :
+main.c(l13:s0:k6:d1:s0:b4)		iTemp1 [k4 lr3:8 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{int fixed}{ sir@ _main_t_10000_3} = iTemp1 [k4 lr3:8 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{int fixed}{ sir@ _main_t_10000_3} + 0x1 {const-int literal}
+main.c(l13:s0:k8:d1:s0:b4)		iTemp2 [k5 lr7:8 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{unsigned-char fixed} = iTemp1 [k4 lr3:8 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{int fixed}{ sir@ _main_t_10000_3} < 0x3e8 {const-int literal}
+main.c(l13:s0:k9:d1:s0:b4)		if iTemp2 [k5 lr7:8 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{unsigned-char fixed} != 0 goto _forcontinue_0($4)
+
+----------------------------------------------------------------
+Basic Block _eBBlock8 (df:4 bb:3 lvl:0:1): loopDepth=0
+
+successors: preHeaderLbl11 
+predecessors: _forcontinue_0 
+dominators: _entry preHeaderLbl10 _forcontinue_0 _eBBlock8 
+
+defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (12) (30) }
+
+local defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (12) (30) }
+
+pointers Set bitvector :
+inExprs: iTemp2(8)
+outExprs: iTemp3(30) iTemp2(8)
+killedExprs: iTemp1(27)
+----------------------------------------------------------------
+main.c(l14:s0:k12:d0:s0:b3)		_P2 [k6 lr0:0 so:0]{ ia1 a2p0 re0 rm0 nos0 ru0 dp0}{volatile-unsigned-char sfr} := 0xff {volatile-unsigned-char literal}
+main.c(l15:s0:k30:d0:s0:b3)		iTemp3 [k7 lr10:15 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{int fixed}{ sir@ _main_t_10000_3} := 0x0 {const-int literal}
+
+----------------------------------------------------------------
+Basic Block preHeaderLbl11 (df:5 bb:4 lvl:0:1): loopDepth=0
+
+successors: _forcontinue_1 
+predecessors: _eBBlock8 
+dominators: _entry preHeaderLbl10 _forcontinue_0 _eBBlock8 preHeaderLbl11 
+
+defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { }
+
+local defines bitVector :
+pointers Set bitvector :
+inExprs: iTemp2(8) iTemp3(30)
+outExprs: iTemp3(30) iTemp2(8)
+killedExprs: iTemp1(27)
+----------------------------------------------------------------
+main.c(l15:s0:k40:d0:s0:b3)	 preHeaderLbl11($29) :
+
+----------------------------------------------------------------
+Basic Block _forcontinue_1 (df:6 bb:5 lvl:2:0): loopDepth=1 partOfLoop
+
+successors: _forcontinue_1 _eBBlock9 
+predecessors: preHeaderLbl11 
+dominators: _entry preHeaderLbl10 _forcontinue_0 _eBBlock8 preHeaderLbl11 _forcontinue_1 
+
+defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (16) (18) }
+
+local defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (16) (18) }
+
+pointers Set bitvector :
+inExprs: iTemp2(8)
+outExprs: iTemp4(18) iTemp2(8)
+killedExprs: iTemp3(30) iTemp1(27)
+----------------------------------------------------------------
+main.c(l15:s0:k15:d1:s0:b5)	 _forcontinue_1($6) :
+main.c(l15:s0:k16:d1:s0:b5)		iTemp3 [k7 lr10:15 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{int fixed}{ sir@ _main_t_10000_3} = iTemp3 [k7 lr10:15 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{int fixed}{ sir@ _main_t_10000_3} + 0x1 {const-int literal}
+main.c(l15:s0:k18:d1:s0:b5)		iTemp4 [k8 lr14:15 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{unsigned-char fixed} = iTemp3 [k7 lr10:15 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{int fixed}{ sir@ _main_t_10000_3} < 0x3e8 {const-int literal}
+main.c(l15:s0:k19:d1:s0:b5)		if iTemp4 [k8 lr14:15 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{unsigned-char fixed} != 0 goto _forcontinue_1($6)
+
+----------------------------------------------------------------
+Basic Block _eBBlock9 (df:7 bb:6 lvl:0:1): loopDepth=0
+
+successors: _return 
+predecessors: _forcontinue_1 
+dominators: _entry preHeaderLbl10 _forcontinue_0 _eBBlock8 preHeaderLbl11 _forcontinue_1 _eBBlock9 
+
+defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (22) }
+
+local defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { (22) }
+
+pointers Set bitvector :
+inExprs: iTemp2(8) iTemp4(18)
+outExprs: iTemp4(18) iTemp2(8)
+killedExprs: iTemp3(30) iTemp1(27)
+----------------------------------------------------------------
+main.c(l16:s0:k22:d0:s0:b3)		_P2 [k6 lr0:0 so:0]{ ia1 a2p0 re0 rm0 nos0 ru0 dp0}{volatile-unsigned-char sfr} := 0x0 {volatile-unsigned-char literal}
+
+----------------------------------------------------------------
+Basic Block _return (df:8 bb:7 lvl:0:1): loopDepth=0
+
+successors: 
+predecessors: _eBBlock9 
+dominators: _entry preHeaderLbl10 _forcontinue_0 _eBBlock8 preHeaderLbl11 _forcontinue_1 _eBBlock9 _return 
+
+defines bitVector :bitvector Size = 41 allocSize = 2
+Bits on { }
+
+local defines bitVector :
+pointers Set bitvector :
+inExprs: iTemp2(8) iTemp4(18)
+outExprs: iTemp4(18) iTemp2(8)
+killedExprs: iTemp3(30) iTemp1(27)
+----------------------------------------------------------------
+main.c(l16:s0:k23:d0:s0:b3)	 _return($7) :
+main.c(l17:s0:k24:d0:s0:b3)		eproc _main [k1 lr0:0 so:0]{ ia0 a2p0 re0 rm0 nos0 ru0 dp0}{void function ( void ) fixed}

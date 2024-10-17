@@ -5,7 +5,7 @@
 #include "Base_Lib.h"
 #include "DS1302.h"
 #include "LED7Seg_OnKit.h"
-//#include "Matrix_Button.h"
+#include "Matrix_Button.h"
 
 /*
     Refs:
@@ -60,10 +60,10 @@ uint8 ms_count = 0;
 // bit-count
 int8 negedge_count = 0;
 
-// //check if we have a new data_frame or not?
-// uint8 new_dataframe(){
-//     return (data_frame!=0)?1:0;
-// }
+//check if we have a new data_frame or not?
+uint8 new_dataframe(){
+    return (data_frame!=0)?1:0;
+}
 
 //clear frame after read!
 uint32 read_extracted_frame(){

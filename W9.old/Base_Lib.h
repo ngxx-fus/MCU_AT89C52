@@ -24,22 +24,15 @@
 #ifndef REV
 #define REV(i, a, b) for(i = (a); i >= (b); --i)
 #endif
-#ifndef true
-#define true 1
-#endif
-#ifndef false
-#define false 0
-#endif
-#ifndef bool
-#define bool uint8
-#endif
+
+
 
 typedef unsigned char uint8;
 typedef unsigned int uint32;
 typedef char int8;
 typedef int int32;
 
-enum enum_STATE{ LOW  = 0, HIGH = 1, Z = 255 };
+enum enum_STATE{ LOW  = 0, HIGH = 1 };
 enum enum_ENABLE{ DISABLE=0, ENABLE, START, 
     STOP, MODE_16BIT, RESET 
 };
