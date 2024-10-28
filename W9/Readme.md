@@ -1,4 +1,3 @@
-# Không làm mà đòi có ăn thì có donate cho bạn 5K đi nè :>
 
 <img align="right" alt="Coding" width="400" src="https://github.com/ngxx-fus/source_respo/blob/main/NTP.jpg">
 <h2 align="left">Hi 👋, I'm Nguyen Thanh Phu</h2>
