@@ -3,7 +3,7 @@
         {
             "name": "Target 1",
             "includePath": [
-                "e:\\DOC\\NH_2024_2025_HK_01\\COOL325364\\W9"
+                "/mnt/sda2/DOC/NH_2024_2025_HK_01/COOL325364/W9"
             ],
             "defines": [
                 "__C51__",
