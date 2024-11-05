@@ -3,7 +3,8 @@
 
 #include "Base_Lib.h"
 
-char UART_Received_Data = 0;
+uint32 UART_Bytes_Received_Size = 0;
+char UART_Bytes_Received[256];
 
 void UART_Byte_Transmit(char transmit_data){
     // Copy data to BUFFER
@@ -33,5 +34,5 @@ void UART_Initial(){
 }
 
 void UART_Received() interrupt 4 {
-    UART_Received_Data = SBUF;
+    UART_Bytes_Received[UART_Bytes_Received_Size++] = SBUF;
 }
