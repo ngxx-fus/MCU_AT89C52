@@ -50,23 +50,28 @@ int main(){
     while( !is_dead ){
         print_a_frame();
         CODE = read_extracted_frame();
-        switch (CODE)
-        {
+        switch (CODE){          
         case __5:
+            if(is_paused) break;
             direction_change(to_left);
             break;
         case __2:
+            if(is_paused) break;
             direction_change(to_right);
             break; 
         case __4:
+            if(is_paused) break;
             direction_change(to_down);
             break;
         case __6:
+            if(is_paused) break;
             direction_change(to_up);
             break;
         }
+        if(is_paused) continue;
         direction_update();
         snake_head_update();
         snake_body_update();
     }
+    while(1);
 }

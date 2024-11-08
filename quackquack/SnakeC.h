@@ -40,6 +40,8 @@ enum enum_CurrDirection{right=0, up=15, left=30, down=45};
 
 //This will avail for 1-8 and 0->7 :>
 uint8 field[8][8];
+//pause?
+uint8 is_paused = 1;
 //Game over?
 uint8 is_dead = 0;
 //next direction from current
@@ -206,7 +208,8 @@ void snake_initial(){
     random_XY(&head_x, &head_y);
     field[head_x][head_y]=head;
     random_apple();
-    current_direction = (rand()%3)*90;
+    current_direction = down;
     next_direction = 0;
     is_dead = 0;
+		is_paused = 0;
 }
