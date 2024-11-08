@@ -88,12 +88,18 @@ void SEND_BYTE_DISPLAY(unsigned char BYTE){
 	ENABLE_LCD();
 }
 //	To sent an array of byte of DISPLAY DATA to the LCD.
-void SEND_BYTE_ARRAY_DISPLAY(char ARR[], uint32 SIZE){
+void SEND_BYTE_ARRAY_DISPLAY(char ARR[], int32 SIZE){
     uint32 i = 0;
-    while( i < SIZE ){
-        SEND_BYTE_DISPLAY(ARR[i]);
-        ++i;
-    }
+	if(SIZE<0)
+		while(*ARR){
+			SEND_BYTE_DISPLAY(*ARR);
+			ARR++;
+		}
+	else
+		while( i < SIZE ){
+			SEND_BYTE_DISPLAY(ARR[i]);
+			++i;
+		}
 }
 //	Set the position of the CURSOR in 16x2 LCD screen.
 void SET_CURSOR_POS(uint32 ROW, uint32 COL){
@@ -116,13 +122,16 @@ Limits:
 	row_offset	: [0->1]
 	col_offset	: [0->15]
 */
+
 void LCD_Set_Text(
 	char str[],	uint8 str_size, 
 	uint8 warp_text, uint8 clear_screen, 
-	uint8 row_offset, uint8 col_offset){
+	int32 row_offset, int32 col_offset){
 	uint8 displayed = 0;
-	if(clear_screen == true)
+	if(clear_screen == true){
 		SEND_BYTE_COMMAND(CLEAR_SCREEN);
+		SEND_BYTE_COMMAND(SET_CURSOR_0x_0y+5);
+	}
 	if(warp_text == true){
 		if( col_offset+(str_size-1) <= 15 ){
 			// TEXT can be displayed in A ROW
@@ -152,21 +161,20 @@ void LCD_Set_Text(
 //Simple to set TEXT which to be displayed in LCD WITHOUT CLEAR previous screen
 void LCD_Simple_Set_Text_1(
 	char str[],	uint8 str_size, 
-	uint8 row_offset, uint8 col_offset){
-	LCD_Set_Text(str, str_size, false, false, row_offset, col_offset);
+	int32 row_offset, int32 col_offset){
+	LCD_Set_Text(str, str_size, 0, 0, row_offset, col_offset);
 }
 
 //Simple to set TEXT which to be displayed in LCD WITH CLEAR previous screen
 void LCD_Simple_Set_Text_2(
 	char str[],	uint8 str_size, 
-	uint8 row_offset, uint8 col_offset){
-	LCD_Set_Text(str, str_size, false, true, row_offset, col_offset);
+	int32 row_offset, int32 col_offset){
+	LCD_Set_Text(str, str_size, 0, 1, row_offset, col_offset);
 }
+
 //  Set up your LCD.
 void LCD_INITIAL(){
 	SEND_BYTE_COMMAND(LCD_ON_CURSOR_OFF);
-	delay_us(20);
 	SEND_BYTE_COMMAND(LINEx2_MAT5x7);
-	delay_us(20);
 	SEND_BYTE_COMMAND(CLEAR_SCREEN);
 }

@@ -1,4 +1,4 @@
-#include "LCD16x2.h"
+// #include "LCD16x2.h"
 #include "IR_Reading.h"
 #include "DS1302.h"
 #include "XPT2046.h"
