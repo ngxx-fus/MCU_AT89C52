@@ -1,0 +1,99 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/08/2024 11:26:13 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.exe main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "SnakeC.h"
+   2          #include "Base_Lib.h"
+   3          #include "IR_Reading.h"
+   4          #include<intrins.h>
+   5          
+   6          
+   7          sbit HC595_SRCLK=P3^6;
+   8          sbit HC595_RCLK=P3^5;
+   9          sbit HC595_SER=P3^4;
+  10          
+  11          #define ROW P0 // for ROW :v
+  12          
+  13          void HC595_Send_Byte(uint8 DATA){ // for column
+  14   1        uint8 a;
+  15   1        HC595_SRCLK=0; HC595_RCLK=0;
+  16   1        REP(a,0,7){
+  17   2          HC595_SER=DATA>>7;DATA<<=1;
+  18   2          HC595_SRCLK=1;
+  19   2          _nop_(); _nop_();
+  20   2          HC595_SRCLK=0;  
+  21   2        }
+  22   1        HC595_RCLK=1;
+  23   1        _nop_(); _nop_();
+  24   1        HC595_RCLK=0;
+  25   1      }
+  26          
+  27          
+  28          void print_a_frame(){
+  29   1          int i, j, k;
+  30   1          uint8 disp_data;
+  31   1          REP(k, 0, 100)
+  32   1              REP(i, 0, 7){
+  33   2                  disp_data = 0;
+  34   2                  HC595_Send_Byte(0);
+  35   2                  REP(j, 0, 7){
+  36   3                      if(field[i][j]){
+  37   4                          disp_data += (1<<j);
+  38   4                          P0 = ~(1<<i);
+  39   4                          HC595_Send_Byte(1<<j);
+  40   4                      }
+  41   3                  }
+  42   2                  delay_ms(1);
+  43   2              }
+  44   1      }
+  45          
+  46          int main(){
+  47   1          uint32 CODE;
+  48   1          snake_initial();
+  49   1          IR_Reading_Initial();
+  50   1          while( !is_dead ){
+  51   2              print_a_frame();
+  52   2              CODE = read_extracted_frame();
+  53   2              switch (CODE)
+  54   2              {
+C51 COMPILER V9.60.7.0   MAIN                                                              11/08/2024 11:26:13 PAGE 2   
+
+  55   3              case __5:
+  56   3                  direction_change(to_left);
+  57   3                  break;
+  58   3              case __2:
+  59   3                  direction_change(to_right);
+  60   3                  break; 
+  61   3              case __4:
+  62   3                  direction_change(to_down);
+  63   3                  break;
+  64   3              case __6:
+  65   3                  direction_change(to_up);
+  66   3                  break;
+  67   3              }
+  68   2              direction_update();
+  69   2              snake_head_update();
+  70   2              snake_body_update();
+  71   2          }
+  72   1      }
+*** WARNING C290 IN LINE 72 OF main.c: missing return value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1374    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     78      24
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
