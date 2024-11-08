@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              11/08/2024 11:37:07 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              11/08/2024 11:47:30 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,35 +62,31 @@ line level    source
   52   2              CODE = read_extracted_frame();
   53   2              switch (CODE){          
   54   3              case __5:
-C51 COMPILER V9.60.7.0   MAIN                                                              11/08/2024 11:37:07 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              11/08/2024 11:47:30 PAGE 2   
 
-  55   3                  if(is_paused) break;
-  56   3                  direction_change(to_left);
-  57   3                  break;
-  58   3              case __2:
-  59   3                  if(is_paused) break;
-  60   3                  direction_change(to_right);
-  61   3                  break; 
-  62   3              case __4:
-  63   3                  if(is_paused) break;
-  64   3                  direction_change(to_down);
+  55   3                  direction_change(to_left);
+  56   3                  break;
+  57   3              case __2:
+  58   3                  direction_change(to_right);
+  59   3                  break; 
+  60   3              case __4:
+  61   3                  direction_change(to_down);
+  62   3                  break;
+  63   3              case __6:
+  64   3                  direction_change(to_up);
   65   3                  break;
-  66   3              case __6:
-  67   3                  if(is_paused) break;
-  68   3                  direction_change(to_up);
-  69   3                  break;
-  70   3              }
-  71   2              if(is_paused) continue;
-  72   2              direction_update();
-  73   2              snake_head_update();
-  74   2              snake_body_update();
-  75   2          }
-  76   1          while(1);
-  77   1      }
+  66   3              }
+  67   2              if(is_paused) continue;
+  68   2              direction_update();
+  69   2              snake_head_update();
+  70   2              snake_body_update();
+  71   2          }
+  72   1          while(1) print_a_frame();
+  73   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1383    ----
+   CODE SIZE        =   1370    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

@@ -52,19 +52,15 @@ int main(){
         CODE = read_extracted_frame();
         switch (CODE){          
         case __5:
-            if(is_paused) break;
             direction_change(to_left);
             break;
         case __2:
-            if(is_paused) break;
             direction_change(to_right);
             break; 
         case __4:
-            if(is_paused) break;
             direction_change(to_down);
             break;
         case __6:
-            if(is_paused) break;
             direction_change(to_up);
             break;
         }
@@ -73,5 +69,5 @@ int main(){
         snake_head_update();
         snake_body_update();
     }
-    while(1);
+    while(1) print_a_frame();
 }
