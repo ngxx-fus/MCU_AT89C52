@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/msnp/.var/app/com.usebottles.bottles/data/bottles/bottles/hehe/drive_c/users/msnp/Desktop/MCU_AT89C52/Test_UART_Bluetooth",
+      "program": "/home/msnp/.var/app/com.usebottles.bottles/data/bottles/bottles/hehe/drive_c/users/msnp/Desktop/MCU_AT89C52/Test_UART_Bluetooth/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
