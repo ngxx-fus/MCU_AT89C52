@@ -1,14 +1,15 @@
 /*
     Note:
-        Base_Lib.h is a lib that include all define, typedef,
+        From 10/11/2024, Utilities.h has been changed to Utilities.h
+        Utilities.h.h is a lib that include all define, typedef,
         base function, ... It can be reused in many following project.
     Autor:
         Nguyen Thanh Phu
     Version:
-        0.1.4
+        0.1.5
 */
-#ifndef _BASE_LIB_H_
-#define _BASE_LIB_H_
+#ifndef _UTILITIES_H_
+#define _UTILITIES_H_
 
 #include <REGX52.h>
 
@@ -21,12 +22,13 @@
 #define bool uint8
 #define min_val(A, B) (((A)<(B))?(A):(B))
 #define max_val(A, B) (((A)>(B))?(A):(B))
+#define nth_bit(num, k) (num&(1<<(k)))  //check n-th bit is 1-bit or 0-bit
 
 typedef unsigned char   uint8;
-typedef unsigned long   uint16;
+typedef unsigned short   uint16;
 typedef unsigned int    uint32;
 typedef char    int8;
-typedef long    int16;
+typedef short    int16;
 typedef int     int32;
 
 enum enum_STATE_1{ ON  = 0, OFF = 1, NONE = 255 };
@@ -45,7 +47,7 @@ static void delay_us(uint32 us){
 void delay_ms(uint32 ms){
     uint32 i = 0; 
     uint32 j = 0;
-    for(i = 0; i < ms*12; i = i + 1){
+    for(i = 0; i < ms*19; i = i + 1){
         // do nothin'
     }
 }
@@ -61,20 +63,20 @@ void eINT0_CTL(uint8 CONFIG){
     }
 }
 
-void eINT1_CTL(uint8 CONFIG){
-    if( CONFIG == ENABLE){
-        // Configure INT1 falling edge interrupt
-        IT1 = 1;   
-        // Enable the INT1 External Interrupt    
-        EX1 = 1;
-    }
-    if( CONFIG == DISABLE){
-        // Configure INT1 falling edge interrupt
-        IT1 = 0;   
-        // Enable the INT1 External Interrupt    
-        EX1 = 0;
-    }
-}
+// void eINT1_CTL(uint8 CONFIG){
+//     if( CONFIG == ENABLE){
+//         // Configure INT1 falling edge interrupt
+//         IT1 = 1;   
+//         // Enable the INT1 External Interrupt    
+//         EX1 = 1;
+//     }
+//     if( CONFIG == DISABLE){
+//         // Configure INT1 falling edge interrupt
+//         IT1 = 0;   
+//         // Enable the INT1 External Interrupt    
+//         EX1 = 0;
+//     }
+// }
 
 #define RESET_TH 0xFC 
 #define RESET_TL 0x67
@@ -101,6 +103,9 @@ void GLOBAL_INT(uint8 CONFIG){
     EA=(CONFIG==ENABLE)?(1):(0);
 }
 
+#ifndef _STRUCT_TIME_
+#define _STRUCT_TIME_
+
 typedef struct TIME{
     uint8 DAY; // mon, tue, wed, thu, ...
     uint8 DATE;
@@ -110,5 +115,7 @@ typedef struct TIME{
     uint8 MINUTE;
     uint8 SECOND;
 } TIME;
+#endif
 
 #endif
+

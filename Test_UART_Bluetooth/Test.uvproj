@@ -377,14 +377,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>Base_Lib.h</FileName>
+              <FileName>Utilities.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Base_Lib.h</FilePath>
-            </File>
-            <File>
-              <FileName>LCD16x2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\LCD16x2.h</FilePath>
+              <FilePath>.\Utilities.h</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
@@ -392,9 +387,24 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>UART.h</FileName>
+              <FileName>UART_BLE.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\UART.h</FilePath>
+              <FilePath>.\UART_BLE.h</FilePath>
+            </File>
+            <File>
+              <FileName>LCD_1602.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LCD_1602.h</FilePath>
+            </File>
+            <File>
+              <FileName>main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\main.h</FilePath>
+            </File>
+            <File>
+              <FileName>String_Ultils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\String_Ultils.h</FilePath>
             </File>
           </Files>
         </Group>

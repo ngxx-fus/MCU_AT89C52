@@ -1,5 +1,5 @@
-#ifndef _LCD16X2_H_
-#define _LCD16X2_H_
+#ifndef _LCD_1602_H_
+#define _LCD_1602_H_
 /*
 DOCUMENTATIONS:
 	https://developer.arm.com/documentation/101655/0961/Cx51-User-s-Guide/Language-Extensions/Data-Types/Special-Function-Registers/sbit
@@ -28,7 +28,7 @@ macro
 
 #include <stdio.h>
 #include <REGX52.h>
-#include "Base_Lib.h"
+#include "Utilities.h"
 
 #define LCD_ON_CURSOR_ON            0x0F  //LCD ON, cursor ON
 #define CLEAR_SCREEN                0x01  //Clear display screen
@@ -69,48 +69,57 @@ sbit EN  			    = P2^7;
 
 //  Make a MONO pulse at EN pin
 //  MONO pulse: LOW->HIGH (HIGH)*n HIGH->LOW :))
-void ENABLE_LCD(){
+void LCD_ENABLE(){
 	//Enable, a high to low pulse need to enable the LCD
 	EN = 0x1;
-	delay_us(3);
+	delay_us(50);
 	EN = 0x0;
 }
+
+
 //	To sent command to the LCD.
-void SEND_BYTE_COMMAND(unsigned char CMD){
+void LCD_SEND_BYTE_COMMAND(unsigned char CMD){
 	DATA_PORT = CMD;
+	delay_us(50);
 	RS = SEND_CMD_MODE;
+	delay_us(50);
 	RW   = WRITE_MODE;
-	ENABLE_LCD();
+	delay_us(50);
+	LCD_ENABLE();
 }
+
 //	To sent a byte of DISPLAY DATA to the LCD.
-void SEND_BYTE_DISPLAY(unsigned char BYTE){
+void LCD_SEND_BYTE_DISPLAY(unsigned char BYTE){
 	// NOTE: BYTE is displayed in ASCII.
 	DATA_PORT = BYTE;
+	delay_us(50);
 	RS = SEND_DISPLAY_DATA_MODE;
+	delay_us(50);
 	RW = WRITE_MODE;
-	ENABLE_LCD();
+	delay_us(50);
+	LCD_ENABLE();
 }
 //	To sent an array of byte of DISPLAY DATA to the LCD.
-void SEND_BYTE_ARRAY_DISPLAY(char ARR[], int32 SIZE){
+void LCD_SEND_BYTE_ARRAY_DISPLAY(char ARR[], uint8 SIZE){
     uint32 i = 0;
 	if(SIZE<0)
 		while(*ARR){
-			SEND_BYTE_DISPLAY(*ARR);
+			LCD_SEND_BYTE_DISPLAY(*ARR);
 			ARR++;
 		}
 	else
 		while( i < SIZE ){
-			SEND_BYTE_DISPLAY(ARR[i]);
+			LCD_SEND_BYTE_DISPLAY(ARR[i]);
 			++i;
 		}
 }
 //	Set the position of the CURSOR in 16x2 LCD screen.
-void SET_CURSOR_POS(uint32 ROW, uint32 COL){
+void LCD_SET_CURSOR_POS(uint32 ROW, uint32 COL){
     if(ROW == 0){
-        SEND_BYTE_COMMAND(SET_CURSOR_0x_0y+COL);
+        LCD_SEND_BYTE_COMMAND(SET_CURSOR_0x_0y+COL);
     }
     if(ROW == 1){
-        SEND_BYTE_COMMAND(SET_CURSOR_1x_0y+COL);
+        LCD_SEND_BYTE_COMMAND(SET_CURSOR_1x_0y+COL);
     }
 }
 
@@ -129,56 +138,67 @@ Limits:
 void LCD_Set_Text(
 	char str[],	uint8 str_size, 
 	uint8 warp_text, uint8 clear_screen, 
-	int32 row_offset, int32 col_offset){
+	uint8 row_offset, uint8 col_offset){
 	uint8 displayed = 0;
 	if(clear_screen == true){
-		SEND_BYTE_COMMAND(0x01);
+		LCD_SEND_BYTE_COMMAND(0x01);
 	}
 	if(warp_text == true){
 		if( col_offset+(str_size-1) <= 15 ){
 			// TEXT can be displayed in A ROW
-			SET_CURSOR_POS(row_offset, col_offset);
-			SEND_BYTE_ARRAY_DISPLAY(str, str_size);
+			LCD_SET_CURSOR_POS(row_offset, col_offset);
+			LCD_SEND_BYTE_ARRAY_DISPLAY(str, str_size);
 		}else{
 			// TEXT can NOT be displayed in A ROW
 			// Display a mount of TEXT (which can be displayed)
 			displayed = 15-col_offset+1;
-			SET_CURSOR_POS(row_offset, 0);
-			SEND_BYTE_ARRAY_DISPLAY(str, displayed);
+			LCD_SET_CURSOR_POS(row_offset, 0);
+			LCD_SEND_BYTE_ARRAY_DISPLAY(str, displayed);
 			if(row_offset == 0){
 				// If can be display at 2nd row
-				SET_CURSOR_POS(1, 0);
-				SEND_BYTE_ARRAY_DISPLAY(str+displayed, str_size-displayed);
+				LCD_SET_CURSOR_POS(1, 0);
+				LCD_SEND_BYTE_ARRAY_DISPLAY(str+displayed, str_size-displayed);
 			}else{
 				// do nothin'
 			}
 		}
 	}else{
 		//un-warp text
-		SET_CURSOR_POS(row_offset, col_offset);
-		SEND_BYTE_ARRAY_DISPLAY(str, min_val(15-col_offset+1, str_size));
+		LCD_SET_CURSOR_POS(row_offset, col_offset);
+		LCD_SEND_BYTE_ARRAY_DISPLAY(str, min_val(15-col_offset+1, str_size));
 	}
 }
 
 //Simple to set TEXT which to be displayed in LCD WITHOUT CLEAR previous screen
 void LCD_Simple_Set_Text_1(
-	char str[],	uint8 str_size, 
-	int32 row_offset, int32 col_offset){
+		char str[],	uint8 str_size, 
+		uint8 row_offset, uint8 col_offset
+	){
+	if(str_size == 0) { while(str[str_size++]); --str_size;}
 	LCD_Set_Text(str, str_size, 0, 0, row_offset, col_offset);
 }
 
 //Simple to set TEXT which to be displayed in LCD WITH CLEAR previous screen
 void LCD_Simple_Set_Text_2(
-	char str[],	uint8 str_size, 
-	int32 row_offset, int32 col_offset){
+		char str[],	uint8 str_size, 
+		uint8 row_offset, uint8 col_offset
+	){
+	if(str_size == 0) { while(str[str_size++]); --str_size;} // Cannot disp '\0' --> remove it! 
 	LCD_Set_Text(str, str_size, 0, 1, row_offset, col_offset);
+}
+
+void LCD_Clear_Screen(){
+	LCD_SEND_BYTE_COMMAND(CLEAR_SCREEN);
 }
 
 //  Set up your LCD.
 void LCD_Initial(){
-	SEND_BYTE_COMMAND(LCD_ON_CURSOR_OFF);
-	SEND_BYTE_COMMAND(LINEx2_MAT5x7);
-	SEND_BYTE_COMMAND(CLEAR_SCREEN+0x2);
+	delay_us(50);
+	LCD_SEND_BYTE_COMMAND(LINEx2_MAT5x7);
+	LCD_SEND_BYTE_COMMAND(LCD_ON_CURSOR_OFF);
+	LCD_SEND_BYTE_COMMAND(RIGHT_SHIFT_CURSOR);
+	LCD_SEND_BYTE_COMMAND(CLEAR_SCREEN);
+	LCD_SEND_BYTE_COMMAND(SET_CURSOR_0x_0y);
 }
 
 
