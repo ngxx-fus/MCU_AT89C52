@@ -23,6 +23,7 @@
 #define min_val(A, B) (((A)<(B))?(A):(B))
 #define max_val(A, B) (((A)>(B))?(A):(B))
 #define nth_bit(num, k) (num&(1<<(k)))  //check n-th bit is 1-bit or 0-bit
+#define bool_casting(x) ((x)?(1):(0))
 
 typedef unsigned char   uint8;
 typedef unsigned short   uint16;

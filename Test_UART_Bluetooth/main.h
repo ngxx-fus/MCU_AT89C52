@@ -58,7 +58,6 @@ uint8 gp_reg; //general purpose register
 uint8 HOLD = 0;
 uint8 DISP_MODE = 0;
 uint8 SYST_TRIGGER = 0;
-uint8 SYST_DEV_CTL = 0;
 uint8 USER_DEV_CTL = 0; 
 uint8 SYS_CTL_INV = 0;
 uint16 CTL_DEV_SEL = 0; 
@@ -294,23 +293,32 @@ uint8 Setup_Time(TIME* t){
     return pos;
 }
 
-void Fetch_System_Time(){
-    DS1302_Read_Time(&sys_t, 0x3F);
-    if(HOLD == 0 && sys_t.SECOND==0){
+void Send_Report_To_Smartphone(uint8 bypass){
+    if(bypass || (HOLD == 0 && sys_t.SECOND==0)){
+            UART_Bytes_Transmit("\n-------------------------", 0);
+            UART_Bytes_Transmit("\nSystem time:\n", 0);
+            UART_Bytes_Transmit(time_disp_1, 0);
+            UART_Byte_Transmit('\n');
+            UART_Bytes_Transmit(time_disp_2, 0);
             UART_Bytes_Transmit("\nSystem status:", 0);
-            UART_Bytes_Transmit("\nDevice1: ", 0); UART_Byte_Transmit('0'+(uint8)DEV1);
-            UART_Bytes_Transmit("\nDevice2: ", 0); UART_Byte_Transmit('0'+(uint8)DEV2);
-            UART_Bytes_Transmit("\nDevice3: ", 0); UART_Byte_Transmit('0'+(uint8)DEV3);
-            UART_Bytes_Transmit("\nDevice4: ", 0); UART_Byte_Transmit('0'+(uint8)DEV4);
-            UART_Bytes_Transmit("\nDevice5: ", 0); UART_Byte_Transmit('0'+(uint8)DEV5);
-            UART_Bytes_Transmit("\nNOTE: 1-off; 0-on\n", 0);
+            UART_Bytes_Transmit("\nDevice 1: ", 0); UART_Bytes_Transmit((DEV1)?"OFF":"ON", 0);
+            UART_Bytes_Transmit("\nDevice 2: ", 0); UART_Bytes_Transmit((DEV2)?"OFF":"ON", 0);
+            UART_Bytes_Transmit("\nDevice 3: ", 0); UART_Bytes_Transmit((DEV3)?"OFF":"ON", 0);
+            UART_Bytes_Transmit("\nDevice 4: ", 0); UART_Bytes_Transmit((DEV4)?"OFF":"ON", 0);
+            UART_Bytes_Transmit("\nDevice 5: ", 0); UART_Bytes_Transmit((DEV5)?"OFF":"ON", 0);
+            UART_Byte_Transmit('\n');
     }
     HOLD=(sys_t.SECOND)?0:HOLD+1;
 }
 
+void Fetch_System_Time(){
+    DS1302_Read_Time(&sys_t, 0x3F);
+}
+
 void Fetch_User_Control(){
     if(data_frame==ON_OFF){
-        USER_DEV_CTL = (USER_DEV_CTL&0xFE) | ((USER_DEV_CTL&_1st_bit_mask)?0:1);
+        // USER_DEV_CTL = (USER_DEV_CTL&0xFE) | ((USER_DEV_CTL&_1st_bit_mask)?0:1);
+        USER_DEV_CTL = (USER_DEV_CTL)?(0):(0xFF);
     }
     // _string_to_lower_case(ble_rcv_data, ble_rcv_size);
     if(ble_has_contained("inv1", 4))
@@ -328,6 +336,10 @@ void Fetch_User_Control(){
     elif(ble_has_contained("inv5", 4))
         ble_rcv_size = 0,
         USER_DEV_CTL = (USER_DEV_CTL&0x10)?(USER_DEV_CTL&0xEF):(USER_DEV_CTL|0x10);
+    if(ble_has_contained("report", 6)){
+        ble_rcv_size = 0;
+        Send_Report_To_Smartphone(1);
+    }
 }
 
 void Fetch_System_Trigger(){
@@ -358,13 +370,13 @@ void Fetch_System_Trigger(){
 uint8 Update_A_Device_State(uint8 dev, uint8 dev_mask, uint16 clt_dev_sel_mask){
     uint8 res = 0x80; //No-changed
     if((CTL_DEV_SEL&clt_dev_sel_mask) == 0){
-        res = USER_DEV_CTL&(1<<(dev-1));
+        res = bool_casting(USER_DEV_CTL&dev_mask);
     }
     elif((CTL_DEV_SEL&clt_dev_sel_mask) == (0x1<<((dev-1)*2))){
         if(SYST_TRIGGER&_1st_bit_mask)//DAYLIGHT
-            res = (SYS_CTL_INV&dev_mask)?0:1;
-        else
             res = (SYS_CTL_INV&dev_mask)?1:0;
+        else
+            res = (SYS_CTL_INV&dev_mask)?0:1;
     }
     elif((CTL_DEV_SEL&clt_dev_sel_mask) == (0x2<<((dev-1)*2))){
         if((SYST_TRIGGER&_2nd_bit_mask))//TIMER 1
@@ -378,6 +390,7 @@ uint8 Update_A_Device_State(uint8 dev, uint8 dev_mask, uint16 clt_dev_sel_mask){
 }
 
 void Update_Device_State(){
+
     gp_reg = Update_A_Device_State(1, _1st_bit_mask, DEV1_MASK);
     DEV1 = (gp_reg&0x80)?(DEV1):(gp_reg&0x1);
     gp_reg = Update_A_Device_State(2, _2nd_bit_mask, DEV2_MASK);
@@ -620,7 +633,6 @@ void Main_Initial(){
     DS1302_Write_Time(&sys_t, 0x7F);
     //--------------//
     CTL_DEV_SEL=0x0E4;
-    SYS_CTL_INV=0x0; // NON-INV for all devs
-    SYST_DEV_CTL=0x0;
+    SYS_CTL_INV=0x2;
     USER_DEV_CTL=0x0;
 }
