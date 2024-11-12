@@ -27,7 +27,6 @@ uint8 _string_equal_compare(char str1[], char str2[], uint8 cmp_size, uint8 str2
     return 1;
 }
 
-
 // void _string_to_upper_case(char str[], uint8 str_size){
 //     if(str_size == 0) return;
 //     while(str_size--){
@@ -35,12 +34,12 @@ uint8 _string_equal_compare(char str1[], char str2[], uint8 cmp_size, uint8 str2
 //     }
 // }
 
-void _string_to_lower_case(char str[], uint8 str_size){
-    if(str_size == 0) return;
-	while(str_size--){
-		if(_is_upper_case(str[str_size])) str[str_size]+= 'a'-'A';
-	}
-}
+// void _string_to_lower_case(char str[], uint8 str_size){
+//     if(str_size == 0) return;
+// 	while(str_size--){
+// 		if(_is_upper_case(str[str_size])) str[str_size]+= 'a'-'A';
+// 	}
+// }
 
 // void _string_copy(char dest[], char scr[], uint8 cp_size, uint8 offset){
 //     uint8 i;

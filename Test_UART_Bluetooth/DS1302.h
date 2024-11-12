@@ -8,6 +8,7 @@
 #ifndef _DS1302_H_
 #define  _DS1302_H_
 
+#include "Time.h"
 #include "Utilities.h"
 #include "ThreeWiresProtocol.h"
 
@@ -16,20 +17,6 @@
 enum enum_DAY{MON = 0, TUE, WED, THU, FRI, SAT, SUN};
 
 #define ds1302_unlock_reg() single_byte_write(0x8E, 0x0)
-
-#ifndef _STRUCT_TIME_
-#define _STRUCT_TIME_
-
-typedef struct TIME{
-    uint8 DAY; // mon, tue, wed, thu, ...
-    uint8 DATE;
-    uint8 MONTH;
-    uint8 YEAR;
-    uint8 HOUR;
-    uint8 MINUTE;
-    uint8 SECOND;
-} TIME;
-#endif
 
 /*
 Read time from DS1302
@@ -75,7 +62,7 @@ void DS1302_Read_Time(TIME* time, uint8 mask){
         }
     }
     //date
-    if(mask&0x10){
+    if(mask&0x8){
         ds1302_unlock_reg();
         byte_data = single_byte_read(0x87);
         x10 = ((byte_data&0x30)>>4)*10;
@@ -83,7 +70,7 @@ void DS1302_Read_Time(TIME* time, uint8 mask){
         time->DATE = x10 + x1;
     }
     //month
-    if(mask&0x20){
+    if(mask&0x10){
         ds1302_unlock_reg();
         byte_data = single_byte_read(0x89);
         x10 = ((byte_data&0x10)>>4)*10;
@@ -91,13 +78,19 @@ void DS1302_Read_Time(TIME* time, uint8 mask){
         time->MONTH = x10 + x1;
     }
     //year
-    if(mask&0x40){
+    if(mask&0x20){
         ds1302_unlock_reg();
-        byte_data = single_byte_read(0x87);
+        byte_data = single_byte_read(0x8D);
         x10 = ((byte_data&0xF0)>>4)*10;
         x1  = (byte_data&0x0F);
         time->YEAR = x10 + x1;
     }
+    // //day
+    // if(mask&0x40){
+    //     x1  = (time->DAY)%10;
+    //     ds1302_unlock_reg();
+    //     single_byte_write(0x9A, x1);
+    // }
 }
 
 void DS1302_Write_Time(TIME* const time, uint8 mask){
@@ -148,7 +141,7 @@ void DS1302_Write_Time(TIME* const time, uint8 mask){
         x1  = (time->YEAR)%10;
         byte_data = (x10<<4) + x1;
         ds1302_unlock_reg();
-        single_byte_write(0x9C, byte_data);
+        single_byte_write(0x8C, byte_data);
     }
     //day
     if(mask&0x40){

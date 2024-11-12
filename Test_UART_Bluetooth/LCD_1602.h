@@ -136,37 +136,13 @@ Limits:
 */
 
 void LCD_Set_Text(
-	char str[],	uint8 str_size, 
-	uint8 warp_text, uint8 clear_screen, 
-	uint8 row_offset, uint8 col_offset){
+		char str[],	uint8 str_size, 
+		uint8 row_offset, uint8 col_offset
+	){
 	uint8 displayed = 0;
-	if(clear_screen == true){
-		LCD_SEND_BYTE_COMMAND(0x01);
-	}
-	if(warp_text == true){
-		if( col_offset+(str_size-1) <= 15 ){
-			// TEXT can be displayed in A ROW
-			LCD_SET_CURSOR_POS(row_offset, col_offset);
-			LCD_SEND_BYTE_ARRAY_DISPLAY(str, str_size);
-		}else{
-			// TEXT can NOT be displayed in A ROW
-			// Display a mount of TEXT (which can be displayed)
-			displayed = 15-col_offset+1;
-			LCD_SET_CURSOR_POS(row_offset, 0);
-			LCD_SEND_BYTE_ARRAY_DISPLAY(str, displayed);
-			if(row_offset == 0){
-				// If can be display at 2nd row
-				LCD_SET_CURSOR_POS(1, 0);
-				LCD_SEND_BYTE_ARRAY_DISPLAY(str+displayed, str_size-displayed);
-			}else{
-				// do nothin'
-			}
-		}
-	}else{
 		//un-warp text
 		LCD_SET_CURSOR_POS(row_offset, col_offset);
-		LCD_SEND_BYTE_ARRAY_DISPLAY(str, min_val(15-col_offset+1, str_size));
-	}
+		LCD_SEND_BYTE_ARRAY_DISPLAY(str, str_size);
 }
 
 //Simple to set TEXT which to be displayed in LCD WITHOUT CLEAR previous screen
@@ -175,7 +151,7 @@ void LCD_Simple_Set_Text_1(
 		uint8 row_offset, uint8 col_offset
 	){
 	if(str_size == 0) { while(str[str_size++]); --str_size;}
-	LCD_Set_Text(str, str_size, 0, 0, row_offset, col_offset);
+	LCD_Set_Text(str, str_size, row_offset, col_offset);
 }
 
 //Simple to set TEXT which to be displayed in LCD WITH CLEAR previous screen
@@ -183,8 +159,9 @@ void LCD_Simple_Set_Text_2(
 		char str[],	uint8 str_size, 
 		uint8 row_offset, uint8 col_offset
 	){
+	LCD_SEND_BYTE_COMMAND(0x01);
 	if(str_size == 0) { while(str[str_size++]); --str_size;} // Cannot disp '\0' --> remove it! 
-	LCD_Set_Text(str, str_size, 0, 1, row_offset, col_offset);
+	LCD_Set_Text(str, str_size, row_offset, col_offset);
 }
 
 // void LCD_Clear_Screen(){
@@ -197,8 +174,6 @@ void LCD_Initial(){
 	LCD_SEND_BYTE_COMMAND(LINEx2_MAT5x7);
 	LCD_SEND_BYTE_COMMAND(LCD_ON_CURSOR_OFF);
 	LCD_SEND_BYTE_COMMAND(RIGHT_SHIFT_CURSOR);
-	LCD_SEND_BYTE_COMMAND(CLEAR_SCREEN);
-	LCD_SEND_BYTE_COMMAND(SET_CURSOR_0x_0y);
 }
 
 

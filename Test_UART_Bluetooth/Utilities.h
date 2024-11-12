@@ -103,19 +103,4 @@ void GLOBAL_INT(uint8 CONFIG){
     EA=(CONFIG==ENABLE)?(1):(0);
 }
 
-#ifndef _STRUCT_TIME_
-#define _STRUCT_TIME_
-
-typedef struct TIME{
-    uint8 DAY; // mon, tue, wed, thu, ...
-    uint8 DATE;
-    uint8 MONTH;
-    uint8 YEAR;
-    uint8 HOUR;
-    uint8 MINUTE;
-    uint8 SECOND;
-} TIME;
 #endif
-
-#endif
-

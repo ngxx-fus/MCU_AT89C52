@@ -9,26 +9,12 @@
 
 /*
 Valid msg from Bluetooth module:
-	$DEV1$$$
-	$DEV2$$$
-	$DEV3$$$
-	$DEV4$$$
-	$DEV5$$$
-	$ON$$$$$
-	$OFF$$$$
-	$NONE$$$
-	$EXIT$$$
-	$SETUP$$
-	$PREV$$$
-	$NEXT$$$
-	$YES$$$$
-	$NO$$$$$
-	$HOUR**$
-	$MIN**$$
-	$SEC**$$
-	$YEAR**$
-	$MON**$$
-	$DATE**$
+NOTE: flip dev-state (1->0, 0->1) if the dev is controlled by USER
+	inv1
+	inv2
+	inv3
+	inv4
+	inv5
 */
 
 #define _max_buffer_size 8 
@@ -70,6 +56,11 @@ void UART_Bytes_Transmit(char transmit_data[], int32 transmit_data_size){
 // 	return true; // for read successful
 // }
 
+uint8 ble_has_contained(char pattern[], uint8 pat_size){
+	if(ble_rcv_size<1) return 0;
+    return _string_find_pattern(pattern, pat_size, ble_rcv_data, ble_rcv_size, 0) < ble_rcv_size;
+}
+
 void Bluetooth_UART_Initial(){
     //UART initial
 	GLOBAL_INT(ENABLE);
@@ -96,6 +87,7 @@ void UART_Received() interrupt 4 {
 				RI = 0;
 				return;
 		}
+		if(_is_upper_case(temp_char)) temp_char -= 'a'-'A';
 		ble_rcv_size = _bounded_y(ble_rcv_size, _max_buffer_size)+1;
 		ble_rcv_data[ble_rcv_size-1] = temp_char;
 		RI = 0; 

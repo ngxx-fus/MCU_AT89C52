@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              11/12/2024 11:01:14 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              11/13/2024 01:31:41 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -9,29 +9,29 @@ COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.exe main.c LARGE OPTIMIZE(8,SPEED) B
 line level    source
 
    1          #include "main.h"
-*** WARNING C275 IN LINE 160 OF main.h: expression with possibly no effect
-   2          #include "LCD_1602.h"
-   3          
-   4          int main(void){
-   5   1          Main_Initial();
-   6   1          while(0x1){
-   7   2              Fetch_System_Control();
-   8   2              Update_Device_State();
-   9   2              Mode_Change();
-  10   2              Mode_Process();
-  11   2              delay_ms(1000);
-  12   2          }
-  13   1          return 0;
-  14   1      }
-*** WARNING C294 IN LINE 118 OF main.c: unreachable code
-*** WARNING C294 IN LINE 162 OF main.c: unreachable code
-*** WARNING C294 IN LINE 13 OF main.c: unreachable code
+*** WARNING C275 IN LINE 282 OF main.h: expression with possibly no effect
+   2          
+   3          int main(void){
+   4   1          Main_Initial();
+   5   1          while(0x1){
+   6   2              Fetch_System_Time();
+   7   2              Fetch_User_Control();
+   8   2              Fetch_System_Trigger();
+   9   2              Update_Device_State();
+  10   2              Mode_Change();
+  11   2              Mode_Process();
+  12   2              // delay_ms(300);
+  13   2          }
+  14   1          return 0;
+  15   1      }
+*** WARNING C294 IN LINE 130 OF main.c: unreachable code
+*** WARNING C294 IN LINE 14 OF main.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   5559    ----
-   CONSTANT SIZE    =    605    ----
-   XDATA SIZE       =     80     119
+   CODE SIZE        =   6374    ----
+   CONSTANT SIZE    =    695    ----
+   XDATA SIZE       =     81     124
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
@@ -39,4 +39,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  4 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  3 WARNING(S),  0 ERROR(S)
