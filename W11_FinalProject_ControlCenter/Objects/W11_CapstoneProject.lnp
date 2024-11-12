@@ -1,3 +1,0 @@
-".\Objects\main.obj" 
-TO ".\Objects\W11_CapstoneProject" 
-PRINT(".\Listings\W11_CapstoneProject.m51") RAMSIZE(256) 

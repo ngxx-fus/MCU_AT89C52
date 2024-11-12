@@ -2,7 +2,7 @@
 #define _IF_READING_
 
 #include "REGX52.h"
-#include "Base_Lib.h"
+#include "Utilities.h"
 
 /*
     Refs:
@@ -42,11 +42,18 @@
 #define RESET_BUFFER() buffer=0;
 #define EXTRACT_FRAME() data_frame=buffer; buffer = 0; negedge_count = 0;
 
+#define clear_frame() data_frame=0
+
 // Based on the diagram of "8051 Pro" Kit
+// sbit IR_RCV_PIN = P3^2;
+// sbit IndicatorLED = P2^7;
+// sbit DataRcv = P2^6;
+// sbit FrameExtracted = P2^0;
+// sbit MR = P2^4;
 // Final data_frame
-uint32 data_frame = 0,
+uint32 data_frame = 0;
 // Temporary storing unfinished  data-frame while receiving.
-       buffer = 0;
+uint32 buffer = 0;
 // Mili-second count
 uint8 ms_count = 0;
 // bit-count
@@ -60,11 +67,29 @@ int8 negedge_count = 0;
 //clear frame after read!
 uint32 read_extracted_frame(){
     uint32 frame = data_frame;
-    data_frame = 0;
+    clear_frame();
     return frame;
 }
 
+//Remote code to number
+uint8 CODE2NUM(uint32 CODE){
+    switch (CODE) {
+        case __0: return 0;
+        case __1: return 1;
+        case __2: return 2;
+        case __3: return 3;
+        case __4: return 4;
+        case __5: return 5;
+        case __6: return 6;
+        case __7: return 7;
+        case __8: return 8;
+        case __9: return 9;
+    }
+    return 0;
+}
+
 void IR_Reading_Initial(){
+    // IndicatorLED = 1;
     // DataRcv = 1;
     buffer = 0;
     data_frame = 0;
@@ -78,6 +103,7 @@ void IR_Reading_Initial(){
 }
 
 void Timer0_OverFlow_Interrupt() interrupt 1 {
+	// IndicatorLED = ~IndicatorLED;
     TIMER0_CTL(RESET);
     //A data-frame isn't longer than 67.5mili-sec.
     if(ms_count<67) ms_count = ms_count + 1;

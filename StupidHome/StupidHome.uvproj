@@ -46,10 +46,10 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>W11_CapstoneProject</OutputName>
+          <OutputName>StupidHome</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>1</CreateHexFile>
+          <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -233,7 +233,7 @@
               <RCB>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0xffff</Size>
+                <Size>0x10000</Size>
               </RCB>
               <RXB>
                 <Type>0</Type>
@@ -377,14 +377,19 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>Base_Lib.h</FileName>
+              <FileName>DS1302.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Base_Lib.h</FilePath>
+              <FilePath>.\DS1302.h</FilePath>
             </File>
             <File>
-              <FileName>LCD16x2.h</FileName>
+              <FileName>IR_Reading.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\LCD16x2.h</FilePath>
+              <FilePath>.\IR_Reading.h</FilePath>
+            </File>
+            <File>
+              <FileName>LCD_1602.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LCD_1602.h</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
@@ -397,14 +402,34 @@
               <FilePath>.\main.h</FilePath>
             </File>
             <File>
-              <FileName>IR_Reading.h</FileName>
+              <FileName>String_Ultils.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\IR_Reading.h</FilePath>
+              <FilePath>.\String_Ultils.h</FilePath>
             </File>
             <File>
               <FileName>ThreeWiresProtocol.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\ThreeWiresProtocol.h</FilePath>
+            </File>
+            <File>
+              <FileName>Time.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Time.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART_BLE.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\UART_BLE.h</FilePath>
+            </File>
+            <File>
+              <FileName>Utilities.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Utilities.h</FilePath>
+            </File>
+            <File>
+              <FileName>XPT2046.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\XPT2046.h</FilePath>
             </File>
           </Files>
         </Group>

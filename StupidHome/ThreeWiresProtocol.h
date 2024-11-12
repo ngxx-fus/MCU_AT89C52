@@ -11,7 +11,7 @@
 #define _THREE_WIRES_PROTOCOL_H_
 
 #include <REGX52.h>
-#include "base_lib.h"
+#include "Utilities.h"
 
 // type define: "usigned int" -> "uint"
 // typedef unsigned int uint;

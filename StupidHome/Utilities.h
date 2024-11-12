@@ -1,48 +1,36 @@
 /*
     Note:
-        Base_Lib.h is a lib that include all define, typedef,
+        From 10/11/2024, Utilities.h has been changed to Utilities.h
+        Utilities.h.h is a lib that include all define, typedef,
         base function, ... It can be reused in many following project.
     Autor:
         Nguyen Thanh Phu
     Version:
-        0.1.4
+        0.1.5
 */
+#ifndef _UTILITIES_H_
+#define _UTILITIES_H_
+
 #include <REGX52.h>
 
-#ifndef _BASE_LIB_H_
-#define _BASE_LIB_H_
-
-#ifndef elif
 #define elif else if
-#endif
-#ifndef DECREASE_ONE
 #define DECREASE_ONE(VAR) VAR = (VAR>0?(VAR-1):VAR)
-#endif
-#ifndef REP
 #define REP(i, a, b) for(i = (a); i <= (b); ++i)
-#endif
-#ifndef REV
 #define REV(i, a, b) for(i = (a); i >= (b); --i)
-#endif
-#ifndef true
 #define true 0x1
-#endif
-#ifndef false
 #define false 0x0
-#endif
-#ifndef bool
 #define bool uint8
-#endif
-#ifndef min_val
 #define min_val(A, B) (((A)<(B))?(A):(B))
-#endif
-#ifndef max_val
 #define max_val(A, B) (((A)>(B))?(A):(B))
-#endif
-typedef unsigned char uint8;
-typedef unsigned int uint32;
-typedef char int8;
-typedef int int32;
+#define nth_bit(num, k) (num&(1<<(k)))  //check n-th bit is 1-bit or 0-bit
+#define bool_casting(x) ((x)?(1):(0))
+
+typedef unsigned char   uint8;
+typedef unsigned short   uint16;
+typedef unsigned int    uint32;
+typedef char    int8;
+typedef short    int16;
+typedef int     int32;
 
 enum enum_STATE_1{ ON  = 0, OFF = 1, NONE = 255 };
 enum enum_STATE_2{ LOW  = 0, HIGH = 1, Z = 255 };
@@ -60,7 +48,7 @@ static void delay_us(uint32 us){
 void delay_ms(uint32 ms){
     uint32 i = 0; 
     uint32 j = 0;
-    for(i = 0; i < ms*12; i = i + 1){
+    for(i = 0; i < ms*19; i = i + 1){
         // do nothin'
     }
 }
@@ -76,20 +64,20 @@ void eINT0_CTL(uint8 CONFIG){
     }
 }
 
-void eINT1_CTL(uint8 CONFIG){
-    if( CONFIG == ENABLE){
-        // Configure INT1 falling edge interrupt
-        IT1 = 1;   
-        // Enable the INT1 External Interrupt    
-        EX1 = 1;
-    }
-    if( CONFIG == DISABLE){
-        // Configure INT1 falling edge interrupt
-        IT1 = 0;   
-        // Enable the INT1 External Interrupt    
-        EX1 = 0;
-    }
-}
+// void eINT1_CTL(uint8 CONFIG){
+//     if( CONFIG == ENABLE){
+//         // Configure INT1 falling edge interrupt
+//         IT1 = 1;   
+//         // Enable the INT1 External Interrupt    
+//         EX1 = 1;
+//     }
+//     if( CONFIG == DISABLE){
+//         // Configure INT1 falling edge interrupt
+//         IT1 = 0;   
+//         // Enable the INT1 External Interrupt    
+//         EX1 = 0;
+//     }
+// }
 
 #define RESET_TH 0xFC 
 #define RESET_TL 0x67
@@ -115,15 +103,5 @@ void TIMER0_CTL(uint8 CONFIG){
 void GLOBAL_INT(uint8 CONFIG){
     EA=(CONFIG==ENABLE)?(1):(0);
 }
-
-typedef struct TIME{
-    uint8 DAY; // mon, tue, wed, thu, ...
-    uint8 DATE;
-    uint8 MONTH;
-    uint8 YEAR;
-    uint8 HOUR;
-    uint8 MINUTE;
-    uint8 SECOND;
-} TIME;
 
 #endif
