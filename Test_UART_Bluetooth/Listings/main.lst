@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              11/13/2024 01:31:41 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              11/13/2024 01:54:52 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -9,7 +9,7 @@ COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.exe main.c LARGE OPTIMIZE(8,SPEED) B
 line level    source
 
    1          #include "main.h"
-*** WARNING C275 IN LINE 282 OF main.h: expression with possibly no effect
+*** WARNING C275 IN LINE 283 OF main.h: expression with possibly no effect
    2          
    3          int main(void){
    4   1          Main_Initial();
@@ -24,14 +24,14 @@ line level    source
   13   2          }
   14   1          return 0;
   15   1      }
-*** WARNING C294 IN LINE 130 OF main.c: unreachable code
+*** WARNING C294 IN LINE 131 OF main.c: unreachable code
 *** WARNING C294 IN LINE 14 OF main.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   6374    ----
-   CONSTANT SIZE    =    695    ----
-   XDATA SIZE       =     81     124
+   CODE SIZE        =   6410    ----
+   CONSTANT SIZE    =    690    ----
+   XDATA SIZE       =     82     123
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----

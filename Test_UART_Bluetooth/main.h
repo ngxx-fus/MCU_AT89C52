@@ -54,6 +54,7 @@ sbit DEV3 = P2^2;
 sbit DEV4 = P2^3;
 sbit DEV5 = P2^4;
 
+uint8 gp_reg; //general purpose register
 uint8 HOLD = 0;
 uint8 DISP_MODE = 0;
 uint8 SYST_TRIGGER = 0;
@@ -189,7 +190,7 @@ uint8 Setup_Device(){
             ble_rcv_size = 0;
             switch (pos) {
                 case 0:
-                    LCD_Simple_Set_Text_1("> TRIG: NONE INV", 0, 1, 0);
+                    LCD_Simple_Set_Text_1("> TRIG: NON-INV ", 0, 1, 0);
                     break;
                 case 1:
                     LCD_Simple_Set_Text_1("> TRIG: INVERTED", 0, 1, 0);
@@ -244,13 +245,13 @@ uint8 Setup_Time(TIME* t){
         elif(REMOTE_CODE == MODE) return 0;
         elif(REMOTE_CODE == NEXT) pos = (pos+1)%6;
         elif(REMOTE_CODE == PREV)  pos = (pos-1+6)%6;
-        found_pos = _string_find_pattern("incr", 4, ble_rcv_data, ble_rcv_size, 0);
-        if(found_pos + 1 < ble_rcv_size){
-            found_pos = ble_rcv_data[found_pos+4] - '0';
-        }else{
-            found_pos = 0;
-        }
-        ble_rcv_size = 0;//clear ble rcv data
+        // found_pos = _string_find_pattern("incr", 4, ble_rcv_data, ble_rcv_size, 0);
+        // if(found_pos + 1 < ble_rcv_size){
+        //     found_pos = ble_rcv_data[found_pos+4] - '0';
+        // }else{
+        //     found_pos = 0;
+        // }
+        // ble_rcv_size = 0;//clear ble rcv data
 
         switch (pos) {
             case 0: 
@@ -355,37 +356,38 @@ void Fetch_System_Trigger(){
 }
 
 uint8 Update_A_Device_State(uint8 dev, uint8 dev_mask, uint16 clt_dev_sel_mask){
-    uint8 res = 0;
+    uint8 res = 0x80; //No-changed
     if((CTL_DEV_SEL&clt_dev_sel_mask) == 0){
         res = USER_DEV_CTL&(1<<(dev-1));
     }
     elif((CTL_DEV_SEL&clt_dev_sel_mask) == (0x1<<((dev-1)*2))){
-        if(SYS_CTL_INV&dev_mask)//DAYLIGHT
-            res = (SYST_TRIGGER&_1st_bit_mask)?(0):(1);
+        if(SYST_TRIGGER&_1st_bit_mask)//DAYLIGHT
+            res = (SYS_CTL_INV&dev_mask)?0:1;
         else
-            res = (SYST_TRIGGER&_1st_bit_mask)?(1):(0);
+            res = (SYS_CTL_INV&dev_mask)?1:0;
     }
     elif((CTL_DEV_SEL&clt_dev_sel_mask) == (0x2<<((dev-1)*2))){
-        if((SYS_CTL_INV&dev_mask) && (SYST_TRIGGER&_2nd_bit_mask))//TIMER 1
-            res = 0;
-        else
-            res = 1;
+        if((SYST_TRIGGER&_2nd_bit_mask))//TIMER 1
+            res = (SYS_CTL_INV&dev_mask)?1:0;
     }
     elif((CTL_DEV_SEL&clt_dev_sel_mask) == (0x3<<((dev-1)*2))){
-        if((SYS_CTL_INV&dev_mask) && (SYST_TRIGGER&_3rd_bit_mask))//TIMER 2
-            res = 0;
-        else
-            res = 1;
+        if((SYST_TRIGGER&_3rd_bit_mask))//TIMER 2
+            res = (SYS_CTL_INV&dev_mask)?1:0;
     }
     return res;
 }
 
 void Update_Device_State(){
-    DEV1 = Update_A_Device_State(1, _1st_bit_mask, DEV1_MASK);
-    DEV2 = Update_A_Device_State(2, _2nd_bit_mask, DEV2_MASK);
-    DEV3 = Update_A_Device_State(3, _3rd_bit_mask, DEV3_MASK);
-    DEV4 = Update_A_Device_State(4, _4th_bit_mask, DEV4_MASK);
-    DEV5 = Update_A_Device_State(5, _5th_bit_mask, DEV5_MASK);
+    gp_reg = Update_A_Device_State(1, _1st_bit_mask, DEV1_MASK);
+    DEV1 = (gp_reg&0x80)?(DEV1):(gp_reg&0x1);
+    gp_reg = Update_A_Device_State(2, _2nd_bit_mask, DEV2_MASK);
+    DEV2 = (gp_reg&0x80)?(DEV2):(gp_reg&0x1);
+    gp_reg = Update_A_Device_State(3, _3rd_bit_mask, DEV3_MASK);
+    DEV3 = (gp_reg&0x80)?(DEV3):(gp_reg&0x1);
+    gp_reg = Update_A_Device_State(4, _4th_bit_mask, DEV4_MASK);
+    DEV4 = (gp_reg&0x80)?(DEV4):(gp_reg&0x1);
+    gp_reg = Update_A_Device_State(5, _5th_bit_mask, DEV5_MASK);
+    DEV5 = (gp_reg&0x80)?(DEV5):(gp_reg&0x1);
 }
 
 void MODE_RIGHT(){
@@ -476,7 +478,6 @@ void Mode_Change(){
 }
 
 void Mode_Process(){
-    uint8 regx;
     switch (DISP_MODE) {
         case MODE_NORMAL: Time_Data_Display("TIME:   ", "DATE:   ", sys_t, 0x3); return;
         case MODE_SETUP: 
@@ -529,12 +530,12 @@ void Mode_Process(){
         case MODE_SETUP_DEVICE_1_ACTION:
             //Call set up function!
             MODE_UP();
-            regx = Setup_Device();
-            if(regx&0x80) return;
-            CTL_DEV_SEL = (CTL_DEV_SEL&0xFFFC) | (regx&0x3);
-            SYS_CTL_INV = (SYS_CTL_INV&0xFE) | ((regx>>2)&0x1);
-            if(regx&0x10) return; //not set dev-state
-            USER_DEV_CTL = (USER_DEV_CTL&0xFE) | ((regx>>3)&0x1);
+            gp_reg = Setup_Device();
+            if(gp_reg&0x80) return;
+            CTL_DEV_SEL = (CTL_DEV_SEL&0xFFFC) | (gp_reg&0x3);
+            SYS_CTL_INV = (SYS_CTL_INV&0xFE) | ((gp_reg>>2)&0x1);
+            if(gp_reg&0x10) return; //not set dev-state
+            USER_DEV_CTL = (USER_DEV_CTL&0xFE) | ((gp_reg>>3)&0x1);
             return;
         case MODE_SETUP_DEVICE_2_DISP:
             Time_Data_Display("TIME:   ", "DATE:   ", sys_t, 0x1); 
@@ -544,12 +545,12 @@ void Mode_Process(){
         case MODE_SETUP_DEVICE_2_ACTION:
             //Call set up function!
             MODE_UP();
-            regx = Setup_Device();
-            if(regx&0x80) return;
-            CTL_DEV_SEL = (CTL_DEV_SEL&0xFFF3) | ((regx&0x3)<<2);
-            SYS_CTL_INV = (SYS_CTL_INV&0xFD) | ((regx>>1)&0x2);
-            if(regx&0x10) return; //not set dev-state
-            USER_DEV_CTL = (USER_DEV_CTL&0xFD) | ((regx>>2)&0x2);
+            gp_reg = Setup_Device();
+            if(gp_reg&0x80) return;
+            CTL_DEV_SEL = (CTL_DEV_SEL&0xFFF3) | ((gp_reg&0x3)<<2);
+            SYS_CTL_INV = (SYS_CTL_INV&0xFD) | ((gp_reg>>1)&0x2);
+            if(gp_reg&0x10) return; //not set dev-state
+            USER_DEV_CTL = (USER_DEV_CTL&0xFD) | ((gp_reg>>2)&0x2);
             return;
         case MODE_SETUP_DEVICE_3_DISP:
             Time_Data_Display("TIME:   ", "DATE:   ", sys_t, 0x1); 
@@ -558,12 +559,12 @@ void Mode_Process(){
             return;
         case MODE_SETUP_DEVICE_3_ACTION:
             MODE_UP();
-            regx = Setup_Device();
-            if(regx&0x80) return;
-            CTL_DEV_SEL = (CTL_DEV_SEL&0xFFCF) | ((regx&0x3)<<4);
-            SYS_CTL_INV = (SYS_CTL_INV&0xFB) | ((regx)&0x4);
-            if(regx&0x10) return; //not set dev-state
-            USER_DEV_CTL = (USER_DEV_CTL&0xFB) | ((regx>>1)&0x4);
+            gp_reg = Setup_Device();
+            if(gp_reg&0x80) return;
+            CTL_DEV_SEL = (CTL_DEV_SEL&0xFFCF) | ((gp_reg&0x3)<<4);
+            SYS_CTL_INV = (SYS_CTL_INV&0xFB) | ((gp_reg)&0x4);
+            if(gp_reg&0x10) return; //not set dev-state
+            USER_DEV_CTL = (USER_DEV_CTL&0xFB) | ((gp_reg>>1)&0x4);
             return;
         case MODE_SETUP_DEVICE_4_DISP:
             Time_Data_Display("TIME:   ", "DATE:   ", sys_t, 0x1); 
@@ -572,12 +573,12 @@ void Mode_Process(){
             return;
         case MODE_SETUP_DEVICE_4_ACTION:
             MODE_UP();
-            regx = Setup_Device();
-            if(regx&0x80) return;
-            CTL_DEV_SEL = (CTL_DEV_SEL&0xFF3F) | ((regx&0x3)<<6);
-            SYS_CTL_INV = (SYS_CTL_INV&0xF7) | ((regx<<1)&0x8);
-            if(regx&0x10) return; //not set dev-state
-            USER_DEV_CTL = (USER_DEV_CTL&0xF7) | ((regx)&0x8);
+            gp_reg = Setup_Device();
+            if(gp_reg&0x80) return;
+            CTL_DEV_SEL = (CTL_DEV_SEL&0xFF3F) | ((gp_reg&0x3)<<6);
+            SYS_CTL_INV = (SYS_CTL_INV&0xF7) | ((gp_reg<<1)&0x8);
+            if(gp_reg&0x10) return; //not set dev-state
+            USER_DEV_CTL = (USER_DEV_CTL&0xF7) | ((gp_reg)&0x8);
             return;
         case MODE_SETUP_DEVICE_5_DISP:
             Time_Data_Display("TIME:   ", "DATE:   ", sys_t, 0x1); 
@@ -586,12 +587,12 @@ void Mode_Process(){
             return;
         case MODE_SETUP_DEVICE_5_ACTION:
             MODE_UP();
-            regx = Setup_Device();
-            if(regx&0x80) return;
-            CTL_DEV_SEL = (CTL_DEV_SEL&0xFCFF) | ((regx&0x3)<<8);
-            SYS_CTL_INV = (SYS_CTL_INV&0xEF) | ((regx<<2)&0x10);
-            if(regx&0x10) return; //not set dev-state
-            USER_DEV_CTL = (USER_DEV_CTL&0xEF) | ((regx<<1)&0x10);
+            gp_reg = Setup_Device();
+            if(gp_reg&0x80) return;
+            CTL_DEV_SEL = (CTL_DEV_SEL&0xFCFF) | ((gp_reg&0x3)<<8);
+            SYS_CTL_INV = (SYS_CTL_INV&0xEF) | ((gp_reg<<2)&0x10);
+            if(gp_reg&0x10) return; //not set dev-state
+            USER_DEV_CTL = (USER_DEV_CTL&0xEF) | ((gp_reg<<1)&0x10);
             return;
         default:
             UART_Bytes_Transmit("\nSYSTEM FAULT!!!\nPLS PRESS RESET!!!\n", 0);
@@ -614,12 +615,12 @@ void Main_Initial(){
     Bluetooth_UART_Initial();
     SPI_Initial();
     //--------------//
-    DS1302_Write_Time(&sys_t, 0x7F);
-    //--------------//
     Hello();
     //--------------//
+    DS1302_Write_Time(&sys_t, 0x7F);
+    //--------------//
     CTL_DEV_SEL=0x0E4;
-    SYS_CTL_INV=0x0;
+    SYS_CTL_INV=0x0; // NON-INV for all devs
     SYST_DEV_CTL=0x0;
     USER_DEV_CTL=0x0;
 }
