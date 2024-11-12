@@ -3,8 +3,9 @@
 
 int main(void){
     Main_Initial();
-    LCD_Simple_Set_Text_2("Stand by mode", 0, 0, 0);
     while(0x1){
+        Fetch_System_Control();
+        Update_Device_State();
         Mode_Change();
         Mode_Process();
         delay_ms(1000);

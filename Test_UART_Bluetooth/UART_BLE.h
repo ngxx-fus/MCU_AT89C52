@@ -70,38 +70,20 @@ void UART_Bytes_Transmit(char transmit_data[], int32 transmit_data_size){
 // 	return true; // for read successful
 // }
 
-void UART_Initial(){
-    GLOBAL_INT(ENABLE);
+void Bluetooth_UART_Initial(){
+    //UART initial
+	GLOBAL_INT(ENABLE);
     ES = 1; //Serial interrupt
     TMOD |= 0x20; //Set timer 2 mode 8bit
     TH1 = 0xFD; //load value for baud rate = 9600
     TL1 = 0xFD; //load value for baud rate = 9600
     SCON = 0x50;
     TR1 = 1; // start timer 1
-}
-
-void Bluetooth_Initial(){
+	
+    //Bluetooth initial
 	ble_rcv_size = 0;
-	LCD_Simple_Set_Text_2("SEND <OK> FROM", 14, 0, 0);
-	LCD_Simple_Set_Text_1("YOUR SMARTPHONE!", 16, 1, 0);
-	do{		
-		delay_ms(1000);
-		if(ble_rcv_size >= 2){
-			_string_to_lower_case(ble_rcv_data, ble_rcv_size);
-			if(_string_find_pattern("ok", 2, ble_rcv_data, ble_rcv_size, 0)<ble_rcv_size){
-				ble_rcv_size=0;// clear received data
-				break;
-			}
-		}
-	}while(1);
+
 }
-
-void Bluetooth_UART_Initial(){
-	UART_Initial();
-	Bluetooth_Initial();
-}
-
-
 
 void UART_Received() interrupt 4 {
 	char temp_char;

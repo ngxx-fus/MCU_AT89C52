@@ -10,7 +10,7 @@ sbit S_CLK  = P3^6;
 sbit C_S   = P3^5;
 
 
-void SPI_Start(void)
+void SPI_Initial(void)
 {
 	S_CLK = 0;
 	C_S  = 1;

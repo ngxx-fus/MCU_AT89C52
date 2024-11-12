@@ -187,9 +187,9 @@ void LCD_Simple_Set_Text_2(
 	LCD_Set_Text(str, str_size, 0, 1, row_offset, col_offset);
 }
 
-void LCD_Clear_Screen(){
-	LCD_SEND_BYTE_COMMAND(CLEAR_SCREEN);
-}
+// void LCD_Clear_Screen(){
+// 	LCD_SEND_BYTE_COMMAND(CLEAR_SCREEN);
+// }
 
 //  Set up your LCD.
 void LCD_Initial(){

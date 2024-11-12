@@ -48,7 +48,7 @@
 // sbit IR_RCV_PIN = P3^2;
 // sbit IndicatorLED = P2^7;
 // sbit DataRcv = P2^6;
-sbit FrameExtracted = P2^0;
+// sbit FrameExtracted = P2^0;
 // sbit MR = P2^4;
 // Final data_frame
 uint32 data_frame = 0;
@@ -71,7 +71,22 @@ uint32 read_extracted_frame(){
     return frame;
 }
 
-
+//Remote code to number
+uint8 CODE2NUM(uint32 CODE){
+    switch (CODE) {
+        case __0: return 0;
+        case __1: return 1;
+        case __2: return 2;
+        case __3: return 3;
+        case __4: return 4;
+        case __5: return 5;
+        case __6: return 6;
+        case __7: return 7;
+        case __8: return 8;
+        case __9: return 9;
+    }
+    return 0;
+}
 
 void IR_Reading_Initial(){
     // IndicatorLED = 1;
@@ -117,9 +132,9 @@ void External0_Interrupt() interrupt 0 {
 			}
         }else if(negedge_count >= 32){
             EXTRACT_FRAME();
-            FrameExtracted=0;
-            delay_ms(1);
-            FrameExtracted=1;
+            // FrameExtracted=0;
+            // delay_ms(1);
+            // FrameExtracted=1;
         }
     }
 }
