@@ -27,13 +27,18 @@ To easier to understand "StupidHome", i have made reduced version. In this versi
 
 ### Connection Diagram
 
-External Bluetooth 5.0 module: Bluetooth 5.0 BLE JDY-24M
+External Bluetooth 5.0 module: [Bluetooth 5.0 BLE JDY-24M](https://icdayroi.com/mach-thu-phat-bluetooth-5-0-ble-jdy-24m)
+
+<br>
+
 | 8051 Pro Kit | Ble 5.0 BLE JDY-24M | Note |
-| :--: | :--: | :--: |
+| :--: | :--: | :-- |
 | P3.1 (TX) | RXD   | |
 | P3.0 (RX) | TXD   | |
 | 5V   | VCC | |
 | 5V   | EN  | LOW: AT mode - for config ble module<br> HIGH: send data |
 | GND  | GND | |
+
 <br>
-![alt text](https://github.com/ngxx-fus/MCU_AT89C52/blob/main/StupidHome-Reduced/image.png)
+
+![alt text](https://raw.githubusercontent.com/ngxx-fus/MCU_AT89C52/refs/heads/main/StupidHome-Reduced/image.png)
