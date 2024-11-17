@@ -1,0 +1,43 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/13/2024 03:09:15 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.exe main.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+*** WARNING C275 IN LINE 282 OF main.h: expression with possibly no effect
+   2          
+   3          int main(void){
+   4   1          Main_Initial();
+   5   1          while(0x1){
+   6   2              Fetch_System_Time();
+   7   2              Send_Report_To_Smartphone(0);
+   8   2              Fetch_User_Control();
+   9   2              Fetch_System_Trigger();
+  10   2              Update_Device_State();
+  11   2              Mode_Change();
+  12   2              Mode_Process();
+  13   2              // delay_ms(300);
+  14   2          }
+  15   1          return 0;
+  16   1      }
+*** WARNING C294 IN LINE 130 OF main.c: unreachable code
+*** WARNING C294 IN LINE 15 OF main.c: unreachable code
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   6560    ----
+   CONSTANT SIZE    =    731    ----
+   XDATA SIZE       =     81     123
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  3 WARNING(S),  0 ERROR(S)
