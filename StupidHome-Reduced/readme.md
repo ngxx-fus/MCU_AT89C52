@@ -36,4 +36,4 @@ External Bluetooth 5.0 module: Bluetooth 5.0 BLE JDY-24M
 | 5V   | EN  | LOW: AT mode - for config ble module<br> HIGH: send data |
 | GND  | GND | |
 <br>
-![alt text](image.png)
+![alt text](https://github.com/ngxx-fus/MCU_AT89C52/blob/main/StupidHome-Reduced/image.png)
