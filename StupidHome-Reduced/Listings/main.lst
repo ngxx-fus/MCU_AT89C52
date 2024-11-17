@@ -16,7 +16,7 @@ line level    source
    5   1          while(0x1){
    6   2              Fetch_System_Time();
    7   2              Send_Report_To_Smartphone(0);
-   8   2              Fetch_User_Control();
+   8   2              Update_Device_State();
    9   2              Fetch_System_Trigger();
   10   2              Update_Device_State();
   11   2              Mode_Change();

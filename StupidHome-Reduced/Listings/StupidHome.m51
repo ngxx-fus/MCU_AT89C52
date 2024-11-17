@@ -55,7 +55,7 @@ LINK MAP OF MODULE:  .\Objects\StupidHome (MAIN)
             CODE    0F9DH     010CH     UNIT         ?PR?_SEND_REPORT_TO_SMARTPHONE?MAIN
             CODE    10A9H     010CH     UNIT         ?PR?_UPDATE_A_DEVICE_STATE?MAIN
             CODE    11B5H     0108H     UNIT         ?PR?_DS1302_WRITE_TIME?MAIN
-            CODE    12BDH     00FBH     UNIT         ?PR?FETCH_USER_CONTROL?MAIN
+            CODE    12BDH     00FBH     UNIT         ?PR?Update_Device_State?MAIN
             CODE    13B8H     00BFH     UNIT         ?PR?UPDATE_DEVICE_STATE?MAIN
             CODE    1477H     00B5H     UNIT         ?PR?EXTERNAL0_INTERRUPT?MAIN
             CODE    152CH     0098H     UNIT         ?PR?TIME_EQUAL_CMP?MAIN
@@ -134,7 +134,7 @@ SEGMENT                                         XDATA_GROUP
   +--> ?PR?MAIN_INITIAL?MAIN
   +--> ?PR?FETCH_SYSTEM_TIME?MAIN
   +--> ?PR?_SEND_REPORT_TO_SMARTPHONE?MAIN
-  +--> ?PR?FETCH_USER_CONTROL?MAIN
+  +--> ?PR?Update_Device_State?MAIN
   +--> ?PR?FETCH_SYSTEM_TRIGGER?MAIN
   +--> ?PR?UPDATE_DEVICE_STATE?MAIN
   +--> ?PR?MODE_CHANGE?MAIN
@@ -228,7 +228,7 @@ SEGMENT                                         XDATA_GROUP
   +--> ?PR?_UART_BYTES_TRANSMIT?MAIN
   +--> ?PR?_UART_BYTE_TRANSMIT?MAIN
 
-?PR?FETCH_USER_CONTROL?MAIN                   -----    -----
+?PR?Update_Device_State?MAIN                   -----    -----
   +--> ?CO?MAIN
   +--> ?PR?_BLE_HAS_CONTAINED?MAIN
   +--> ?PR?_SEND_REPORT_TO_SMARTPHONE?MAIN
@@ -365,7 +365,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\StupidHome (MAIN)
   D:0099H         PUBLIC        SBUF
   C:1A63H         PUBLIC        MODE_LEFT
   D:0098H         PUBLIC        SCON
-  C:12BDH         PUBLIC        Fetch_User_Control
+  C:12BDH         PUBLIC        Update_Device_State
   X:0005H         PUBLIC        timer_1
   X:000CH         PUBLIC        sys_t
   D:0089H         PUBLIC        TMOD
@@ -1337,7 +1337,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\StupidHome (MAIN)
   C:1FA7H         LINE#         314
   C:1FA7H         LINE#         315
   -------         ENDPROC       FETCH_SYSTEM_TIME
-  -------         PROC          FETCH_USER_CONTROL
+  -------         PROC          Update_Device_State
   C:12BDH         LINE#         318
   C:12BDH         LINE#         319
   C:12C9H         LINE#         321
@@ -1357,7 +1357,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\StupidHome (MAIN)
   C:13B2H         LINE#         341
   C:13B7H         LINE#         342
   C:13B7H         LINE#         343
-  -------         ENDPROC       FETCH_USER_CONTROL
+  -------         ENDPROC       Update_Device_State
   -------         PROC          FETCH_SYSTEM_TRIGGER
   C:16CEH         LINE#         345
   C:16CEH         LINE#         357

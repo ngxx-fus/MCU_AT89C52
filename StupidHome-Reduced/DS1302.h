@@ -25,6 +25,7 @@ MSB  ... x    x    x    x    x    x   x   LSB
          day  year mon  date hour min sec
 x = 1: Choose
 x = 0: Skip
+FULL: 0x7F
 */
 void DS1302_Read_Time(TIME* time, uint8 mask){
     uint8 x10, x1, byte_data, AM_PM;
