@@ -1,7 +1,6 @@
 #ifndef _IF_READING_
 #define _IF_READING_
 
-#include "REGX52.h"
 #include "Utilities.h"
 
 /*

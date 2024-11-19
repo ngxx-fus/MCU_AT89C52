@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              09/17/2024 07:42:17 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              11/20/2024 00:10:22 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -9,14 +9,7 @@ COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE 
 line level    source
 
    1          #include "DS1307.h"
-*** WARNING C173 IN LINE 155 OF DS1307.h: missing return-expression
    2          #include "LCD16x2_DATE_TIME.h"
-*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
-*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
-*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
-*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
-*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
-*** WARNING C182 IN LINE 32 OF LCD16x2_DATE_TIME.h: pointer to different objects
    3          
    4          void main(){
    5   1        LCD_INITIAL();
@@ -31,18 +24,17 @@ line level    source
   14   2        }
   15   1      }
   16          
-*** WARNING C290 IN LINE 155 OF main.c: missing return value
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1452    ----
+   CODE SIZE        =   1184    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     76      37
+   DATA SIZE        =     46      37
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  8 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

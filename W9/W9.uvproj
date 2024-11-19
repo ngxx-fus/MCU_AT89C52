@@ -377,11 +377,6 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>Base_Lib.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Base_Lib.h</FilePath>
-            </File>
-            <File>
               <FileName>DS1302.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\DS1302.h</FilePath>

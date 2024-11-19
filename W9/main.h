@@ -1,4 +1,4 @@
-#include "Base_Lib.h"
+#include "Utilities.h"
 #include "DS1302.h"
 #include "XPT2046.h"
 #include "IR_Reading.h"
@@ -119,7 +119,7 @@ uint8 SET_TIMER(TIME* t){
     uint32 CODE = 0;
     TIME tmp;
 	// tmp = *t;
-    ds1302_read_time(&tmp, 0x6);
+    DS1302_Read_Time(&tmp, 0x6);
     while(0x1){
         CODE = read_extracted_frame();
         if(CODE == PLAY_PAUSE) break;
@@ -198,7 +198,7 @@ uint8 SET_ON_OFF_NONE(uint8 *val, uint8 dev){
 }
 
 void read_system_time(){
-    ds1302_read_time(&system_time, 0x7);
+    DS1302_Read_Time(&system_time, 0x7);
 }
 
 void update_dev_state(){
@@ -214,23 +214,6 @@ void update_dev_state(){
         dev2 = (dev2_syst_ctl)?0:1;
     else
         dev2 = (dev2_user_ctl)?0:1;    
-}
-/*
-Time comparision
-Choose what will be compared by using bit in MASK
-MASK: 
-             7    6    5     4    3     2     1   0
-    MSB  ... x    x    x     x    x     x     x   x    LSB 
-description       day  year  mon  date  hour  min sec
-*/
-uint8 time_equal_cmp(TIME a, TIME b, uint8 mask){
-    if( ((mask&0x1)!=0) && (a.SECOND!=b.SECOND) ) 
-        return false;
-    if( ((mask&0x2)!=0) && (a.MINUTE!=b.MINUTE) ) 
-        return false;
-    if( ((mask&0x4)!=0) && (a.HOUR!=b.HOUR) ) 
-        return false;
-    return true;
 }
 
 uint32 have_daylight(){
@@ -279,7 +262,6 @@ uint32 get_right_index(uint32 indx){
 }
 
 void code_proc(uint32 CODE){
-    uint32 tmp;
     switch (CODE) {
         case ON_OFF:
             dev0_syst_ctl = (dev0_syst_ctl)?(0):(1);
@@ -342,7 +324,7 @@ void code_proc(uint32 CODE){
 
         case SYS_TIME_SETUP:
             if( SET_TIMER(&system_time))
-                ds1302_write_time(&system_time, 0x7F);
+                DS1302_Write_Time(&system_time, 0x7F);
             CURRENT_INDX = get_up_index(CURRENT_INDX);
             return;
 
@@ -445,11 +427,11 @@ void code_proc(uint32 CODE){
 
 void main_intial(){
     IR_Reading_Initial();
-    ds1302_initial();
+    DS1302_Initial();
     dev0_user_ctl = Z;
     dev1_user_ctl = Z;
     dev2_user_ctl = Z;
     CURRENT_INDX = 0;
-    ds1302_write_time(&system_time, 0x7F);
+    DS1302_Write_Time(&system_time, 0x7F);
 
 }

@@ -1,8 +1,7 @@
 #ifndef _IF_READING_
 #define _IF_READING_
 
-#include "REGX52.h"
-#include "Base_Lib.h"
+#include "Utilities.h"
 #include "DS1302.h"
 #include "LED7Seg_OnKit.h"
 //#include "Matrix_Button.h"

@@ -1,75 +1,69 @@
 #ifndef	  __XPT2046_H_
 #define   __XPT2046_H_
 
-#include "Base_Lib.h"
-#include<intrins.h>
+#include "Utilities.h"
 
-sbit DOUT = P3^7;
-sbit CLK  = P3^6;
-sbit DIN  = P3^4;
-sbit CS   = P3^5;
+sbit D_OUT = P3^7;
+sbit D_IN  = P3^4;
+sbit S_CLK  = P3^6;
+sbit C_S   = P3^5;
 
-uint32 Read_AD_Data(uint8 cmd);
-uint32 SPI_Read(void);
-void SPI_Write(uint8 dat);
 
-void SPI_Start(void)
+void SPI_Initial(void)
 {
-	CLK = 0;
-	CS  = 1;
-	DIN = 1;
-	CLK = 1;
-	CS  = 0;		
+	S_CLK = 0;
+	C_S  = 1;
+	D_IN = 1;
+	S_CLK = 1;
+	C_S  = 0;		
 }
 
-void SPI_Write(uint8 dat)
+void SPI_Write(uint8 __data)
 {
 	uint8 i;
-	CLK = 0;
+	S_CLK = 0;
 	for(i=0; i<8; i++)
 	{
-		DIN = dat >> 7; 
-		dat <<= 1;
-		CLK = 0;	
-
-		CLK = 1;
+		D_IN = __data >> 7; 
+		__data <<= 1;
+		S_CLK = 0;	
+		delay_us(5);
+		S_CLK = 1;
 
 	}
 }
 
 uint32 SPI_Read(void)
 {
-	uint32 i, dat=0;
-	CLK = 0;
+	uint32 i, __data=0;
+	S_CLK = 0;
 	for(i=0; i<12; i++)	
 	{
-		dat <<= 1;
+		__data <<= 1;
 
-		CLK = 1;
-		CLK = 0;
+		S_CLK = 1;
+		S_CLK = 0;
 
-		dat |= DOUT;
+		__data |= D_OUT;
 
 	}
-	return dat;	
+	return __data;	
 }
 
-uint32 Read_AD_Data(uint8 cmd)
+uint32 Read_AD_Data(uint8 __command)
 {
 	uint8 i;
 	uint32 AD_Value;
-	CLK = 0;
-	CS  = 0;
-	SPI_Write(cmd);
+	S_CLK = 0;
+	C_S  = 0;
+	SPI_Write(__command);
 	for(i=6; i>0; i--); 
-	CLK = 1;	
-	CLK = 0;
+	S_CLK = 1;	
+	S_CLK = 0;
 	AD_Value=SPI_Read();
-	CS = 1;
+	C_S = 1;
 	return AD_Value;	
 }
-
-
 
 #endif
 

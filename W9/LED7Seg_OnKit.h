@@ -2,9 +2,7 @@
 //---------- Include -----------
 #ifndef _LED7SEG_ONKIT_H_
 #define _LED7SEG_ONKIT_H_
-#include <REGX52.h>
-// Thư viện cơ sở cho AT89C52
-#include "Base_Lib.h"
+#include "Utilities.h"
 
 //---------- Macros -----------
 

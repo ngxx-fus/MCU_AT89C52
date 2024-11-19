@@ -3,8 +3,6 @@ DOCUMENTATIONS:
     https://electronics.stackexchange.com/questions/29700/what-is-the-i2c-ack-and-how-do-i-detect-it
     https://stackoverflow.com/questions/37040696/nack-and-ack-responses-on-i2c-bus
     https://www.i2c-bus.org/repeated-start-condition/
-NOTE:
-    Using static keyword to make the function prevent conflict :v
 */
 
 #ifndef _DS1307_H_
@@ -41,17 +39,15 @@ enum SLAVE_STATE  {ACK = 0, NAK  = 1};
 
 // Config two pins suit for your demand.
 // I2C pins
-sbit SCL = P0^0;
-sbit SDA = P0^1;
+sbit SCL = P0^6;
+sbit SDA = P0^7;
 
 //              T_PEAK
 // HIGH:        ______
 //             /      \ T_PEAK /
 // LOW :  ____/        \______/
 
-uint T_PEAK = 5;
 uint T_WAIT = 2;
-uint PERIOD = 5;
 
 // Do stuff things to make delay :v
 static void DELAY(uint t){
@@ -68,7 +64,7 @@ static void DELAY(uint t){
 //        SDA     |     
 // LOW :          |_______         
 void I2C_START(){
-    DELAY(T_PEAK);
+    // DELAY(T_WAIT);
     SET_SCL(HIGH); 
     SET_SDA(HIGH);
     DELAY(T_WAIT);
@@ -86,36 +82,31 @@ void I2C_START(){
 //        SDA               |
 // LOW :             _______|    
 void I2C_STOP(){
-    SET_SCL(LOW);
+    DELAY(T_WAIT);
+    SET_SCL(LOW); 
     SET_SDA(LOW);
     DELAY(T_WAIT);
     SET_SCL(HIGH);
     DELAY(T_WAIT);
     SET_SDA(HIGH);
-    DELAY(T_PEAK);
 }
 
 //        |<-T1->|<-T2->|
-// HIGH:  _______ ______
-// SCL           |      |
-// LOW :   _ _ _ |      |______
-static void SCL_MONO_PULSE(){
+// HIGH   _______ ______
+// SCL:          |      |
+// LOW    _ _ _ _|      |______
+void SCL_MONO_PULSE(){
 	DELAY(T_WAIT);      // wait for somethings (T1)
     SET_SCL(HIGH);      // pull to high
-    DELAY(T_PEAK);      // wait (T2) to make a peak of MOMO PULSE.
 	SET_SCL(LOW);
-    DELAY(T_WAIT);    // pull to  low
 }
 
 uint RECEIVE_BIT(){
     uint BIT_DATA;
     DELAY(T_WAIT);
-    SET_SDA(HIGH); // release SDA line
-    DELAY(T_WAIT);
-    SET_SCL(HIGH);
-    DELAY(T_WAIT);
-	BIT_DATA = SDA;
-    SET_SCL(LOW);
+    SET_SDA(HIGH);  DELAY(T_WAIT); // release SDA line
+    SET_SCL(HIGH);  DELAY(T_WAIT);
+	BIT_DATA = SDA; SET_SCL(LOW);
     return BIT_DATA;
 }
 
@@ -129,18 +120,18 @@ uint I2C_SEND_BYTE(unsigned char DATA){
     return RECEIVE_BIT();
 }
 
-static void SEND_ACK(){
+void SEND_ACK(){
+    DELAY(T_WAIT);
     SET_SDA(LOW);  // pull SDA to low level to indicate ACK.
     SCL_MONO_PULSE();
     SET_SDA(HIGH); // idle state
-    DELAY(T_WAIT);
 }
 
-static void SEND_NAK(){
+void SEND_NAK(){
+    DELAY(T_WAIT);
     SET_SDA(HIGH);  // pull SDA to low level to indicate No ACK.
     SCL_MONO_PULSE();
     SET_SDA(HIGH); // idle state
-    DELAY(T_WAIT);
 }
 
 uint I2C_RECEIVE_BYTE(uint ACK_NAK){
@@ -152,6 +143,7 @@ uint I2C_RECEIVE_BYTE(uint ACK_NAK){
     }
     if( ACK_NAK == NAK ) SEND_NAK();
     if( ACK_NAK == ACK) SEND_ACK();
+		return RCV_DATA;
 }
 
 void DS1307_INIT(){
@@ -178,8 +170,8 @@ void DS1307_READ(uint *YEAR, uint *MONTH, uint *DAY,
     (*HOUR) = I2C_RECEIVE_BYTE(ACK);
     I2C_RECEIVE_BYTE(ACK);
     (*DAY) = I2C_RECEIVE_BYTE(ACK);
-    (*YEAR) = I2C_RECEIVE_BYTE(ACK);
-    (*MONTH) = I2C_RECEIVE_BYTE(NAK);
+    (*MONTH) = I2C_RECEIVE_BYTE(ACK);
+    (*YEAR) = I2C_RECEIVE_BYTE(NAK);
     I2C_STOP();
 }
 

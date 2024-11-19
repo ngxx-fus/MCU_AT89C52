@@ -32,8 +32,7 @@ typedef unsigned int UINT;
 //---------- Delay ------------
 static void DELAY_DISP(UINT mili_sec) {
   UINT i;
-  for (i = 0; i < 3 * mili_sec; i++)
-    ;
+  for (i = 0; i < 3 * mili_sec; i++);
 }
 static void DELAY(UINT mili_sec) {
   UINT i;

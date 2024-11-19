@@ -13,29 +13,25 @@ DOCUMENTATIONS:
 #define uchar unsigned char 
 #define uint unsigned int  
 
-int DAY = 0;
-int MONTH = 0;
-int YEAR = 0;
-int SECOND = 0;
-int MINUTE = 0;
-int HOUR   = 0;
+uint DAY = 0;
+uint MONTH = 0;
+uint YEAR = 0;
+uint SECOND = 0;
+uint MINUTE = 0;
+uint HOUR   = 0;
 
 char DATE[] ="DATE: YYYY MM DD";
 char TIME[] ="TIME: HH:MM:SS";
-int  DAYS_OF_MON[]  ={-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-#define SET_DD_MM_YYYY(DD, MM, YYYY) {DAY = DD%31; MONTH = MM%12; YEAR = YYYY;}
-#define SET_HH_MM_SS(HH, MM, SS) 	{HOUR = HH%24; MINUTE = MM%60; SECOND = SS%60;}
 
 void GET_TIME_DATE(){
 	//Get date/time from ds1307
 	DS1307_READ(&YEAR, &MONTH, &DAY, &HOUR, &MINUTE, &SECOND);
-	YEAR = (YEAR&0x0F) + (YEAR>>4)&0x0F;
-	MONTH = (MONTH&0x0F) + ((MONTH>>4)&0x1)*10;
-	DAY = (DAY&0x0F) + ((DAY>>4)&0x0F);
-	HOUR = (HOUR&0xF) + ((HOUR>>4)&0x3);
-	MINUTE = (MINUTE&0xF) + ((MINUTE>>4)&0x3);
-	SECOND = (SECOND&0xF) + ((SECOND>>4)&0x3); 
+	YEAR = (YEAR&0x0F) + ((YEAR>>4)&0x0F)*10;
+	MONTH = (MONTH&0x0F) + (((MONTH>>4)&0x1))*10;
+	DAY = (DAY&0x0F) + ((DAY>>4)&0x0F)*10;
+	HOUR = (HOUR&0xF) + ((HOUR>>4)&0x3)*10;
+	MINUTE = (MINUTE&0xF) + ((MINUTE>>4)&0x3)*10;
+	SECOND = (SECOND&0xF) + ((SECOND>>4)&0x3)*10; 
 }
 
 void FORMAT_DATE(){
@@ -67,70 +63,5 @@ void DISPLAY(){
 	SEND_BYTE_ARRAY_DISPLAY(TIME, 14);
 }
 
-int IS_LEAP_YEAR(){
-	if( YEAR%100 == 0 ){
-		if(YEAR%400 == 0)
-			return 1;
-		else
-			return 0;
-	}else{
-		if(YEAR%4 == 0)
-			return 1;
-		else
-			return 0;
-	}
-	return 0;
-}
-
-void INCREASE_YEAR(){
-	++YEAR;
-}
-
-void INCREASE_MONTH(){
-	if(MONTH >= 12){
-		INCREASE_YEAR();
-		MONTH = 1;
-	}else{
-		++MONTH;
-	}
-}
-
-void INCREASE_DAY(){
-	int LIM_DAY = DAYS_OF_MON[MONTH];
-	if(MONTH >= 2 && IS_LEAP_YEAR()) ++LIM_DAY;
-	if(DAY >= LIM_DAY){
-		INCREASE_MONTH();
-		DAY = 1;
-	}else{
-		++DAY;
-	}
-}
-
-void INCREASE_HOUR(){
-	if(HOUR >= 23){
-		HOUR = 0;
-		INCREASE_DAY();
-	}else{
-		++HOUR;
-	}
-}
-
-void INCREASE_MINUTE(){
-	if(MINUTE >= 59){
-		MINUTE = 0;
-		INCREASE_HOUR();
-	}else{
-		++MINUTE;
-	}
-}
-
-void INCREASE_SECOND(){
-	if(SECOND >= 59){
-		SECOND = 0;
-		INCREASE_MINUTE();
-	}else{
-		++SECOND;
-	}
-}
 
 #endif
