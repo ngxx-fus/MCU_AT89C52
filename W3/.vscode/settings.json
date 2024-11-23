@@ -1,10 +1,6 @@
 {
-  "files.associations": {
-    "matrix_button.h": "c",
-    "base_lib.h": "c"
-  },
-  "C_Cpp_Runner.cCompilerPath": "C:/TDM-GCC-64/bin/gcc.exe",
-  "C_Cpp_Runner.cppCompilerPath": "C:/TDM-GCC-64/bin/g++.exe",
+  "C_Cpp_Runner.cCompilerPath": "gcc",
+  "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
   "C_Cpp_Runner.cStandard": "",
   "C_Cpp_Runner.cppStandard": "",
@@ -41,7 +37,9 @@
   "C_Cpp_Runner.warningsAsError": false,
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
-  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.includePaths": [
+    "e:\\DOC\\NH_2024_2025_HK_01\\COOL325364\\W3"
+  ],
   "C_Cpp_Runner.includeSearch": [
     "*",
     "**/*"
@@ -59,5 +57,10 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "files.associations": {
+    "*.c": "c",
+    "*.cpp": "cpp",
+    "main.h": "c"
+  }
 }

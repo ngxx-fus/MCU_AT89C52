@@ -256,6 +256,7 @@ void SET_STATE(UINT CODE) {
       SET_TRAFFIC_LIGHT(1, GREEN);
     }
   }
+  
   if (CODE == GREEN) {
     if (GET_STATE(0) == YELLOW) {
       SET_TRAFFIC_LIGHT(0, GREEN);

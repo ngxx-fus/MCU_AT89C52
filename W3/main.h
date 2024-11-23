@@ -1,10 +1,3 @@
-/*
-DOCUMENTATIONS:
-	https://developer.arm.com/documentation/101655/0961/Cx51-User-s-Guide/Language-Extensions/Data-Types/Special-Function-Registers/sbit
-	https://embeddedflakes.com/interrupt-handling-in-8051/
-
-*/
-#include <stdio.h>
 #include <REGX52.h>
 
 #define RED 0x21
@@ -44,7 +37,8 @@ void INITIAL(){
 	// NOTE:
 	// 		INT0 - Manual/Auto
 	// 		INT1 - RED/GREEN
-	IE = 0x5;
+	EX0 = 0x1; //8'b0000_0101
+	EX1 = 0x1; //8'b0000_0101
 	// Config <interrupt triger> for INT0 and INT1
 	// NOTE: triggered at falling edge
 	IT0 = 0x1;
@@ -63,7 +57,7 @@ void eINT0_ACTION(void) interrupt 0 {
 		AutoIndicator = 0x0;
 }
 
-void eINT1_ACTION(void) interrupt 1 {
+void eINT1_ACTION(void) interrupt 2 {
 	RED_GREEN_SET = (RED_GREEN_SET==RED)?(GREEN):(RED);
 }
 
@@ -82,6 +76,7 @@ void DISPLAY(unsigned int second){
 			delay(delay_t);
 			G0 = 0; G1 = 1; SET_LED((COUNT_1/10)%10);
 			delay(delay_t);
+
 			G0 = 1; G1 = 0; SET_LED(COUNT_0%10);
 			delay(delay_t);
 			G0 = 1; G1 = 1; SET_LED(COUNT_1);
@@ -96,39 +91,18 @@ void DISPLAY(unsigned int second){
 	}
 }
 
-void DIRECT_SET(int CODE){
-	COUNT_0 = 0;
-	COUNT_1 = 0;
-	SET_LED(LED_OFF);
-	switch (CODE){
-		case RED:
-			STATE = RED;
-			TRAFFIC_LIGHT = 0x21;
-			return;
-		case YELLOW:
-			SET_LED(10);
-			STATE = YELLOW;
-			TRAFFIC_LIGHT = 0x12;
-			return;
-		case GREEN:
-			STATE = GREEN;
-			TRAFFIC_LIGHT = 0xC;
-			return;
-	}
-}
-
 void SET(int CODE){
 	switch (CODE){
 		// 0: GREEN -> YELLOW -> RED
 		// 1: RED   -> RED    -> GREEN
 		case RED:
 			if (STATE == RED) return;
-			if (STATE != YELLOW){
-					TRAFFIC_LIGHT = 0xA;
+			if (STATE != YELLOW){ // -> GREEN
+					TRAFFIC_LIGHT = 0xA;// -> Change to YELLOW
 					COUNT_0 = 2;
-					DISPLAY(2);
+					DISPLAY(2);// wait in 2 secconds
 			}
-			TRAFFIC_LIGHT = RED;
+			TRAFFIC_LIGHT = RED; //-> change to RED
 			STATE = RED;
 			break;
 		
@@ -146,10 +120,10 @@ void SET(int CODE){
 		// 1: GREEN -> YELLOW -> RED
 		case GREEN:
 			if (STATE == GREEN) return;
-			if (STATE != YELLOW){
-					TRAFFIC_LIGHT = 0x11;
+			if (STATE != YELLOW){// is RED
+					TRAFFIC_LIGHT = 0x11;//00 010 001
 					COUNT_1 = 2;
-					DISPLAY(2);
+					DISPLAY(2);// wait in 2 secconds for Yellow
 			}
 			TRAFFIC_LIGHT = GREEN;
 			STATE = GREEN;

@@ -38,13 +38,13 @@ void single_byte_write(ubyte cmd, ubyte byte_data){
     // send cmd in 8 rasing edges 
     for(nCLK = 1; nCLK <= 8; nCLK++){
         IO = (cmd&0x1);
-        HL_MONO_PULSE(SCLK);
+        LH_MONO_PULSE(SCLK);
         cmd = (cmd>>1);
     }
     // send byte_data in 8 rasing edges 
     for(nCLK = 1; nCLK <= 8; nCLK++){
         IO = (byte_data&0x1);
-        HL_MONO_PULSE(SCLK);
+        LH_MONO_PULSE(SCLK);
         byte_data >>= 1;
     }
 
@@ -63,7 +63,7 @@ ubyte single_byte_read(ubyte cmd){
     //Send command at 8 rasing edge
     for(nCLK = 1; nCLK <= 7; nCLK++){
         IO = (cmd&0x1);
-        HL_MONO_PULSE(SCLK);
+        LH_MONO_PULSE(SCLK);
         cmd = (cmd>>1);
     }
     // 8th rasing edge

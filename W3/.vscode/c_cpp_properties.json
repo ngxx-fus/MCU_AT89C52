@@ -1,9 +1,44 @@
 {
     "configurations": [
         {
+            "name": "windows-gcc-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "e:\\DOC\\NH_2024_2025_HK_01\\COOL325364\\W3"
+            ],
+            "defines": [
+                "__C51__",
+                "__VSCODE_C51__",
+                "reentrant=",
+                "compact=",
+                "small=",
+                "large=",
+                "data=",
+                "idata=",
+                "pdata=",
+                "bdata=",
+                "xdata=",
+                "code=",
+                "bit=char",
+                "sbit=char",
+                "sfr=char",
+                "sfr16=int",
+                "sfr32=int",
+                "interrupt=",
+                "using=",
+                "_at_=",
+                "_priority_=",
+                "_task_="
+            ],
+            "intelliSenseMode": "windows-gcc-x64",
+            "cStandard": "${default}",
+            "cppStandard": "${default}",
+            "compilerPath": "C:/TDM-GCC-64/bin/gcc.exe"
+        },
+        {
             "name": "Target 1",
             "includePath": [
-                "d:\\DOC\\NH_2024_2025_HK_01\\COOL325364\\W3"
+                "e:\\DOC\\NH_2024_2025_HK_01\\COOL325364\\W3"
             ],
             "defines": [
                 "__C51__",

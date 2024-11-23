@@ -3,8 +3,6 @@
 
 void main(){
 	INITIAL();
-	DIRECT_SET(YELLOW);
-	SET_LED(10);
 	delay(1000);
 	while(1){
 			if(Manual_Auto == AUTO){
@@ -18,11 +16,12 @@ void main(){
 				COUNT_1 = 7;
 				DISPLAY(5);
 			}else{
-				SET_LED(10);
-				if(RED_GREEN_SET)
-					DIRECT_SET(RED);
+				LED = 0;
+				if(RED_GREEN_SET == RED)
+					SET(RED);
 				else
-					DIRECT_SET(GREEN);
+					SET(GREEN);
+				delay(100);
 			}
 	}
 }
